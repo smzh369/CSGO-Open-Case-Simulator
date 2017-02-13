@@ -1,7 +1,9 @@
-package com.zerlings.gabeisfaker;
+package com.zerlings.gabeisfaker.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.zerlings.gabeisfaker.R;
 
 public class MainActivity extends AppCompatActivity {
 
