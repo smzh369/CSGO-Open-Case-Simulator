@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gabe is Faker</string>
+
+    <string name="setting">设置</string>
+    <string name="inventory">库存</string>
+    <string name="ignored">忽略</string>
+    <string name="music">战歌</string>
+    <string name="share">分享</string>
+    <string name="donate">捐助</string>
+    <string name="quit">退出</string>
+
+    <string name="glove_case">手套武器箱</string>
+    <string name="gamma_2_case">伽玛 2 号武器箱</string>
+    <string name="gamma_case">伽玛武器箱</string>
+    <string name="csgo_weapon_case">CS:GO 武器箱</string>
+    <string name="csgo_weapon_case_2">CS:GO 2 号武器箱</string>
+    <string name="csgo_weapon_case_3">CS:GO 3 号武器箱</string>
+    <string name="chroma_case">幻彩武器箱</string>
+    <string name="chroma_case_2">幻彩 2 号武器箱</string>
+    <string name="chroma_case_3">幻彩 3 号武器箱</string>
+    <string name="esports_2013_case">电竞 2013 武器箱</string>
+    <string name="esports_2013_winter_case">电竞2013冬季武器箱</string>
+    <string name="esports_2014_summer_case">电竞2014夏季武器箱</string>
+    <string name="falchion_case">弯曲猎手武器箱</string>
+    <string name="huntsman_weapon_case">猎杀者武器箱</string>
+    <string name="operation_bravo_case">“英勇大行动” 武器箱</string>
+    <string name="operation_breakout_weapon_case">“突围大行动” 武器箱</string>
+    <string name="operation_phoenix_weapon_case">“凤凰大行动” 武器箱</string>
+    <string name="operation_vanguard_weapon_case">“先锋大行动” 武器箱</string>
+    <string name="operation_wildfire_case">“野火大行动” 武器箱</string>
+    <string name="revolver_case">左轮武器箱</string>
+    <string name="shadow_case">暗影武器箱</string>
+    <string name="winter_offensive_weapon_case">冬季攻势武器箱</string>
+
+    <string name="buzz_kill">喧嚣杀戮</string>
+    <string name="dragonfire">炎龙之焰</string>
+    <string name="wasteland_princess">废土公主</string>
+    <string name="mecha_industries">机械工业</string>
+    <string name="shallow_grave">浅坟</string>
+    <string name="gila">毒蜥</string>
+    <string name="flash_back">闪回</string>
+    <string name="royal_consorts">皇家伴侣</string>
+    <string name="stinger">毒刺</string>
+    <string name="cyrex">次时代</string>
+    <string name="black_sand">黑砂</string>
+    <string name="sonar">声呐</string>
+    <string name="sand_scale">沙垢</string>
+    <string name="turf">草皮</string>
+    <string name="cirrus">卷云</string>
+    <string name="ironwork">铁制品</string>
+    <string name="polymer">聚合物</string>
+</resources>

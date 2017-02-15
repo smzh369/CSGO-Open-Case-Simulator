@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inventory"
+            android:icon="@drawable/nav_inventory"
+            android:title="@string/inventory"/>
+        <item
+            android:id="@+id/nav_ignored"
+            android:icon="@drawable/nav_ignored"
+            android:title="@string/ignored"/>
+        <item
+            android:id="@+id/nav_music"
+            android:icon="@drawable/nav_music"
+            android:title="@string/music"/>
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/nav_share"
+            android:title="@string/share"/>
+        <item
+            android:id="@+id/nav_donate"
+            android:icon="@drawable/nav_donate"
+            android:title="@string/donate"/>
+        <item
+            android:id="@+id/nav_quit"
+            android:icon="@drawable/nav_quit"
+            android:title="@string/quit"/>
+    </group>
+
+</menu>

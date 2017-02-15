@@ -19,6 +19,9 @@ public class UniqueWeapon extends BaseModel {
     private String weaponName;
 
     @Column
+    private String skinName;
+
+    @Column
     private String quality;
 
     @Column
@@ -38,6 +41,14 @@ public class UniqueWeapon extends BaseModel {
 
     public void setWeaponName(String weaponName) {
         this.weaponName = weaponName;
+    }
+
+    public String getSkinName() {
+        return skinName;
+    }
+
+    public void setSkinName(String skinName) {
+        this.skinName = skinName;
     }
 
     public String getQuality() {

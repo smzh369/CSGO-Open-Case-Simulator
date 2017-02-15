@@ -1,3 +1,52 @@
 <resources>
     <string name="app_name">Gabe is Faker</string>
+
+    <string name="setting">Setting</string>
+    <string name="inventory">Inventory</string>
+    <string name="ignored">Ignored</string>
+    <string name="music">Music</string>
+    <string name="share">Share</string>
+    <string name="donate">Donate</string>
+    <string name="quit">Quit</string>
+
+    <string name="glove_case">Glove Case</string>
+    <string name="gamma_2_case">Gamma 2 Case</string>
+    <string name="gamma_case">Gamma Case</string>
+    <string name="csgo_weapon_case">CS:GO Weapon Case</string>
+    <string name="csgo_weapon_case_2">CS:GO Weapon Case 2</string>
+    <string name="csgo_weapon_case_3">CS:GO Weapon Case 3</string>
+    <string name="chroma_case">Chroma Case</string>
+    <string name="chroma_case_2">Chroma 2 Case</string>
+    <string name="chroma_case_3">Chroma 3 Case</string>
+    <string name="esports_2013_case">eSports 2013 Case</string>
+    <string name="esports_2013_winter_case">eSports 2013 Winter Case</string>
+    <string name="esports_2014_summer_case">eSports 2013 Winter Case</string>
+    <string name="falchion_case">Falchion Case</string>
+    <string name="huntsman_weapon_case">Huntsman Weapon Case</string>
+    <string name="operation_bravo_case">Operation Bravo Case</string>
+    <string name="operation_breakout_weapon_case">Operation Breakout Weapon Case</string>
+    <string name="operation_phoenix_weapon_case">Operation Phoenix Weapon Case</string>
+    <string name="operation_vanguard_weapon_case">Operation Vanguard Weapon Case</string>
+    <string name="operation_wildfire_case">Operation Wildfire Case</string>
+    <string name="revolver_case">Revolver Case</string>
+    <string name="shadow_case">Shadow Case</string>
+    <string name="winter_offensive_weapon_case">Winter Offensive Weapon Case</string>
+
+    <string name="buzz_kill">Buzz Kill</string>
+    <string name="dragonfire">Dragonfire</string>
+    <string name="wasteland_princess">Wasteland Princess</string>
+    <string name="mecha_industries">Mecha Industries</string>
+    <string name="shallow_grave">Shallow Grave</string>
+    <string name="gila">Gila</string>
+    <string name="flash_back">Flash Back</string>
+    <string name="royal_consorts">Royal Consorts</string>
+    <string name="stinger">Stinger</string>
+    <string name="cyrex">Cyrex</string>
+    <string name="black_sand">Black Sand</string>
+    <string name="sonar">sonar</string>
+    <string name="sand_scale">Sand Scale</string>
+    <string name="turf">Turf</string>
+    <string name="cirrus">Cirrus</string>
+    <string name="ironwork">Ironwork</string>
+    <string name="polymer">Polymer</string>
 </resources>

@@ -19,13 +19,30 @@ public class Weapon extends BaseModel {
     private String weaponName;
 
     @Column
-    private String quality;
+    private String skinName;
+
+    @Column int imageId;
+
+    @Column
+    private int quality;
 
     @Column
     private int minWear;
 
     @Column
     private int maxWear;
+
+    public Weapon() {
+    }
+
+    public Weapon(String weaponName, String skinName, int imageId, int quality, int minWear, int maxWear) {
+        this.weaponName = weaponName;
+        this.skinName = skinName;
+        this.imageId = imageId;
+        this.quality = quality;
+        this.minWear = minWear;
+        this.maxWear = maxWear;
+    }
 
     public int getId() {
         return id;
@@ -43,11 +60,27 @@ public class Weapon extends BaseModel {
         this.weaponName = weaponName;
     }
 
-    public String getQuality() {
+    public String getSkinName() {
+        return skinName;
+    }
+
+    public void setSkinName(String skinName) {
+        this.skinName = skinName;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
+    }
+
+    public int getQuality() {
         return quality;
     }
 
-    public void setQuality(String quality) {
+    public void setQuality(int quality) {
         this.quality = quality;
     }
 
@@ -66,4 +99,5 @@ public class Weapon extends BaseModel {
     public void setMaxWear(int maxWear) {
         this.maxWear = maxWear;
     }
+
 }

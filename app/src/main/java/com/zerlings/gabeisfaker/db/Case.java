@@ -19,7 +19,14 @@ public class Case extends BaseModel {
     private String caseName;
 
     @Column
-    private String caseCode;
+    private int imageId;
+
+    public Case(){}
+
+    public Case(String caseName, int imageId) {
+        this.caseName = caseName;
+        this.imageId = imageId;
+    }
 
     public int getId() {
         return id;
@@ -37,11 +44,11 @@ public class Case extends BaseModel {
         this.caseName = caseName;
     }
 
-    public String getCaseCode() {
-        return caseCode;
+    public int getImageId() {
+        return imageId;
     }
 
-    public void setCaseCode(String caseCode) {
-        this.caseCode = caseCode;
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }
