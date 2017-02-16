@@ -32,6 +32,8 @@ public class Weapon extends BaseModel {
     @Column
     private int maxWear;
 
+    private boolean isStatTrak = false;
+
     public Weapon() {
     }
 
@@ -100,4 +102,11 @@ public class Weapon extends BaseModel {
         this.maxWear = maxWear;
     }
 
+    public boolean isStatTrak() {
+        return isStatTrak;
+    }
+
+    public void setStatTrak(boolean statTrak) {
+        isStatTrak = statTrak;
+    }
 }
