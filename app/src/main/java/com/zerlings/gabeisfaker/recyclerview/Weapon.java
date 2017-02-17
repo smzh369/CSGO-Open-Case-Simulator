@@ -1,35 +1,23 @@
-package com.zerlings.gabeisfaker.db;
+package com.zerlings.gabeisfaker.recyclerview;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by 令子 on 2017/2/13.
  */
 
-@Table(database = AppDatabase.class)
 public class Weapon extends BaseModel {
 
-    @PrimaryKey(autoincrement = true)
-    private int id;
-
-    @Column
     private String weaponName;
 
-    @Column
     private String skinName;
 
-    @Column int imageId;
+    private int imageId;
 
-    @Column
     private int quality;
 
-    @Column
     private int minWear;
 
-    @Column
     private int maxWear;
 
     private boolean isStatTrak = false;
@@ -44,14 +32,6 @@ public class Weapon extends BaseModel {
         this.quality = quality;
         this.minWear = minWear;
         this.maxWear = maxWear;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getWeaponName() {

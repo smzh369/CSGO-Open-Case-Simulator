@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zerlings.gabeisfaker.R;
-import com.zerlings.gabeisfaker.db.Case;
-import com.zerlings.gabeisfaker.utils.CaseAdapter;
+import com.zerlings.gabeisfaker.recyclerview.Case;
+import com.zerlings.gabeisfaker.recyclerview.CaseAdapter;
 import com.zerlings.gabeisfaker.utils.InitUtils;
 
 import java.util.ArrayList;

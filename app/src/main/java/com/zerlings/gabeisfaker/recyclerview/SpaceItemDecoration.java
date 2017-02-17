@@ -1,4 +1,4 @@
-package com.zerlings.gabeisfaker.utils;
+package com.zerlings.gabeisfaker.recyclerview;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

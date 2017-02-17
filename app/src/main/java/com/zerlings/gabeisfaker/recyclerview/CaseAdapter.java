@@ -1,4 +1,4 @@
-package com.zerlings.gabeisfaker.utils;
+package com.zerlings.gabeisfaker.recyclerview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.SimulatorActivity;
-import com.zerlings.gabeisfaker.db.Case;
 
 import java.util.List;
 

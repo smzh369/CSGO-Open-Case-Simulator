@@ -1,6 +1,7 @@
-package com.zerlings.gabeisfaker.utils;
+package com.zerlings.gabeisfaker.recyclerview;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
-import com.zerlings.gabeisfaker.db.Weapon;
 
 import java.util.List;
 
@@ -97,6 +97,19 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
             Glide.with(mContext).load(weapon.getImageId()).into(holder.weaponImage);
             holder.weaponName.setText(weapon.getWeaponName());
             holder.skinName.setText(weapon.getSkinName());
+            switch (weapon.getQuality()){
+                case 7:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.knife));
+                    break;
+                case 6:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.convert));
+                    break;
+                case 5:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.classified));
+                    break;
+                case 4:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.restricted));
+                    break;
+                case 3:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.milspec));
+                    break;
+                default:break;
+            }
         }
     }
 

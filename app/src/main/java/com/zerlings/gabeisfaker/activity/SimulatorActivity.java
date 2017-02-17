@@ -3,20 +3,22 @@ package com.zerlings.gabeisfaker.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.zerlings.gabeisfaker.R;
-import com.zerlings.gabeisfaker.db.Weapon;
+import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
+import com.zerlings.gabeisfaker.recyclerview.Weapon;
+import com.zerlings.gabeisfaker.utils.DensityUtil;
 import com.zerlings.gabeisfaker.utils.InitUtils;
-import com.zerlings.gabeisfaker.utils.SpaceItemDecoration;
-import com.zerlings.gabeisfaker.utils.WeaponAdapter;
+import com.zerlings.gabeisfaker.recyclerview.SpaceItemDecoration;
+import com.zerlings.gabeisfaker.recyclerview.WeaponAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,7 @@ public class SimulatorActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.simulator_activity);
         Button backButton = (Button) findViewById(R.id.back);
+        Button startButton = (Button)findViewById(R.id.start_button);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_2);
         TextView titleText = (TextView)findViewById(R.id.title_text);
 
@@ -82,18 +85,33 @@ public class SimulatorActivity extends AppCompatActivity {
         adapter = new WeaponAdapter(weaponList);
 
         //设置recyclerview显示方式
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        final CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
 
         //设置item间隔
-        int spacingInPixels = 20;
+        int spacingInPixels = DensityUtil.dip2px(7.5f);
         recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
 
         //添加表头
         View header = LayoutInflater.from(this).inflate(R.layout.item_header,recyclerView,false);
         adapter.setHeaderView(header);
         recyclerView.setAdapter(adapter);
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutManager.setSpeed(0.6f);
+                recyclerView.smoothScrollToPosition(38);
+            }
+        });
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
     }
 
     private void initList(){
@@ -112,7 +130,7 @@ public class SimulatorActivity extends AppCompatActivity {
         int degree = random.nextInt(500);
         if (degree == 499){
             weaponList.get(37).setStatTrak(false);
-            weaponList.get(37).setWeaponName("* Rare Special Item *");
+            weaponList.get(37).setWeaponName("*Rare Special Item*");
             weaponList.get(37).setImageId(R.drawable.rare_special);
             weaponList.get(37).setSkinName(null);
             weaponList.get(37).setQuality(7);

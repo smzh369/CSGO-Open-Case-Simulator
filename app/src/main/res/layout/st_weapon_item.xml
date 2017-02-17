@@ -13,12 +13,12 @@
         android:scaleType="fitCenter"/>
 
     <LinearLayout
+        android:id="@+id/quality_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/quality_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
