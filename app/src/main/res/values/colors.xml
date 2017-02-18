@@ -8,4 +8,5 @@
     <color name="classified">#E733F7</color>
     <color name="restricted">#8746FA</color>
     <color name="milspec">#3D58E7</color>
+    <color name="darkblue">#000033</color>
 </resources>

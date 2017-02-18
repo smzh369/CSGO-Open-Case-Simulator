@@ -22,10 +22,18 @@ public class UniqueWeapon extends BaseModel {
     private String skinName;
 
     @Column
-    private String quality;
+    private int ImageId;
+
+    @Column
+    private int quality;
 
     @Column
     private String exterior;
+
+    @Column float wearValue;
+
+    @Column
+    private boolean isStatTrak = false;
 
     public int getId() {
         return id;
@@ -51,11 +59,19 @@ public class UniqueWeapon extends BaseModel {
         this.skinName = skinName;
     }
 
-    public String getQuality() {
+    public int getImageId() {
+        return ImageId;
+    }
+
+    public void setImageId(int ImageId) {
+        this.ImageId = ImageId;
+    }
+
+    public int getQuality() {
         return quality;
     }
 
-    public void setQuality(String quality) {
+    public void setQuality(int quality) {
         this.quality = quality;
     }
 
@@ -65,5 +81,21 @@ public class UniqueWeapon extends BaseModel {
 
     public void setExterior(String exterior) {
         this.exterior = exterior;
+    }
+
+    public float getWearValue() {
+        return wearValue;
+    }
+
+    public void setWearValue(float wearValue) {
+        this.wearValue = wearValue;
+    }
+
+    public boolean isStatTrak() {
+        return isStatTrak;
+    }
+
+    public void setStatTrak(boolean statTrak) {
+        isStatTrak = statTrak;
     }
 }

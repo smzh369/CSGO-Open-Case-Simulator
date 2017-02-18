@@ -8,6 +8,14 @@
     <string name="share">Share</string>
     <string name="donate">Donate</string>
     <string name="quit">Quit</string>
+    <string name="discard">Discard</string>
+    <string name="keep">Keep</string>
+
+    <string name="factory_new">Factory New</string>
+    <string name="minimal_wear">Minimal Wear</string>
+    <string name="field_tested">Field-Tested</string>
+    <string name="well_worn">Well-Worn</string>
+    <string name="battle_scarred">Battle-Scarred</string>
 
     <string name="glove_case">Glove Case</string>
     <string name="gamma_2_case">Gamma 2 Case</string>

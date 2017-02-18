@@ -80,11 +80,10 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
         if (mContext == null){
             mContext = parent.getContext();
         }
-        View view;
+        View view = LayoutInflater.from(mContext).inflate(R.layout.weapon_item,parent,false);
         if (viewType == TYPE_STATTRAK){
-            view = LayoutInflater.from(mContext).inflate(R.layout.st_weapon_item,parent,false);
-        }else {
-            view = LayoutInflater.from(mContext).inflate(R.layout.weapon_item,parent,false);
+            ImageView statTrakView = (ImageView) view.findViewById(R.id.st_img);
+            statTrakView.setVisibility(View.VISIBLE);
         }
         final WeaponAdapter.ViewHolder holder =  new WeaponAdapter.ViewHolder(view);
         return holder;

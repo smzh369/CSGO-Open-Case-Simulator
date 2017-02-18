@@ -9,6 +9,14 @@
     <string name="share">分享</string>
     <string name="donate">捐助</string>
     <string name="quit">退出</string>
+    <string name="discard">丢弃</string>
+    <string name="keep">保留</string>
+
+    <string name="factory_new">崭新出厂</string>
+    <string name="minimal_wear">略有磨损</string>
+    <string name="field_tested">久经沙场</string>
+    <string name="well_worn">破损不堪</string>
+    <string name="battle_scarred">战痕累累</string>
 
     <string name="glove_case">手套武器箱</string>
     <string name="gamma_2_case">伽玛 2 号武器箱</string>

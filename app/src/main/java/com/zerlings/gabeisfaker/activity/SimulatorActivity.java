@@ -2,17 +2,26 @@ package com.zerlings.gabeisfaker.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
+import com.zerlings.gabeisfaker.db.UniqueWeapon;
 import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
 import com.zerlings.gabeisfaker.recyclerview.Weapon;
 import com.zerlings.gabeisfaker.utils.DensityUtil;
@@ -28,7 +37,7 @@ import java.util.Random;
  * Created by 令子 on 2017/2/15.
  */
 
-public class SimulatorActivity extends AppCompatActivity {
+public class SimulatorActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String CASE_NAME = "case_name";
 
@@ -38,6 +47,22 @@ public class SimulatorActivity extends AppCompatActivity {
 
     private WeaponAdapter adapter;
 
+    private LinearLayout qualityLayout;
+
+    private RelativeLayout uniqueWeaponLayout;
+
+    private ImageView weaponImage;
+
+    private ImageView statTrakImage;
+
+    private TextView weaponName;
+
+    private TextView skinName;
+
+    private TextView exteriorText;
+
+    private UniqueWeapon uniqueWeapon;
+
     private List<Weapon> weapons;
 
     private List<Weapon> weaponList = new ArrayList<>();
@@ -46,6 +71,39 @@ public class SimulatorActivity extends AppCompatActivity {
     private List<Weapon> restrictedList = new ArrayList<>();
     private List<Weapon> milspecList = new ArrayList<>();
 
+    private Handler handler = new Handler(){
+
+        //更新开出物品的视图
+        @Override
+        public void handleMessage(Message msg) {
+            uniqueWeapon = (UniqueWeapon) msg.obj;
+            weaponName.setText(uniqueWeapon.getWeaponName());
+            skinName.setText(uniqueWeapon.getSkinName());
+            exteriorText.setText(uniqueWeapon.getExterior());
+            Glide.with(SimulatorActivity.this).load(uniqueWeapon.getImageId()).into(weaponImage);
+            if (uniqueWeapon.isStatTrak()){
+                statTrakImage.setVisibility(View.VISIBLE);
+            }else {
+                statTrakImage.setVisibility(View.GONE);
+            }
+            switch (msg.what){
+                case 3:
+                    qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
+                    break;
+                case 4:
+                    qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
+                    break;
+                case 5:
+                    qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
+                    break;
+                case 6:
+                    qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
+                    break;
+            }
+            Log.d("uniqueWeapon", "handleMessage: "+ uniqueWeapon.getWeaponName());
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +111,19 @@ public class SimulatorActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.simulator_activity);
-        Button backButton = (Button) findViewById(R.id.back);
+
+        //初始化布局
+        Button backButton = (Button) findViewById(R.id.back_button);
         Button startButton = (Button)findViewById(R.id.start_button);
+        Button discardButton = (Button)findViewById(R.id.discard_button);
+        Button keepButton = (Button)findViewById(R.id.keep_button);
+        qualityLayout = (LinearLayout)findViewById(R.id.quality_layout);
+        uniqueWeaponLayout = (RelativeLayout)findViewById(R.id.unique_weapon_layout);
+        weaponImage = (ImageView)findViewById(R.id.weapon_image);
+        statTrakImage = (ImageView)findViewById(R.id.st_img);
+        weaponName = (TextView)findViewById(R.id.weapon_name);
+        skinName = (TextView)findViewById(R.id.skin_name);
+        exteriorText = (TextView)findViewById(R.id.quality_text);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_2);
         TextView titleText = (TextView)findViewById(R.id.title_text);
 
@@ -68,7 +137,7 @@ public class SimulatorActivity extends AppCompatActivity {
         classifiedList.clear();
         restrictedList.clear();
         milspecList.clear();
-        for (int i = 0;i<weapons.size();i++) {
+        for (int i = 0;i < weapons.size();i++) {
             Weapon weapon = weapons.get(i);
             if (weapon.getQuality() == 6) {
                 convertList.add(weapon);
@@ -81,11 +150,13 @@ public class SimulatorActivity extends AppCompatActivity {
             }
         }
         initList();
+        Log.d("weaponList", "onCreate: "+ weaponList.get(37).getWeaponName());
 
         adapter = new WeaponAdapter(weaponList);
 
         //设置recyclerview显示方式
-        final CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
+        CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
+        layoutManager.setSpeed(0.6f);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -97,20 +168,32 @@ public class SimulatorActivity extends AppCompatActivity {
         View header = LayoutInflater.from(this).inflate(R.layout.item_header,recyclerView,false);
         adapter.setHeaderView(header);
         recyclerView.setAdapter(adapter);
-
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutManager.setSpeed(0.6f);
-                recyclerView.smoothScrollToPosition(38);
-            }
-        });
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                switch (newState){
+                    case RecyclerView.SCROLL_STATE_IDLE:
+                        uniqueWeaponLayout.setVisibility(View.VISIBLE);
+                        exteriorText.setVisibility(View.VISIBLE);
+                        initList();
+                        adapter.notifyDataSetChanged();
+                        recyclerView.scrollToPosition(0);
+                        break;
+                    default:break;
+                }
+            }
+        });
+
+        backButton.setOnClickListener(this);
+        startButton.setOnClickListener(this);
+        discardButton.setOnClickListener(this);
+        keepButton.setOnClickListener(this);
 
     }
 
@@ -142,6 +225,64 @@ public class SimulatorActivity extends AppCompatActivity {
             weaponList.set(37,restrictedList.get(random.nextInt(restrictedList.size())));
         }else {
             weaponList.set(37,milspecList.get(random.nextInt(milspecList.size())));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.discard_button:
+                uniqueWeaponLayout.setVisibility(View.GONE);
+                break;
+            case R.id.keep_button:
+                uniqueWeapon.save();
+                uniqueWeaponLayout.setVisibility(View.GONE);
+                break;
+            case R.id.back_button:
+                finish();break;
+            case R.id.start_button:
+                final Weapon weapon = weaponList.get(37);
+                recyclerView.smoothScrollToPosition(38);
+                //recyclerView.smoothScrollBy(DensityUtil.dip2px(5445), 0);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        UniqueWeapon uniqueWeapon = new UniqueWeapon();
+                        Random random = new Random();
+                        Message message = new Message();
+                        uniqueWeapon.setWeaponName(weapon.getWeaponName());
+                        uniqueWeapon.setSkinName(weapon.getSkinName());
+                        uniqueWeapon.setQuality(weapon.getQuality());
+                        uniqueWeapon.setImageId(weapon.getImageId());
+
+                        float wear = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
+                        uniqueWeapon.setWearValue(wear);
+                        if (wear>=0 && wear<7){
+                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.factory_new));
+                        }else if (wear>=7 && wear<15){
+                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.minimal_wear));
+                        }else if (wear>=15 && wear<38){
+                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.field_tested));
+                        }else if (wear>=38 && wear<45){
+                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.well_worn));
+                        }else {
+                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.battle_scarred));
+                        }
+                        switch (uniqueWeapon.getQuality()){
+                            case 3:message.what = 3;break;
+                            case 4:message.what = 4;break;
+                            case 5:message.what = 5;break;
+                            case 6:message.what = 6;break;
+                            default:break;
+                        }
+                        message.obj = uniqueWeapon;
+                        Log.d("uniqueWeapon", "run: "+ uniqueWeapon.getWeaponName());
+                        handler.sendMessage(message);
+                        Log.d("weaponList", "run: "+ weaponList.get(37).getWeaponName());
+                    }
+                }).start();
+                break;
+            default:break;
         }
     }
 }

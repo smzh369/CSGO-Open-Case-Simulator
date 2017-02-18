@@ -28,7 +28,7 @@
                 android:layout_height="?attr/actionBarSize">
 
                 <Button
-                    android:id="@+id/back"
+                    android:id="@+id/back_button"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:textColor="#fff"
-                    android:textSize="20dp"/>
+                    android:textSize="20sp"/>
 
 
             </RelativeLayout>
@@ -82,5 +82,44 @@
             app:headerLayout="@layout/nav_header"/>
 
     </android.support.v4.widget.DrawerLayout>
+
+    <RelativeLayout
+        android:id="@+id/unique_weapon_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/darkblue"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/discard_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50dp"
+            android:text="@string/discard"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:background="@drawable/circle_button"/>
+
+        <include layout="@layout/weapon_item"
+                 android:layout_margin="10dp"
+                 android:layout_width="150dp"
+                 android:layout_height="wrap_content"
+                 android:layout_centerInParent="true"/>
+
+        <Button
+            android:id="@+id/keep_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:text="@string/keep"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:background="@drawable/circle_button"/>
+
+    </RelativeLayout>
 
 </FrameLayout>
