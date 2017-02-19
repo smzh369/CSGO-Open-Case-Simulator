@@ -3,7 +3,6 @@
               android:orientation="vertical"
               android:layout_width="150dp"
               android:layout_height="wrap_content"
-              android:layout_marginTop="10dp"
               android:background="@color/cardview_dark_background">
 
     <ImageView
@@ -40,7 +39,7 @@
                 android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/quality_text"
+                android:id="@+id/exterior_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

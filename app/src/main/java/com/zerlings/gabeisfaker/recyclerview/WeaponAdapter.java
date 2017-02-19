@@ -36,6 +36,7 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
         ImageView weaponImage;
         TextView weaponName;
         TextView skinName;
+        ImageView statTrakView;
 
         public ViewHolder(View view){
             super(view);
@@ -43,8 +44,10 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
             weaponImage = (ImageView)view.findViewById(R.id.weapon_image);
             weaponName = (TextView)view.findViewById(R.id.weapon_name);
             skinName = (TextView)view.findViewById(R.id.skin_name);
+            statTrakView = (ImageView) view.findViewById(R.id.st_img);
         }
     }
+
     public WeaponAdapter(List<Weapon> weaponList){
         mWeaponList = weaponList;
     }
@@ -56,6 +59,7 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
         mHeaderView = headerView;
         notifyItemInserted(0);
     }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -70,6 +74,7 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
             return TYPE_HEADER;
         }
         return TYPE_NORMAL;
+
     }
 
     @Override
@@ -81,11 +86,10 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.weapon_item,parent,false);
-        if (viewType == TYPE_STATTRAK){
-            ImageView statTrakView = (ImageView) view.findViewById(R.id.st_img);
-            statTrakView.setVisibility(View.VISIBLE);
-        }
         final WeaponAdapter.ViewHolder holder =  new WeaponAdapter.ViewHolder(view);
+        if (viewType == TYPE_STATTRAK){
+            holder.statTrakView.setVisibility(View.VISIBLE);
+        }
         return holder;
     }
 
@@ -110,6 +114,7 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
                 default:break;
             }
         }
+
     }
 
     @Override

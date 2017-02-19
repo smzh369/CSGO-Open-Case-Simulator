@@ -6,13 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/weapon_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/csgo_background"/>
-
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -20,44 +13,34 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/csgo_background">
+
+            <include layout="@layout/title"/>
 
             <RelativeLayout
-                android:layout_alignParentTop="true"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/item_frame">
 
-                <Button
-                    android:id="@+id/back_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_back"
-                    />
-
-                <TextView
-                    android:id="@+id/title_text"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_2"
+                    android:layout_width="485dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="#000510"/>
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_2"
-                android:layout_width="482dp"
-                android:layout_height="170dp"
-                android:layout_centerInParent="true"
-                android:background="#000000"/>
-
             <android.support.v7.widget.CardView
+                android:id="@+id/select_bar"
                 android:layout_width="1dp"
-                android:layout_height="160dp"
+                android:layout_height="170dp"
                 android:layout_centerInParent="true"
                 app:cardCornerRadius="4dp"
                 app:cardBackgroundColor="#FF9900"
@@ -65,11 +48,16 @@
 
             <Button
                 android:id="@+id/start_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/recycler_view_2"
-                android:layout_marginTop="10dp"/>
+                android:layout_below="@id/select_bar"
+                android:background="@drawable/start_button"
+                android:text="@string/start"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
         </RelativeLayout>
 
@@ -96,17 +84,25 @@
             android:layout_height="80dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="80dp"
             android:text="@string/discard"
             android:textSize="16sp"
             android:gravity="center"
             android:background="@drawable/circle_button"/>
 
-        <include layout="@layout/weapon_item"
-                 android:layout_margin="10dp"
-                 android:layout_width="150dp"
-                 android:layout_height="wrap_content"
-                 android:layout_centerInParent="true"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/item_frame">
+
+            <include layout="@layout/weapon_item"
+                     android:layout_margin="20dp"
+                     android:layout_width="150dp"
+                     android:layout_height="wrap_content"
+                     android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
 
         <Button
             android:id="@+id/keep_button"
@@ -114,7 +110,7 @@
             android:layout_height="80dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
+            android:layout_marginRight="80dp"
             android:text="@string/keep"
             android:textSize="16sp"
             android:gravity="center"

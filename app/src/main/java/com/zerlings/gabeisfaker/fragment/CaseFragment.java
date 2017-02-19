@@ -1,7 +1,6 @@
 package com.zerlings.gabeisfaker.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -36,12 +35,10 @@ public class CaseFragment extends Fragment {
 
     private List<Case> caseList = new ArrayList<>();
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
-            savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.choose_case,container,false);
-        settingButton = (Button)view.findViewById(R.id.setting);
+        settingButton = (Button)view.findViewById(R.id.left_button);
         drawerLayout = (DrawerLayout)view.findViewById(R.id.drawer_layout);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(),4);
@@ -49,11 +46,12 @@ public class CaseFragment extends Fragment {
         caseList = InitUtils.initCase();
         adapter = new CaseAdapter(caseList);
         recyclerView.setAdapter(adapter);
+        settingButton.setBackgroundResource(R.drawable.ic_cs);
         return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         settingButton.setOnClickListener(new View.OnClickListener() {
             @Override

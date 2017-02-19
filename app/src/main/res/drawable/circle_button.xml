@@ -6,16 +6,20 @@
             //边框角度
             <corners android:radius="30dip"/>
             //外边框颜色
-            <solid android:color="@color/cardview_dark_background"/>
+            <solid android:color="#444444"/>
         </shape>
     </item>
-    //离边框的厚度
-    <item android:bottom="1dp" android:left="1dp" android:right="1dp" android:top="1dp">
+    //里边框的厚度
+    <item android:bottom="0dp" android:left="2dp" android:right="2dp" android:top="4dp">
         <shape android:shape="oval">
             //边框角度
             <corners android:radius="30dip"/>
-            //外边框颜色
-            <solid android:color="@color/cardview_light_background" />
+
+            <gradient
+                android:startColor="#111111"
+                android:endColor="#333333"
+                android:angle="90"
+                />
         </shape>
     </item>
     //然后把button的长宽设置成一样就可以了

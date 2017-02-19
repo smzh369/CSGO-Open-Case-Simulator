@@ -8,7 +8,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,9 +23,9 @@ import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.db.UniqueWeapon;
 import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
 import com.zerlings.gabeisfaker.recyclerview.Weapon;
+import com.zerlings.gabeisfaker.recyclerview.WeaponItemDecoration;
 import com.zerlings.gabeisfaker.utils.DensityUtil;
 import com.zerlings.gabeisfaker.utils.InitUtils;
-import com.zerlings.gabeisfaker.recyclerview.SpaceItemDecoration;
 import com.zerlings.gabeisfaker.recyclerview.WeaponAdapter;
 
 import java.util.ArrayList;
@@ -100,7 +99,6 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                     qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
                     break;
             }
-            Log.d("uniqueWeapon", "handleMessage: "+ uniqueWeapon.getWeaponName());
         }
     };
 
@@ -113,7 +111,9 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.simulator_activity);
 
         //初始化布局
-        Button backButton = (Button) findViewById(R.id.back_button);
+        Button backButton = (Button) findViewById(R.id.left_button);
+        Button inventoryButton = (Button)findViewById(R.id.right_button);
+        inventoryButton.setVisibility(View.VISIBLE);
         Button startButton = (Button)findViewById(R.id.start_button);
         Button discardButton = (Button)findViewById(R.id.discard_button);
         Button keepButton = (Button)findViewById(R.id.keep_button);
@@ -123,7 +123,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         statTrakImage = (ImageView)findViewById(R.id.st_img);
         weaponName = (TextView)findViewById(R.id.weapon_name);
         skinName = (TextView)findViewById(R.id.skin_name);
-        exteriorText = (TextView)findViewById(R.id.quality_text);
+        exteriorText = (TextView)findViewById(R.id.exterior_text);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_2);
         TextView titleText = (TextView)findViewById(R.id.title_text);
 
@@ -150,23 +150,22 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             }
         }
         initList();
-        Log.d("weaponList", "onCreate: "+ weaponList.get(37).getWeaponName());
-
-        adapter = new WeaponAdapter(weaponList);
 
         //设置recyclerview显示方式
+        adapter = new WeaponAdapter(weaponList);
         CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
         layoutManager.setSpeed(0.6f);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
 
         //设置item间隔
-        int spacingInPixels = DensityUtil.dip2px(7.5f);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+        int spacingInPixels = DensityUtil.dip2px(10f);
+        recyclerView.addItemDecoration(new WeaponItemDecoration(spacingInPixels));
 
         //添加表头
         View header = LayoutInflater.from(this).inflate(R.layout.item_header,recyclerView,false);
         adapter.setHeaderView(header);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -191,6 +190,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         });
 
         backButton.setOnClickListener(this);
+        inventoryButton.setOnClickListener(this);
         startButton.setOnClickListener(this);
         discardButton.setOnClickListener(this);
         keepButton.setOnClickListener(this);
@@ -238,8 +238,12 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 uniqueWeapon.save();
                 uniqueWeaponLayout.setVisibility(View.GONE);
                 break;
-            case R.id.back_button:
+            case R.id.left_button:
                 finish();break;
+            case R.id.right_button:
+                Intent intent = new Intent(this,InventoryActivity.class);
+                startActivity(intent);
+                break;
             case R.id.start_button:
                 final Weapon weapon = weaponList.get(37);
                 recyclerView.smoothScrollToPosition(38);
@@ -254,7 +258,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                         uniqueWeapon.setSkinName(weapon.getSkinName());
                         uniqueWeapon.setQuality(weapon.getQuality());
                         uniqueWeapon.setImageId(weapon.getImageId());
-
+                        uniqueWeapon.setStatTrak(weapon.isStatTrak());
                         float wear = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
                         uniqueWeapon.setWearValue(wear);
                         if (wear>=0 && wear<7){
@@ -276,9 +280,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                             default:break;
                         }
                         message.obj = uniqueWeapon;
-                        Log.d("uniqueWeapon", "run: "+ uniqueWeapon.getWeaponName());
                         handler.sendMessage(message);
-                        Log.d("weaponList", "run: "+ weaponList.get(37).getWeaponName());
                     }
                 }).start();
                 break;

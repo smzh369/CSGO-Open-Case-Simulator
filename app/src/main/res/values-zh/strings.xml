@@ -11,6 +11,7 @@
     <string name="quit">退出</string>
     <string name="discard">丢弃</string>
     <string name="keep">保留</string>
+    <string name="start">试试手气</string>
 
     <string name="factory_new">崭新出厂</string>
     <string name="minimal_wear">略有磨损</string>

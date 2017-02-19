@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".activity.SimulatorActivity"
                   android:screenOrientation="landscape"/>
+        <activity android:name=".activity.InventoryActivity"
+                  android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
