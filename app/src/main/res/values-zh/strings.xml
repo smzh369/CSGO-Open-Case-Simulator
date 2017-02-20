@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Gabe is Faker</string>
+    <string name="another_case">换个手气 ?</string>
 
     <string name="setting">设置</string>
     <string name="inventory">库存</string>

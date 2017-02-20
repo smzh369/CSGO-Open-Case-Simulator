@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/weapon_item_layout"
               android:orientation="vertical"
               android:layout_width="150dp"
               android:layout_height="wrap_content"
-              android:background="@color/cardview_dark_background">
+              android:background="#00000000">
 
     <ImageView
         android:id="@+id/weapon_image"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:background="@color/cardview_dark_background"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"/>
 
     <LinearLayout
         android:id="@+id/quality_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp">
 
         <LinearLayout
             android:layout_width="wrap_content"

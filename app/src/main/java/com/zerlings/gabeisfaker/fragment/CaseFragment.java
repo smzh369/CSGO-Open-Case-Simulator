@@ -5,13 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.zerlings.gabeisfaker.R;
+import com.zerlings.gabeisfaker.activity.MainActivity;
 import com.zerlings.gabeisfaker.recyclerview.Case;
 import com.zerlings.gabeisfaker.recyclerview.CaseAdapter;
 import com.zerlings.gabeisfaker.utils.InitUtils;
@@ -27,8 +30,6 @@ public class CaseFragment extends Fragment {
 
     private Button settingButton;
 
-    private DrawerLayout drawerLayout;
-
     private RecyclerView recyclerView;
 
     private CaseAdapter adapter;
@@ -39,10 +40,17 @@ public class CaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.choose_case,container,false);
         settingButton = (Button)view.findViewById(R.id.left_button);
-        drawerLayout = (DrawerLayout)view.findViewById(R.id.drawer_layout);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
-        GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(),4);
-        recyclerView.setLayoutManager(layoutManager);
+        if (getActivity() instanceof MainActivity){
+            GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(),4);
+            recyclerView.setLayoutManager(layoutManager);
+        }else {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+            recyclerView.setLayoutManager(layoutManager);
+            settingButton.setVisibility(View.GONE);
+            TextView titleText = (TextView)view.findViewById(R.id.title_text);
+            titleText.setText(R.string.another_case);
+        }
         caseList = InitUtils.initCase();
         adapter = new CaseAdapter(caseList);
         recyclerView.setAdapter(adapter);
@@ -56,6 +64,7 @@ public class CaseFragment extends Fragment {
         settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DrawerLayout drawerLayout = (DrawerLayout)v.getRootView().findViewById(R.id.drawer_layout);
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });

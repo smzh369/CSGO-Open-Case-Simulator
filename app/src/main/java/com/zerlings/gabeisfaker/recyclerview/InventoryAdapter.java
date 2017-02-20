@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
+import com.zerlings.gabeisfaker.activity.InventoryActivity;
 import com.zerlings.gabeisfaker.db.UniqueWeapon;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by 令子 on 2017/2/19.
@@ -29,7 +31,14 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
     private List<UniqueWeapon> mWeaponList;
 
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout itemLayout;
         LinearLayout qualityLayout;
         ImageView weaponImage;
         TextView weaponName;
@@ -39,6 +48,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
         public ViewHolder(View view){
             super(view);
+            itemLayout = (LinearLayout)view.findViewById(R.id.weapon_item_layout);
             qualityLayout = (LinearLayout)view.findViewById(R.id.quality_layout);
             weaponImage = (ImageView)view.findViewById(R.id.weapon_image);
             weaponName = (TextView)view.findViewById(R.id.weapon_name);
@@ -46,6 +56,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
             exteriorText = (TextView)view.findViewById(R.id.exterior_text);
             statTrakView = (ImageView) view.findViewById(R.id.st_img);
         }
+
     }
 
     public InventoryAdapter(List<UniqueWeapon> weaponList){
@@ -76,8 +87,13 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(InventoryAdapter.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(InventoryAdapter.ViewHolder holder,final int position) {
+        Set<Integer> positionSet = InventoryActivity.positionSet;
+        if (positionSet.contains(position)) {
+            holder.itemLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.selected));
+        } else {
+            holder.itemLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.unSelected));
+        }
         UniqueWeapon weapon = mWeaponList.get(position);
         Glide.with(mContext).load(weapon.getImageId()).into(holder.weaponImage);
         holder.weaponName.setText(weapon.getWeaponName());
@@ -96,10 +112,30 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
                 break;
             default:break;
         }
+        if (onItemClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(v,position);
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemClickListener.onItemLongClick(v,position);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
         return mWeaponList.size();
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View view, int position);
+        void onItemLongClick(View view,int position);
     }
 }

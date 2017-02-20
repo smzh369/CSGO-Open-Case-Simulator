@@ -9,4 +9,6 @@
     <color name="restricted">#8746FA</color>
     <color name="milspec">#3D58E7</color>
     <color name="darkblue">#000011</color>
+    <color name="selected">#FFFF00</color>
+    <color name="unSelected">#00000000</color>
 </resources>
