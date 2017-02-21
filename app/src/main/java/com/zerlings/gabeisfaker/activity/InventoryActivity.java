@@ -75,15 +75,16 @@ public class InventoryActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 // 删除已选
+                List<UniqueWeapon> uniqueWeapons = new ArrayList<>();
+                uniqueWeapons.addAll(uniqueWeaponList);
                 for (int position : positionSet) {
-                    UniqueWeapon weapon = uniqueWeaponList.get(position);
-                    uniqueWeaponList.remove(position);
+                    UniqueWeapon weapon = uniqueWeapons.get(position);
+                    uniqueWeaponList.remove(weapon);
                     adapter.notifyItemRemoved(position);
-                    adapter.notifyItemRangeChanged(position,uniqueWeaponList.size() - position);
                     weapon.delete();
                 }
+                adapter.notifyItemRangeChanged(0,uniqueWeapons.size());
                 positionSet.clear();
-                //adapter.notifyDataSetChanged();
                 selectMode = false;
                 deleteButton.setVisibility(View.GONE);
             }
@@ -132,46 +133,4 @@ public class InventoryActivity extends AppCompatActivity{
         }
     }
 
-    /*@Override
-    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-        if (actionMode == null) {
-            actionMode = mode;
-            MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.menu_delete, menu);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        return false;
-    }
-
-    @Override
-    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_delete:
-                // 删除已选
-                for (int position : positionSet) {
-                    UniqueWeapon weapon = uniqueWeaponList.get(position);
-                    uniqueWeaponList.remove(position);
-                    adapter.notifyItemRemoved(position);
-                    adapter.notifyItemRangeChanged(position,uniqueWeaponList.size() - position);
-                    weapon.delete();
-                }
-                mode.finish();
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @Override
-    public void onDestroyActionMode(ActionMode mode) {
-        actionMode = null;
-        positionSet.clear();
-        adapter.notifyDataSetChanged();
-    }*/
 }

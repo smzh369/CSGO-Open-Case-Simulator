@@ -1,8 +1,6 @@
 package com.zerlings.gabeisfaker.recyclerview;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
-import com.zerlings.gabeisfaker.activity.SimulatorActivity;
 
 import java.util.List;
 
@@ -26,6 +23,15 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
     private Context mContext;
 
     private List<Case> mCaseList;
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+    public interface OnItemClickListener{
+        void onItemClick(View view, int position);
+    }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         CardView cardView;
@@ -51,25 +57,22 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.case_item,parent,false);
         final ViewHolder holder =  new ViewHolder(view);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                Case mCase = mCaseList.get(position);
-                Intent intent = new Intent(mContext,SimulatorActivity.class);
-                intent.putExtra(SimulatorActivity.CASE_NAME,mCase.getCaseName());
-                intent.putExtra(SimulatorActivity.CASE_IMAGE_ID,mCase.getImageId());
-                mContext.startActivity(intent);
-            }
-        });
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Case mCase = mCaseList.get(position);
         Glide.with(mContext).load(mCase.getImageId()).into(holder.caseImage);
         holder.caseName.setText(mCase.getCaseName());
+        if (onItemClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(v,position);
+                }
+            });
+        }
     }
 
     @Override

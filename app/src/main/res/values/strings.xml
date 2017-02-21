@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Gabe is Faker</string>
     <string name="another_case">Another case ?</string>
+    <string name="more_features">More features please wait</string>
 
     <string name="setting">Setting</string>
     <string name="inventory">Inventory</string>

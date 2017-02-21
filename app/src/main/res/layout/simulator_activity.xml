@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+        android:id="@+id/drawer_layout_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -53,6 +53,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/select_bar"
                 android:background="@drawable/start_button"
+                android:soundEffectsEnabled="false"
                 android:text="@string/start"
                 android:textAllCaps="false"
                 android:textSize="18sp"

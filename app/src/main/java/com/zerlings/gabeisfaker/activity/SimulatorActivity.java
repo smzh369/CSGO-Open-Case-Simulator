@@ -1,10 +1,15 @@
 package com.zerlings.gabeisfaker.activity;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,9 +47,15 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     public static final String CASE_IMAGE_ID = "case_image_id";
 
-    private RecyclerView recyclerView;
+    public int caseImageId;
 
-    private WeaponAdapter adapter;
+    public TextView titleText;
+
+    public DrawerLayout drawerLayout;
+
+    public WeaponAdapter adapter;
+
+    private RecyclerView recyclerView;
 
     private LinearLayout qualityLayout;
 
@@ -60,9 +71,27 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     private TextView exteriorText;
 
+    private Button startButton;
+
+    private Button backButton;
+
+    private Button inventoryButton;
+
+    private Button discardButton;
+
+    private Button keepButton;
+
     private UniqueWeapon uniqueWeapon;
 
     private List<Weapon> weapons;
+
+    private SoundPool soundPool;
+
+    private  int soundID;
+
+    private MediaPlayer player;
+
+    private Random random = new Random();
 
     private List<Weapon> weaponList = new ArrayList<>();
     private List<Weapon> convertList = new ArrayList<>();
@@ -111,59 +140,51 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.simulator_activity);
 
         //初始化布局
-        Button backButton = (Button) findViewById(R.id.left_button);
-        Button inventoryButton = (Button)findViewById(R.id.right_button);
+        backButton = (Button) findViewById(R.id.left_button);
+        inventoryButton = (Button)findViewById(R.id.right_button);
         inventoryButton.setVisibility(View.VISIBLE);
-        Button startButton = (Button)findViewById(R.id.start_button);
-        Button discardButton = (Button)findViewById(R.id.discard_button);
-        Button keepButton = (Button)findViewById(R.id.keep_button);
+        startButton = (Button)findViewById(R.id.start_button);
+        startButton.playSoundEffect(R.raw.button);
+        discardButton = (Button)findViewById(R.id.discard_button);
+        keepButton = (Button)findViewById(R.id.keep_button);
         qualityLayout = (LinearLayout)findViewById(R.id.quality_layout);
         uniqueWeaponLayout = (RelativeLayout)findViewById(R.id.unique_weapon_layout);
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout_2);
         weaponImage = (ImageView)findViewById(R.id.weapon_image);
         statTrakImage = (ImageView)findViewById(R.id.st_img);
         weaponName = (TextView)findViewById(R.id.weapon_name);
         skinName = (TextView)findViewById(R.id.skin_name);
         exteriorText = (TextView)findViewById(R.id.exterior_text);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_2);
-        TextView titleText = (TextView)findViewById(R.id.title_text);
+        titleText = (TextView)findViewById(R.id.title_text);
 
+        //初始化SoundPool和MediaPlayer
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool.Builder()
+                    .setMaxStreams(2)
+                    .build();
+        } else {
+            soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 5);
+        }
+        soundID = soundPool.load(this,R.raw.button,1);
+        player = MediaPlayer.create(this,R.raw.open_case);
+
+        //获取传入的箱子信息
         Intent intent = getIntent();
         titleText.setText(intent.getStringExtra(CASE_NAME));
-        int caseImageId = intent.getIntExtra(CASE_IMAGE_ID,0);
-
-        //初始化各项列表
-        weapons = InitUtils.initWeapon(caseImageId);
-        convertList.clear();
-        classifiedList.clear();
-        restrictedList.clear();
-        milspecList.clear();
-        for (int i = 0;i < weapons.size();i++) {
-            Weapon weapon = weapons.get(i);
-            if (weapon.getQuality() == 6) {
-                convertList.add(weapon);
-            } else if (weapon.getQuality() == 5) {
-                classifiedList.add(weapon);
-            } else if (weapon.getQuality() == 4) {
-                restrictedList.add(weapon);
-            } else {
-                milspecList.add(weapon);
-            }
-        }
-        initList();
+        caseImageId = intent.getIntExtra(CASE_IMAGE_ID,0);
+        initWeapons();//初始化各项武器列表
+        initList();//初始化游戏列表
 
         //设置recyclerview显示方式
         adapter = new WeaponAdapter(weaponList);
         CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
-        layoutManager.setSpeed(0.6f);
+        layoutManager.setSpeed(0.58f);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-
-        //设置item间隔
-        int spacingInPixels = DensityUtil.dip2px(10f);
+        int spacingInPixels = DensityUtil.dip2px(10f);//设置item间隔
         recyclerView.addItemDecoration(new WeaponItemDecoration(spacingInPixels));
-
-        //添加表头
-        View header = LayoutInflater.from(this).inflate(R.layout.item_header,recyclerView,false);
+        View header = LayoutInflater.from(this).inflate(R.layout.item_header,recyclerView,false);//添加表头
         adapter.setHeaderView(header);
 
         recyclerView.setAdapter(adapter);
@@ -197,9 +218,30 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void initList(){
+    //初始化各类武器列表
+    public void initWeapons(){
+        weapons = InitUtils.initWeapon(caseImageId);
+        convertList.clear();
+        classifiedList.clear();
+        restrictedList.clear();
+        milspecList.clear();
+        for (int i = 0;i < weapons.size();i++) {
+            Weapon weapon = weapons.get(i);
+            if (weapon.getQuality() == 6) {
+                convertList.add(weapon);
+            } else if (weapon.getQuality() == 5) {
+                classifiedList.add(weapon);
+            } else if (weapon.getQuality() == 4) {
+                restrictedList.add(weapon);
+            } else {
+                milspecList.add(weapon);
+            }
+        }
+    }
+
+    public void initList(){
+
         weaponList.clear();
-        Random random = new Random();
         for (int i = 0;i<40;i++){
             int index = random.nextInt(weapons.size());
             int st = random.nextInt(10);
@@ -209,23 +251,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             }
             weaponList.add(weapon);
         }
-        //计算最终得到的物品
-        int degree = random.nextInt(500);
-        if (degree == 499){
-            weaponList.get(37).setStatTrak(false);
-            weaponList.get(37).setWeaponName("*Rare Special Item*");
-            weaponList.get(37).setImageId(R.drawable.rare_special);
-            weaponList.get(37).setSkinName(null);
-            weaponList.get(37).setQuality(7);
-        }else if (degree > 495 && degree < 499){
-            weaponList.set(37,convertList.get(random.nextInt(convertList.size())));
-        }else if (degree > 480 && degree < 496){
-            weaponList.set(37,classifiedList.get(random.nextInt(classifiedList.size())));
-        }else if (degree > 400 && degree < 481){
-            weaponList.set(37,restrictedList.get(random.nextInt(restrictedList.size())));
-        }else {
-            weaponList.set(37,milspecList.get(random.nextInt(milspecList.size())));
-        }
+
     }
 
     @Override
@@ -245,35 +271,22 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.start_button:
-                final Weapon weapon = weaponList.get(37);
+                soundPool.play(soundID,1,1,5,0,1);
+                //soundPool.play(soundID.get(1),1,1,5,0,1);
+                player.start();
                 recyclerView.smoothScrollToPosition(38);
                 //recyclerView.smoothScrollBy(DensityUtil.dip2px(5445), 0);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        UniqueWeapon uniqueWeapon = new UniqueWeapon();
-                        Random random = new Random();
+                        setUniqueWeapon();
+                        Weapon weapon = weaponList.get(37);
+                        UniqueWeapon uniqueWeapon = getUniqueWeapon(weapon);
+
+                        //发送异步消息
                         Message message = new Message();
-                        uniqueWeapon.setWeaponName(weapon.getWeaponName());
-                        uniqueWeapon.setSkinName(weapon.getSkinName());
-                        uniqueWeapon.setQuality(weapon.getQuality());
-                        uniqueWeapon.setImageId(weapon.getImageId());
-                        uniqueWeapon.setStatTrak(weapon.isStatTrak());
-                        float wear = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
-                        uniqueWeapon.setWearValue(wear);
-                        if (wear>=0 && wear<7){
-                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.factory_new));
-                        }else if (wear>=7 && wear<15){
-                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.minimal_wear));
-                        }else if (wear>=15 && wear<38){
-                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.field_tested));
-                        }else if (wear>=38 && wear<45){
-                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.well_worn));
-                        }else {
-                            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.battle_scarred));
-                        }
                         switch (uniqueWeapon.getQuality()){
-                            case 3:message.what = 3;break;
+                            case 3:message.what = 3;break;//根据物品品质渲染展示界面
                             case 4:message.what = 4;break;
                             case 5:message.what = 5;break;
                             case 6:message.what = 6;break;
@@ -286,5 +299,51 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 break;
             default:break;
         }
+    }
+
+    /**计算得到的最终物品除磨损值以外的各项属性并替换列表中的相应位置**/
+    private void setUniqueWeapon(){
+        //计算最终得到的物品
+        int degree = random.nextInt(500);
+        if (degree == 499){
+            weaponList.get(37).setStatTrak(false);
+            weaponList.get(37).setWeaponName("*Rare Special Item*");
+            weaponList.get(37).setImageId(R.drawable.rare_special);
+            weaponList.get(37).setSkinName(null);
+            weaponList.get(37).setQuality(7);
+        }else if (degree > 495 && degree < 499){
+            weaponList.set(37,convertList.get(random.nextInt(convertList.size())));
+        }else if (degree > 480 && degree < 496){
+            weaponList.set(37,classifiedList.get(random.nextInt(classifiedList.size())));
+        }else if (degree > 400 && degree < 481){
+            weaponList.set(37,restrictedList.get(random.nextInt(restrictedList.size())));
+        }else {
+            weaponList.set(37,milspecList.get(random.nextInt(milspecList.size())));
+        }
+    }
+
+    /**计算磨损值以得到完整的最终物品**/
+    private UniqueWeapon getUniqueWeapon(Weapon weapon){
+
+        UniqueWeapon uniqueWeapon = new UniqueWeapon();
+        uniqueWeapon.setWeaponName(weapon.getWeaponName());
+        uniqueWeapon.setSkinName(weapon.getSkinName());
+        uniqueWeapon.setQuality(weapon.getQuality());
+        uniqueWeapon.setImageId(weapon.getImageId());
+        uniqueWeapon.setStatTrak(weapon.isStatTrak());
+        float wear = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
+        uniqueWeapon.setWearValue(wear);
+        if (wear>=0 && wear<7){
+            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.factory_new));
+        }else if (wear>=7 && wear<15){
+            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.minimal_wear));
+        }else if (wear>=15 && wear<38){
+            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.field_tested));
+        }else if (wear>=38 && wear<45){
+            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.well_worn));
+        }else {
+            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.battle_scarred));
+        }
+        return uniqueWeapon;
     }
 }

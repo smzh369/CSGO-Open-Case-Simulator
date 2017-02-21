@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Gabe is Faker</string>
     <string name="another_case">换个手气 ?</string>
+    <string name="more_features">更多功能，敬请期待</string>
 
     <string name="setting">设置</string>
     <string name="inventory">库存</string>
