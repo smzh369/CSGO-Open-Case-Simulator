@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.zerlings.gabeisfaker.MyApplication;
 import com.zerlings.gabeisfaker.R;
-import com.zerlings.gabeisfaker.recyclerview.Case;
-import com.zerlings.gabeisfaker.recyclerview.Weapon;
+import com.zerlings.gabeisfaker.db.Case;
+import com.zerlings.gabeisfaker.db.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;

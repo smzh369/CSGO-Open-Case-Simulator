@@ -1,4 +1,4 @@
-package com.zerlings.gabeisfaker.recyclerview;
+package com.zerlings.gabeisfaker.db;
 
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
@@ -7,6 +7,8 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 
 public class Case extends BaseModel {
+
+    private int id;
 
     private String caseName;
 
@@ -17,6 +19,14 @@ public class Case extends BaseModel {
     public Case(String caseName, int imageId) {
         this.caseName = caseName;
         this.imageId = imageId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCaseName() {

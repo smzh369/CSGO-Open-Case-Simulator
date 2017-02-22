@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="weapon" type="com.zerlings.gabeisfaker.db.Weapon"/>
+        <variable name="uniqueWeapon" type="com.zerlings.gabeisfaker.db.UniqueWeapon"/>
     </data>
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_marginTop="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
-            app:imageId="@{weapon.imageId}"/>
+            app:imageId="@{uniqueWeapon.imageId}"/>
 
         <LinearLayout
             android:id="@+id/quality_layout"
@@ -31,7 +31,7 @@
             android:layout_marginBottom="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
-            app:layoutColor="@{weapon.quality}">
+            app:layoutColor="@{uniqueWeapon.quality}">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:textSize="16sp"
-                    android:text="@{weapon.weaponName}"/>
+                    android:text="@{uniqueWeapon.weaponName}"/>
 
                 <TextView
                     android:id="@+id/skin_name"
@@ -54,8 +54,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:textSize="16sp"
-                    android:text="@{weapon.skinName}"/>
+                    android:text="@{uniqueWeapon.skinName}"/>
 
+                <TextView
+                    android:id="@+id/exterior_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
+                    android:text="@{uniqueWeapon.exterior}"/>
 
             </LinearLayout>
 
@@ -67,11 +74,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:src="@drawable/stat_trak"
-                app:visibility="@{weapon.isStatTrak}"/>
+                app:visibility="@{uniqueWeapon.isStatTrak}"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
 </layout>
-

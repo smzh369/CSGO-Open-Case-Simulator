@@ -1,6 +1,7 @@
 package com.zerlings.gabeisfaker.activity;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,21 +17,18 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
+import com.zerlings.gabeisfaker.databinding.SimulatorActivityBinding;
 import com.zerlings.gabeisfaker.db.UniqueWeapon;
 import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
-import com.zerlings.gabeisfaker.recyclerview.Weapon;
+import com.zerlings.gabeisfaker.db.Weapon;
 import com.zerlings.gabeisfaker.recyclerview.WeaponItemDecoration;
 import com.zerlings.gabeisfaker.utils.DensityUtil;
 import com.zerlings.gabeisfaker.utils.InitUtils;
 import com.zerlings.gabeisfaker.recyclerview.WeaponAdapter;
+import com.zerlings.gabeisfaker.BR;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,37 +46,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     public int caseImageId;
 
-    public TextView titleText;
-
-    public DrawerLayout drawerLayout;
-
     public WeaponAdapter adapter;
-
-    private RecyclerView recyclerView;
-
-    private LinearLayout qualityLayout;
-
-    private RelativeLayout uniqueWeaponLayout;
-
-    private ImageView weaponImage;
-
-    private ImageView statTrakImage;
-
-    private TextView weaponName;
-
-    private TextView skinName;
-
-    private TextView exteriorText;
-
-    private Button startButton;
-
-    private Button backButton;
-
-    private Button inventoryButton;
-
-    private Button discardButton;
-
-    private Button keepButton;
 
     private UniqueWeapon uniqueWeapon;
 
@@ -87,11 +54,13 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     private SoundPool soundPool;
 
-    private  int soundID;
+    private int soundID;
 
     private MediaPlayer player;
 
     private Random random = new Random();
+
+    public SimulatorActivityBinding binding;
 
     private List<Weapon> weaponList = new ArrayList<>();
     private List<Weapon> convertList = new ArrayList<>();
@@ -105,27 +74,27 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         @Override
         public void handleMessage(Message msg) {
             uniqueWeapon = (UniqueWeapon) msg.obj;
-            weaponName.setText(uniqueWeapon.getWeaponName());
-            skinName.setText(uniqueWeapon.getSkinName());
-            exteriorText.setText(uniqueWeapon.getExterior());
-            Glide.with(SimulatorActivity.this).load(uniqueWeapon.getImageId()).into(weaponImage);
+            binding.uniqueItem.weaponName.setText(uniqueWeapon.getWeaponName());
+            binding.uniqueItem.skinName.setText(uniqueWeapon.getSkinName());
+            binding.uniqueItem.exteriorText.setText(uniqueWeapon.getExterior());
+            Glide.with(SimulatorActivity.this).load(uniqueWeapon.getImageId()).into(binding.uniqueItem.weaponImage);
             if (uniqueWeapon.isStatTrak()){
-                statTrakImage.setVisibility(View.VISIBLE);
+                binding.uniqueItem.stImg.setVisibility(View.VISIBLE);
             }else {
-                statTrakImage.setVisibility(View.GONE);
+                binding.uniqueItem.stImg.setVisibility(View.GONE);
             }
             switch (msg.what){
                 case 3:
-                    qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
+                    binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
                     break;
                 case 4:
-                    qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
+                    binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
                     break;
                 case 5:
-                    qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
+                    binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
                     break;
                 case 6:
-                    qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
+                    binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
                     break;
             }
         }
@@ -137,26 +106,8 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.simulator_activity);
-
-        //初始化布局
-        backButton = (Button) findViewById(R.id.left_button);
-        inventoryButton = (Button)findViewById(R.id.right_button);
-        inventoryButton.setVisibility(View.VISIBLE);
-        startButton = (Button)findViewById(R.id.start_button);
-        startButton.playSoundEffect(R.raw.button);
-        discardButton = (Button)findViewById(R.id.discard_button);
-        keepButton = (Button)findViewById(R.id.keep_button);
-        qualityLayout = (LinearLayout)findViewById(R.id.quality_layout);
-        uniqueWeaponLayout = (RelativeLayout)findViewById(R.id.unique_weapon_layout);
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout_2);
-        weaponImage = (ImageView)findViewById(R.id.weapon_image);
-        statTrakImage = (ImageView)findViewById(R.id.st_img);
-        weaponName = (TextView)findViewById(R.id.weapon_name);
-        skinName = (TextView)findViewById(R.id.skin_name);
-        exteriorText = (TextView)findViewById(R.id.exterior_text);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_2);
-        titleText = (TextView)findViewById(R.id.title_text);
+        binding = DataBindingUtil.setContentView(this,R.layout.simulator_activity);
+        binding.simulatorTitle.rightButton.setVisibility(View.VISIBLE);
 
         //初始化SoundPool和MediaPlayer
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -171,50 +122,50 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
         //获取传入的箱子信息
         Intent intent = getIntent();
-        titleText.setText(intent.getStringExtra(CASE_NAME));
+        binding.simulatorTitle.titleText.setText(intent.getStringExtra(CASE_NAME));
         caseImageId = intent.getIntExtra(CASE_IMAGE_ID,0);
         initWeapons();//初始化各项武器列表
         initList();//初始化游戏列表
 
         //设置recyclerview显示方式
-        adapter = new WeaponAdapter(weaponList);
+        adapter = new WeaponAdapter(weaponList,BR.weapon);
         CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
         layoutManager.setSpeed(0.58f);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
+        binding.recyclerView2.setLayoutManager(layoutManager);
         int spacingInPixels = DensityUtil.dip2px(10f);//设置item间隔
-        recyclerView.addItemDecoration(new WeaponItemDecoration(spacingInPixels));
-        View header = LayoutInflater.from(this).inflate(R.layout.item_header,recyclerView,false);//添加表头
+        binding.recyclerView2.addItemDecoration(new WeaponItemDecoration(spacingInPixels));
+        View header = LayoutInflater.from(this).inflate(R.layout.item_header,binding.recyclerView2,false);//添加表头
         adapter.setHeaderView(header);
 
-        recyclerView.setAdapter(adapter);
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+        binding.recyclerView2.setAdapter(adapter);
+        binding.recyclerView2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        binding.recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 switch (newState){
                     case RecyclerView.SCROLL_STATE_IDLE:
-                        uniqueWeaponLayout.setVisibility(View.VISIBLE);
-                        exteriorText.setVisibility(View.VISIBLE);
+                        binding.uniqueWeaponLayout.setVisibility(View.VISIBLE);
+                        binding.uniqueItem.exteriorText.setVisibility(View.VISIBLE);
                         initList();
                         adapter.notifyDataSetChanged();
-                        recyclerView.scrollToPosition(0);
+                        binding.recyclerView2.scrollToPosition(0);
                         break;
                     default:break;
                 }
             }
         });
 
-        backButton.setOnClickListener(this);
-        inventoryButton.setOnClickListener(this);
-        startButton.setOnClickListener(this);
-        discardButton.setOnClickListener(this);
-        keepButton.setOnClickListener(this);
+        binding.simulatorTitle.leftButton.setOnClickListener(this);
+        binding.simulatorTitle.rightButton.setOnClickListener(this);
+        binding.startButton.setOnClickListener(this);
+        binding.discardButton.setOnClickListener(this);
+        binding.keepButton.setOnClickListener(this);
 
     }
 
@@ -258,11 +209,11 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.discard_button:
-                uniqueWeaponLayout.setVisibility(View.GONE);
+                binding.uniqueWeaponLayout.setVisibility(View.GONE);
                 break;
             case R.id.keep_button:
                 uniqueWeapon.save();
-                uniqueWeaponLayout.setVisibility(View.GONE);
+                binding.uniqueWeaponLayout.setVisibility(View.GONE);
                 break;
             case R.id.left_button:
                 finish();break;
@@ -274,7 +225,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 soundPool.play(soundID,1,1,5,0,1);
                 //soundPool.play(soundID.get(1),1,1,5,0,1);
                 player.start();
-                recyclerView.smoothScrollToPosition(38);
+                binding.recyclerView2.smoothScrollToPosition(38);
                 //recyclerView.smoothScrollBy(DensityUtil.dip2px(5445), 0);
                 new Thread(new Runnable() {
                     @Override

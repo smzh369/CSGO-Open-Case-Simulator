@@ -1,14 +1,14 @@
 package com.zerlings.gabeisfaker.recyclerview;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
@@ -31,6 +31,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
     private List<UniqueWeapon> mWeaponList;
 
+    private int brId;
+
     private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -38,29 +40,27 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
+        ViewDataBinding binding;
         LinearLayout itemLayout;
-        LinearLayout qualityLayout;
-        ImageView weaponImage;
-        TextView weaponName;
-        TextView skinName;
-        TextView exteriorText;
-        ImageView statTrakView;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             itemLayout = (LinearLayout)view.findViewById(R.id.weapon_item_layout);
-            qualityLayout = (LinearLayout)view.findViewById(R.id.quality_layout);
-            weaponImage = (ImageView)view.findViewById(R.id.weapon_image);
-            weaponName = (TextView)view.findViewById(R.id.weapon_name);
-            skinName = (TextView)view.findViewById(R.id.skin_name);
-            exteriorText = (TextView)view.findViewById(R.id.exterior_text);
-            statTrakView = (ImageView) view.findViewById(R.id.st_img);
+        }
+
+        public ViewDataBinding getBinding() {
+            return binding;
+        }
+
+        public void setBinding(ViewDataBinding binding) {
+            this.binding = binding;
         }
 
     }
 
-    public InventoryAdapter(List<UniqueWeapon> weaponList){
+    public InventoryAdapter(List<UniqueWeapon> weaponList, int brId){
         mWeaponList = weaponList;
+        this.brId = brId;
     }
 
     @Override
@@ -77,12 +77,9 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         if (mContext == null){
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.weapon_item,parent,false);
-        final InventoryAdapter.ViewHolder holder =  new InventoryAdapter.ViewHolder(view);
-        if (viewType == TYPE_STATTRAK){
-            holder.statTrakView.setVisibility(View.VISIBLE);
-        }
-        holder.exteriorText.setVisibility(View.VISIBLE);
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.unique_weapon_item,parent,false);
+        ViewHolder holder =  new ViewHolder(binding.getRoot());
+        holder.setBinding(binding);
         return holder;
     }
 
@@ -94,24 +91,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         } else {
             holder.itemLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.unSelected));
         }
-        UniqueWeapon weapon = mWeaponList.get(position);
-        Glide.with(mContext).load(weapon.getImageId()).into(holder.weaponImage);
-        holder.weaponName.setText(weapon.getWeaponName());
-        holder.skinName.setText(weapon.getSkinName());
-        holder.exteriorText.setText(weapon.getExterior());
-        switch (weapon.getQuality()){
-            case 7:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.knife));
-                break;
-            case 6:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.convert));
-                break;
-            case 5:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.classified));
-                break;
-            case 4:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.restricted));
-                break;
-            case 3:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.milspec));
-                break;
-            default:break;
-        }
+        holder.getBinding().setVariable(brId,mWeaponList.get(position));
+        holder.getBinding().executePendingBindings();
         if (onItemClickListener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,16 +1,15 @@
 package com.zerlings.gabeisfaker.recyclerview;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
+import com.zerlings.gabeisfaker.db.Case;
 
 import java.util.List;
 
@@ -24,6 +23,8 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
 
     private List<Case> mCaseList;
 
+    private int brId;
+
     private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -33,21 +34,25 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
         void onItemClick(View view, int position);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
-        CardView cardView;
-        ImageView caseImage;
-        TextView caseName;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        ViewDataBinding binding;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
-            cardView = (CardView)view;
-            caseImage = (ImageView)view.findViewById(R.id.case_image);
-            caseName = (TextView)view.findViewById(R.id.case_name);
+        }
+
+        public ViewDataBinding getBinding() {
+            return binding;
+        }
+
+        public void setBinding(ViewDataBinding binding) {
+            this.binding = binding;
         }
     }
 
-    public CaseAdapter(List<Case> caseList){
+    public CaseAdapter(List<Case> caseList,int brId){
         mCaseList = caseList;
+        this.brId = brId;
     }
 
     @Override
@@ -55,16 +60,16 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
         if (mContext == null){
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.case_item,parent,false);
-        final ViewHolder holder =  new ViewHolder(view);
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.case_item,parent,false);
+        ViewHolder holder =  new ViewHolder(binding.getRoot());
+        holder.setBinding(binding);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Case mCase = mCaseList.get(position);
-        Glide.with(mContext).load(mCase.getImageId()).into(holder.caseImage);
-        holder.caseName.setText(mCase.getCaseName());
+        holder.getBinding().setVariable(brId,mCaseList.get(position));
+        holder.getBinding().executePendingBindings();
         if (onItemClickListener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

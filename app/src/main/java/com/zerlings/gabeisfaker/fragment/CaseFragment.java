@@ -1,25 +1,25 @@
 package com.zerlings.gabeisfaker.fragment;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.MainActivity;
 import com.zerlings.gabeisfaker.activity.SimulatorActivity;
-import com.zerlings.gabeisfaker.recyclerview.Case;
+import com.zerlings.gabeisfaker.databinding.ChooseCaseBinding;
+import com.zerlings.gabeisfaker.db.Case;
 import com.zerlings.gabeisfaker.recyclerview.CaseAdapter;
 import com.zerlings.gabeisfaker.utils.InitUtils;
+import com.zerlings.gabeisfaker.BR;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,40 +30,36 @@ import java.util.List;
 
 public class CaseFragment extends Fragment {
 
-    private Button settingButton;
-
-    private RecyclerView recyclerView;
-
     private CaseAdapter adapter;
 
     private List<Case> caseList = new ArrayList<>();
 
+    private ChooseCaseBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.choose_case,container,false);
-        settingButton = (Button)view.findViewById(R.id.left_button);
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
+        binding = DataBindingUtil.inflate(inflater,R.layout.choose_case,container,false);
+        binding.fragTitle.titleText.setText(getString(R.string.app_name));
         if (getActivity() instanceof MainActivity){
-            GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(),4);
-            recyclerView.setLayoutManager(layoutManager);
+            GridLayoutManager layoutManager = new GridLayoutManager(getContext(),4);
+            binding.recyclerView.setLayoutManager(layoutManager);
         }else {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-            recyclerView.setLayoutManager(layoutManager);
-            settingButton.setVisibility(View.GONE);
-            TextView titleText = (TextView)view.findViewById(R.id.title_text);
-            titleText.setText(R.string.another_case);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            binding.recyclerView.setLayoutManager(layoutManager);
+            binding.fragTitle.leftButton.setVisibility(View.GONE);
+            binding.fragTitle.titleText.setText(getString(R.string.another_case));
         }
         caseList = InitUtils.initCase();
-        adapter = new CaseAdapter(caseList);
-        recyclerView.setAdapter(adapter);
-        settingButton.setBackgroundResource(R.drawable.ic_cs);
-        return view;
+        adapter = new CaseAdapter(caseList,BR.case1);
+        binding.recyclerView.setAdapter(adapter);
+        binding.fragTitle.leftButton.setBackgroundResource(R.drawable.ic_cs);
+        return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        settingButton.setOnClickListener(new View.OnClickListener() {
+        binding.fragTitle.leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DrawerLayout drawerLayout = (DrawerLayout)v.getRootView().findViewById(R.id.drawer_layout);
@@ -81,9 +77,9 @@ public class CaseFragment extends Fragment {
                     startActivity(intent);
                 }else {
                     SimulatorActivity activity = (SimulatorActivity)getActivity();
-                    activity.drawerLayout.closeDrawers();
+                    activity.binding.drawerLayout2.closeDrawers();
                     activity.caseImageId = mCase.getImageId();
-                    activity.titleText.setText(mCase.getCaseName());
+                    activity.binding.simulatorTitle.titleText.setText(mCase.getCaseName());
                     activity.initWeapons();
                     activity.initList();
                     activity.adapter.notifyDataSetChanged();

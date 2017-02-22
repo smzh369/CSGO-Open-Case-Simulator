@@ -1,17 +1,17 @@
 package com.zerlings.gabeisfaker.recyclerview;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
+import com.zerlings.gabeisfaker.db.Weapon;
 
 import java.util.List;
 
@@ -31,25 +31,27 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
 
     private List<Weapon> mWeaponList;
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
-        LinearLayout qualityLayout;
-        ImageView weaponImage;
-        TextView weaponName;
-        TextView skinName;
-        ImageView statTrakView;
+    private int brId;
 
-        public ViewHolder(View view){
+    static class ViewHolder extends RecyclerView.ViewHolder{
+        ViewDataBinding binding;
+
+        public ViewHolder(View view) {
             super(view);
-            qualityLayout = (LinearLayout)view.findViewById(R.id.quality_layout);
-            weaponImage = (ImageView)view.findViewById(R.id.weapon_image);
-            weaponName = (TextView)view.findViewById(R.id.weapon_name);
-            skinName = (TextView)view.findViewById(R.id.skin_name);
-            statTrakView = (ImageView) view.findViewById(R.id.st_img);
+        }
+
+        public ViewDataBinding getBinding() {
+            return binding;
+        }
+
+        public void setBinding(ViewDataBinding binding) {
+            this.binding = binding;
         }
     }
 
-    public WeaponAdapter(List<Weapon> weaponList){
+    public WeaponAdapter(List<Weapon> weaponList,int brId){
         mWeaponList = weaponList;
+        this.brId = brId;
     }
 
     public View getHeaderView() {
@@ -85,34 +87,17 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
         if (mContext == null){
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.weapon_item,parent,false);
-        final WeaponAdapter.ViewHolder holder =  new WeaponAdapter.ViewHolder(view);
-        if (viewType == TYPE_STATTRAK){
-            holder.statTrakView.setVisibility(View.VISIBLE);
-        }
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.weapon_item,parent,false);
+        ViewHolder holder =  new ViewHolder(binding.getRoot());
+        holder.setBinding(binding);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(WeaponAdapter.ViewHolder holder, int position) {
         if(getItemViewType(position) == TYPE_NORMAL || getItemViewType(position) == TYPE_STATTRAK){
-            Weapon weapon = mWeaponList.get(position);
-            Glide.with(mContext).load(weapon.getImageId()).into(holder.weaponImage);
-            holder.weaponName.setText(weapon.getWeaponName());
-            holder.skinName.setText(weapon.getSkinName());
-            switch (weapon.getQuality()){
-                case 7:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.knife));
-                    break;
-                case 6:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.convert));
-                    break;
-                case 5:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.classified));
-                    break;
-                case 4:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.restricted));
-                    break;
-                case 3:holder.qualityLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.milspec));
-                    break;
-                default:break;
-            }
+            holder.getBinding().setVariable(brId,mWeaponList.get(position));
+            holder.getBinding().executePendingBindings();
         }
 
     }

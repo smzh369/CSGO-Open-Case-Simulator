@@ -1,4 +1,4 @@
-package com.zerlings.gabeisfaker.recyclerview;
+package com.zerlings.gabeisfaker.db;
 
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
