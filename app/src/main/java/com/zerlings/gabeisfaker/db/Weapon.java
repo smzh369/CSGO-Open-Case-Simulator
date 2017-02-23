@@ -8,6 +8,8 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 public class Weapon extends BaseModel {
 
+    private int id;
+
     private String weaponName;
 
     private String skinName;
@@ -32,6 +34,14 @@ public class Weapon extends BaseModel {
         this.quality = quality;
         this.minWear = minWear;
         this.maxWear = maxWear;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getWeaponName() {

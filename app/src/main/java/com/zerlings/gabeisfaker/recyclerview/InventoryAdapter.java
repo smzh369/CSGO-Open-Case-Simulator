@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.InventoryActivity;
 import com.zerlings.gabeisfaker.db.UniqueWeapon;

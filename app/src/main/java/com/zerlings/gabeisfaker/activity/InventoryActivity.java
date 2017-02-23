@@ -112,7 +112,6 @@ public class InventoryActivity extends AppCompatActivity{
         }
         if (positionSet.size() == 0) {
             // 如果没有选中任何的item，则退出多选模式
-            //actionMode.finish();
             adapter.notifyDataSetChanged();
             binding.inventoryTitle.rightButton.setVisibility(View.GONE);
             selectMode = false;

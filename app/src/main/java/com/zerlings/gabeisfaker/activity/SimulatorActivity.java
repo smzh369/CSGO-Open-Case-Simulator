@@ -34,6 +34,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * Created by 令子 on 2017/2/15.
  */
@@ -67,38 +74,6 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
     private List<Weapon> classifiedList = new ArrayList<>();
     private List<Weapon> restrictedList = new ArrayList<>();
     private List<Weapon> milspecList = new ArrayList<>();
-
-    private Handler handler = new Handler(){
-
-        //更新开出物品的视图
-        @Override
-        public void handleMessage(Message msg) {
-            uniqueWeapon = (UniqueWeapon) msg.obj;
-            binding.uniqueItem.weaponName.setText(uniqueWeapon.getWeaponName());
-            binding.uniqueItem.skinName.setText(uniqueWeapon.getSkinName());
-            binding.uniqueItem.exteriorText.setText(uniqueWeapon.getExterior());
-            Glide.with(SimulatorActivity.this).load(uniqueWeapon.getImageId()).into(binding.uniqueItem.weaponImage);
-            if (uniqueWeapon.isStatTrak()){
-                binding.uniqueItem.stImg.setVisibility(View.VISIBLE);
-            }else {
-                binding.uniqueItem.stImg.setVisibility(View.GONE);
-            }
-            switch (msg.what){
-                case 3:
-                    binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
-                    break;
-                case 4:
-                    binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
-                    break;
-                case 5:
-                    binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
-                    break;
-                case 6:
-                    binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
-                    break;
-            }
-        }
-    };
 
 
     @Override
@@ -223,36 +198,53 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.start_button:
                 soundPool.play(soundID,1,1,5,0,1);
-                //soundPool.play(soundID.get(1),1,1,5,0,1);
                 player.start();
                 binding.recyclerView2.smoothScrollToPosition(38);
-                //recyclerView.smoothScrollBy(DensityUtil.dip2px(5445), 0);
-                new Thread(new Runnable() {
+                final Observable<UniqueWeapon> observable = Observable.create(new ObservableOnSubscribe<UniqueWeapon>() {
                     @Override
-                    public void run() {
+                    public void subscribe(ObservableEmitter<UniqueWeapon> e) throws Exception {
                         setUniqueWeapon();
                         Weapon weapon = weaponList.get(37);
-                        UniqueWeapon uniqueWeapon = getUniqueWeapon(weapon);
-
-                        //发送异步消息
-                        Message message = new Message();
-                        switch (uniqueWeapon.getQuality()){
-                            case 3:message.what = 3;break;//根据物品品质渲染展示界面
-                            case 4:message.what = 4;break;
-                            case 5:message.what = 5;break;
-                            case 6:message.what = 6;break;
-                            default:break;
-                        }
-                        message.obj = uniqueWeapon;
-                        handler.sendMessage(message);
+                        uniqueWeapon = getUniqueWeapon(weapon);
+                        e.onNext(uniqueWeapon);
                     }
-                }).start();
+                });
+                observable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<UniqueWeapon>() {
+                            @Override
+                            public void accept(UniqueWeapon uniqueWeapon) throws Exception {
+                                binding.uniqueItem.weaponName.setText(uniqueWeapon.getWeaponName());
+                                binding.uniqueItem.skinName.setText(uniqueWeapon.getSkinName());
+                                binding.uniqueItem.exteriorText.setText(uniqueWeapon.getExterior());
+                                Glide.with(SimulatorActivity.this).load(uniqueWeapon.getImageId()).into(binding.uniqueItem.weaponImage);
+                                if (uniqueWeapon.isStatTrak()){
+                                    binding.uniqueItem.stImg.setVisibility(View.VISIBLE);
+                                }else {
+                                    binding.uniqueItem.stImg.setVisibility(View.GONE);
+                                }
+                                switch (uniqueWeapon.getQuality()){
+                                    case 3:
+                                        binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
+                                        break;
+                                    case 4:
+                                        binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
+                                        break;
+                                    case 5:
+                                        binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
+                                        break;
+                                    case 6:
+                                        binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
+                                        break;
+                                }
+                            }
+                        });
                 break;
             default:break;
         }
     }
 
-    /**计算得到的最终物品除磨损值以外的各项属性并替换列表中的相应位置**/
+    /**计算得到的最终物品类型并替换列表中的相应位置**/
     private void setUniqueWeapon(){
         //计算最终得到的物品
         int degree = random.nextInt(500);
@@ -296,5 +288,14 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.battle_scarred));
         }
         return uniqueWeapon;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (player != null){
+            player.stop();
+            player.release();
+        }
     }
 }
