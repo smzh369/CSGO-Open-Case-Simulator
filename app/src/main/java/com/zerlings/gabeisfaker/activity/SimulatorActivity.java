@@ -7,9 +7,8 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,14 +18,15 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.bumptech.glide.Glide;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.databinding.SimulatorActivityBinding;
 import com.zerlings.gabeisfaker.db.UniqueWeapon;
+import com.zerlings.gabeisfaker.db.Weapon_Table;
 import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
 import com.zerlings.gabeisfaker.db.Weapon;
 import com.zerlings.gabeisfaker.recyclerview.WeaponItemDecoration;
 import com.zerlings.gabeisfaker.utils.DensityUtil;
-import com.zerlings.gabeisfaker.utils.InitUtils;
 import com.zerlings.gabeisfaker.recyclerview.WeaponAdapter;
 import com.zerlings.gabeisfaker.BR;
 
@@ -146,7 +146,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     //初始化各类武器列表
     public void initWeapons(){
-        weapons = InitUtils.initWeapon(caseImageId);
+        weapons = SQLite.select().from(Weapon.class).where(Weapon_Table.caseId.eq(caseImageId)).queryList();
         convertList.clear();
         classifiedList.clear();
         restrictedList.clear();
@@ -185,10 +185,12 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
             case R.id.discard_button:
                 binding.uniqueWeaponLayout.setVisibility(View.GONE);
+                binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 break;
             case R.id.keep_button:
                 uniqueWeapon.save();
                 binding.uniqueWeaponLayout.setVisibility(View.GONE);
+                binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 break;
             case R.id.left_button:
                 finish();break;
@@ -199,6 +201,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             case R.id.start_button:
                 soundPool.play(soundID,1,1,5,0,1);
                 player.start();
+                binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 binding.recyclerView2.smoothScrollToPosition(38);
                 final Observable<UniqueWeapon> observable = Observable.create(new ObservableOnSubscribe<UniqueWeapon>() {
                     @Override

@@ -1,39 +1,55 @@
 package com.zerlings.gabeisfaker.db;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by 令子 on 2017/2/13.
  */
 
+@Table(database = AppDatabase.class)
 public class Weapon extends BaseModel {
 
+    @PrimaryKey(autoincrement = true)
     private int id;
 
+    @Column
     private String weaponName;
 
+    @Column
     private String skinName;
 
+    @Column
     private int imageId;
 
+    @Column
     private int quality;
 
+    @Column
     private int minWear;
 
+    @Column
     private int maxWear;
 
+    @Column
+    private int caseId;
+
+    @Column
     private boolean isStatTrak = false;
 
     public Weapon() {
     }
 
-    public Weapon(String weaponName, String skinName, int imageId, int quality, int minWear, int maxWear) {
+    public Weapon(String weaponName, String skinName, int imageId, int quality, int minWear, int maxWear, int caseId) {
         this.weaponName = weaponName;
         this.skinName = skinName;
         this.imageId = imageId;
         this.quality = quality;
         this.minWear = minWear;
         this.maxWear = maxWear;
+        this.caseId = caseId;
     }
 
     public int getId() {
@@ -90,6 +106,14 @@ public class Weapon extends BaseModel {
 
     public void setMaxWear(int maxWear) {
         this.maxWear = maxWear;
+    }
+
+    public int getCaseId() {
+        return caseId;
+    }
+
+    public void setCaseId(int caseId) {
+        this.caseId = caseId;
     }
 
     public boolean isStatTrak() {
