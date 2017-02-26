@@ -4,6 +4,10 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.zerlings.gabeisfaker.MyApplication;
+import com.zerlings.gabeisfaker.R;
+
+import java.util.Random;
 
 /**
  * Created by 令子 on 2017/2/13.
@@ -22,7 +26,7 @@ public class UniqueWeapon extends BaseModel {
     private String skinName;
 
     @Column
-    private int ImageId;
+    private int imageId;
 
     @Column
     private int quality;
@@ -34,6 +38,29 @@ public class UniqueWeapon extends BaseModel {
 
     @Column
     private boolean isStatTrak = false;
+
+    public UniqueWeapon(){}
+
+    public UniqueWeapon(Weapon weapon){
+        this.weaponName = weapon.getWeaponName();
+        this.skinName = weapon.getSkinName();
+        this.quality = weapon.getQuality();
+        this.imageId = weapon.getImageId();
+        this.isStatTrak = weapon.isStatTrak();
+        Random random = new Random();
+        this.wearValue = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
+        if (wearValue >= 0 && wearValue < 7){
+            this.exterior = MyApplication.getContext().getResources().getString(R.string.factory_new);
+        }else if (wearValue >= 7 && wearValue < 15){
+            this.exterior = MyApplication.getContext().getResources().getString(R.string.minimal_wear);
+        }else if (wearValue >= 15 && wearValue < 38){
+            this.exterior = MyApplication.getContext().getResources().getString(R.string.field_tested);
+        }else if (wearValue >= 38 && wearValue < 45){
+            this.exterior = MyApplication.getContext().getResources().getString(R.string.well_worn);
+        }else {
+            this.exterior = MyApplication.getContext().getResources().getString(R.string.battle_scarred);
+        }
+    }
 
     public int getId() {
         return id;
@@ -60,11 +87,11 @@ public class UniqueWeapon extends BaseModel {
     }
 
     public int getImageId() {
-        return ImageId;
+        return imageId;
     }
 
     public void setImageId(int ImageId) {
-        this.ImageId = ImageId;
+        this.imageId = ImageId;
     }
 
     public int getQuality() {

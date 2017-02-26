@@ -207,8 +207,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void subscribe(ObservableEmitter<UniqueWeapon> e) throws Exception {
                         setUniqueWeapon();
-                        Weapon weapon = weaponList.get(37);
-                        uniqueWeapon = getUniqueWeapon(weapon);
+                        uniqueWeapon = new UniqueWeapon(weaponList.get(37));//根据武器基本类型生成具体的独有武器
                         e.onNext(uniqueWeapon);
                     }
                 });
@@ -266,31 +265,6 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         }else {
             weaponList.set(37,milspecList.get(random.nextInt(milspecList.size())));
         }
-    }
-
-    /**计算磨损值以得到完整的最终物品**/
-    private UniqueWeapon getUniqueWeapon(Weapon weapon){
-
-        UniqueWeapon uniqueWeapon = new UniqueWeapon();
-        uniqueWeapon.setWeaponName(weapon.getWeaponName());
-        uniqueWeapon.setSkinName(weapon.getSkinName());
-        uniqueWeapon.setQuality(weapon.getQuality());
-        uniqueWeapon.setImageId(weapon.getImageId());
-        uniqueWeapon.setStatTrak(weapon.isStatTrak());
-        float wear = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
-        uniqueWeapon.setWearValue(wear);
-        if (wear>=0 && wear<7){
-            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.factory_new));
-        }else if (wear>=7 && wear<15){
-            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.minimal_wear));
-        }else if (wear>=15 && wear<38){
-            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.field_tested));
-        }else if (wear>=38 && wear<45){
-            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.well_worn));
-        }else {
-            uniqueWeapon.setExterior(SimulatorActivity.this.getResources().getString(R.string.battle_scarred));
-        }
-        return uniqueWeapon;
     }
 
     @Override
