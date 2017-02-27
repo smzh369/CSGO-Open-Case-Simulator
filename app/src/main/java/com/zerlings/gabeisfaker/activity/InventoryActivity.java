@@ -57,7 +57,14 @@ public class InventoryActivity extends AppCompatActivity{
         binding.inventoryTitle.leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (selectMode){
+                    selectMode = false;
+                    positionSet.clear();
+                    adapter.notifyDataSetChanged();
+                    binding.inventoryTitle.rightButton.setVisibility(View.GONE);
+                }else {
+                    finish();
+                }
             }
         });
         binding.inventoryTitle.rightButton.setBackgroundResource(R.drawable.ic_delete);
@@ -69,11 +76,12 @@ public class InventoryActivity extends AppCompatActivity{
                 uniqueWeapons.addAll(uniqueWeaponList);
                 for (int position : positionSet) {
                     UniqueWeapon weapon = uniqueWeapons.get(position);
-                    uniqueWeaponList.remove(weapon);
-                    adapter.notifyItemRemoved(position);
+                    int newPosition = uniqueWeaponList.indexOf(weapon);
+                    uniqueWeaponList.remove(newPosition);
+                    adapter.notifyItemRemoved(newPosition);
+                    adapter.notifyItemRangeChanged(newPosition,uniqueWeaponList.size() - newPosition);
                     weapon.delete();
                 }
-                adapter.notifyItemRangeChanged(0,uniqueWeapons.size());
                 positionSet.clear();
                 selectMode = false;
                 binding.inventoryTitle.rightButton.setVisibility(View.GONE);

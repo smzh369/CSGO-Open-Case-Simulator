@@ -31,6 +31,7 @@ import com.zerlings.gabeisfaker.recyclerview.WeaponAdapter;
 import com.zerlings.gabeisfaker.BR;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -40,6 +41,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by 令子 on 2017/2/15.
@@ -61,7 +63,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     private SoundPool soundPool;
 
-    private int soundID;
+    private HashMap<Integer, Integer> soundMap = new HashMap<Integer, Integer>();
 
     private MediaPlayer player;
 
@@ -83,6 +85,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this,R.layout.simulator_activity);
         binding.simulatorTitle.rightButton.setVisibility(View.VISIBLE);
+        binding.selectBar.setMinimumWidth(1);
 
         //初始化SoundPool和MediaPlayer
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -92,7 +95,8 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         } else {
             soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 5);
         }
-        soundID = soundPool.load(this,R.raw.button,1);
+        soundMap.put(1,soundPool.load(this,R.raw.button,1));
+        soundMap.put(2,soundPool.load(this,R.raw.display,1));
         player = MediaPlayer.create(this,R.raw.open_case);
 
         //获取传入的箱子信息
@@ -105,7 +109,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         //设置recyclerview显示方式
         adapter = new WeaponAdapter(weaponList,BR.weapon);
         CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
-        layoutManager.setSpeed(0.58f);
+        layoutManager.setSpeed(0.5f);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         binding.recyclerView2.setLayoutManager(layoutManager);
         int spacingInPixels = DensityUtil.dip2px(10f);//设置item间隔
@@ -125,6 +129,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 switch (newState){
                     case RecyclerView.SCROLL_STATE_IDLE:
+                        soundPool.play(soundMap.get(2),1,1,5,0,1);
                         binding.uniqueWeaponLayout.setVisibility(View.VISIBLE);
                         binding.uniqueItem.exteriorText.setVisibility(View.VISIBLE);
                         initList();
@@ -175,6 +180,9 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             if (st == 0){
                 weapon.setStatTrak(true);
             }
+            else {
+                weapon.setStatTrak(false);
+            }
             weaponList.add(weapon);
         }
 
@@ -184,11 +192,13 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.discard_button:
+                binding.startButton.setClickable(true);
                 binding.uniqueWeaponLayout.setVisibility(View.GONE);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 break;
             case R.id.keep_button:
                 uniqueWeapon.save();
+                binding.startButton.setClickable(true);
                 binding.uniqueWeaponLayout.setVisibility(View.GONE);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 break;
@@ -199,8 +209,9 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.start_button:
-                soundPool.play(soundID,1,1,5,0,1);
+                soundPool.play(soundMap.get(1),1,1,5,0,1);
                 player.start();
+                binding.startButton.setClickable(false);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 binding.recyclerView2.smoothScrollToPosition(38);
                 final Observable<UniqueWeapon> observable = Observable.create(new ObservableOnSubscribe<UniqueWeapon>() {

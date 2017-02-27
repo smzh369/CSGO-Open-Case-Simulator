@@ -37,7 +37,7 @@ public class Weapon extends BaseModel {
     private int caseId;
 
     @Column
-    private boolean isStatTrak = false;
+    private boolean isStatTrak;
 
     public Weapon() {
     }
