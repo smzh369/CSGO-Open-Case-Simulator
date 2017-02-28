@@ -117,17 +117,6 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         adapter.setHeaderView(header);
 
         binding.recyclerView2.setAdapter(adapter);
-        binding.recyclerView2.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-        binding.recyclerView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
         binding.recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
