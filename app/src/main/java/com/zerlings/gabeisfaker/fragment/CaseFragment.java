@@ -12,17 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
-import com.raizlabs.android.dbflow.structure.database.transaction.FastStoreModelTransaction;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.MainActivity;
 import com.zerlings.gabeisfaker.activity.SimulatorActivity;
 import com.zerlings.gabeisfaker.databinding.ChooseCaseBinding;
-import com.zerlings.gabeisfaker.db.AppDatabase;
 import com.zerlings.gabeisfaker.db.Case;
-import com.zerlings.gabeisfaker.db.Weapon;
 import com.zerlings.gabeisfaker.recyclerview.CaseAdapter;
 import com.zerlings.gabeisfaker.utils.InitUtils;
 import com.zerlings.gabeisfaker.BR;
@@ -56,7 +50,7 @@ public class CaseFragment extends Fragment {
             binding.fragTitle.titleText.setText(getString(R.string.another_case));
         }
 
-        //判断数据库是否完整，不完整则重新录入数据
+        /*//判断数据库是否完整，不完整则重新录入数据
         long count = SQLite.selectCountOf().from(Weapon.class).count();
         if (count < 139){
             Delete.table(Weapon.class);
@@ -65,7 +59,7 @@ public class CaseFragment extends Fragment {
                     .saveBuilder(FlowManager.getModelAdapter(Weapon.class))
                     .addAll(allWeapons).build();
             FlowManager.getDatabase(AppDatabase.class).executeTransaction(transaction);
-        }
+        }*/
 
         caseList = InitUtils.initCase();
         adapter = new CaseAdapter(caseList,BR.case1);

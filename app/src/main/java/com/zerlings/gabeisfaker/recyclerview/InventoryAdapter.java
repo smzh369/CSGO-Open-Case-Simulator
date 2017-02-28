@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.InventoryActivity;
@@ -40,11 +41,11 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         ViewDataBinding binding;
-        LinearLayout itemLayout;
+        RelativeLayout itemLayout;
 
         public ViewHolder(View view) {
             super(view);
-            itemLayout = (LinearLayout)view.findViewById(R.id.weapon_item_layout);
+            itemLayout = (RelativeLayout)view.findViewById(R.id.weapon_item_layout);
         }
 
         public ViewDataBinding getBinding() {

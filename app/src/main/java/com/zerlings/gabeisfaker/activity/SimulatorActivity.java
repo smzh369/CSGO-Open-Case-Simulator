@@ -18,17 +18,16 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.bumptech.glide.Glide;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.databinding.SimulatorActivityBinding;
 import com.zerlings.gabeisfaker.db.UniqueWeapon;
-import com.zerlings.gabeisfaker.db.Weapon_Table;
 import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
 import com.zerlings.gabeisfaker.db.Weapon;
 import com.zerlings.gabeisfaker.recyclerview.WeaponItemDecoration;
 import com.zerlings.gabeisfaker.utils.DensityUtil;
 import com.zerlings.gabeisfaker.recyclerview.WeaponAdapter;
 import com.zerlings.gabeisfaker.BR;
+import com.zerlings.gabeisfaker.utils.InitUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -124,6 +123,11 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 return true;
             }
         });
+        binding.recyclerView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         binding.recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -151,7 +155,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     //初始化各类武器列表
     public void initWeapons(){
-        weapons = SQLite.select().from(Weapon.class).where(Weapon_Table.caseId.eq(caseImageId)).queryList();
+        weapons = InitUtils.initWeapon(caseImageId);
         convertList.clear();
         classifiedList.clear();
         restrictedList.clear();
@@ -262,11 +266,13 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         //计算最终得到的物品
         int degree = random.nextInt(500);
         if (degree == 499){
-            weaponList.get(37).setStatTrak(false);
-            weaponList.get(37).setWeaponName("*Rare Special Item*");
-            weaponList.get(37).setImageId(R.drawable.rare_special);
-            weaponList.get(37).setSkinName(null);
-            weaponList.get(37).setQuality(7);
+            Weapon rareWeapon = new Weapon();
+            rareWeapon.setStatTrak(false);
+            rareWeapon.setWeaponName("*Rare Special Item*");
+            rareWeapon.setImageId(R.drawable.rare_special);
+            rareWeapon.setSkinName(null);
+            rareWeapon.setQuality(7);
+            weaponList.set(37,rareWeapon);
         }else if (degree > 495 && degree < 499){
             weaponList.set(37,convertList.get(random.nextInt(convertList.size())));
         }else if (degree > 480 && degree < 496){

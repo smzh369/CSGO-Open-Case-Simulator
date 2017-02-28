@@ -35,7 +35,15 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="15dp"
-                        android:background="#000510"/>
+                        android:background="#000510" />
+
+                    <FrameLayout
+                        android:layout_width="485dp"
+                        android:layout_height="170dp"
+                        android:layout_centerInParent="true"
+                        android:background="#00000000"
+                        android:clickable="true">
+                    </FrameLayout>
 
                 </RelativeLayout>
 

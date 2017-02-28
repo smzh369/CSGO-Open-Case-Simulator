@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="uniqueWeapon" type="com.zerlings.gabeisfaker.db.UniqueWeapon"/>
+        <variable name="weapon" type="com.zerlings.gabeisfaker.db.Weapon"/>
     </data>
 
     <RelativeLayout
@@ -15,12 +15,9 @@
             android:id="@+id/weapon_image"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             android:scaleType="fitCenter"
             android:background="@color/cardview_dark_background"
-            app:imageId="@{uniqueWeapon.imageId}"/>
+            app:imageId="@{weapon.imageId}"/>
 
         <ImageView
             android:id="@+id/st_img"
@@ -30,8 +27,7 @@
             android:layout_marginBottom="3dp"
             android:layout_marginLeft="5dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/stat_trak"
-            app:visibility="@{uniqueWeapon.isStatTrak}"/>
+            android:src="@drawable/stat_trak" />
 
         <LinearLayout
             android:id="@+id/quality_layout"
@@ -39,10 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/weapon_image"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginBottom="1dp"
-            app:layoutColor="@{uniqueWeapon.quality}">
+            app:layoutColor="@{weapon.quality}">
 
             <TextView
                 android:id="@+id/weapon_name"
@@ -50,26 +43,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textSize="14sp"
-                android:text="@{uniqueWeapon.weaponName}"/>
+                android:text="@{weapon.weaponName}"/>
 
             <TextView
                 android:id="@+id/skin_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:layout_marginBottom="3dp"
                 android:textSize="14sp"
-                android:text="@{uniqueWeapon.skinName}"/>
-
-            <TextView
-                android:id="@+id/exterior_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:textSize="14sp"
-                android:text="@{uniqueWeapon.exterior}"/>
+                android:text="@{weapon.skinName}"/>
 
         </LinearLayout>
 
     </RelativeLayout>
 
 </layout>
+

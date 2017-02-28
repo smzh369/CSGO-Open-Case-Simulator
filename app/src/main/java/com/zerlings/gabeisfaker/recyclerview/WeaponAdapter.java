@@ -1,6 +1,5 @@
 package com.zerlings.gabeisfaker.recyclerview;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
@@ -24,8 +23,6 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
     public static final int TYPE_STATTRAK = 2;
 
     private View mHeaderView;
-
-    private Context mContext;
 
     private List<Weapon> mWeaponList;
 
@@ -63,29 +60,28 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        if (mWeaponList.get(position).isStatTrak()){
-            return TYPE_STATTRAK;
-        }
-        if (mHeaderView == null){
-            return TYPE_NORMAL;
-        }
-        if (position == 0){
+
+        if (position == 0 && mHeaderView != null){
             //第一个item应该加载Header
             return TYPE_HEADER;
+        }else if (mWeaponList.get(position).isStatTrak()){
+            return TYPE_STATTRAK;
+        }else {
+            return TYPE_NORMAL;
         }
-        return TYPE_NORMAL;
 
     }
 
     @Override
     public WeaponAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(mHeaderView != null && viewType == TYPE_HEADER) {
-            return new WeaponAdapter.ViewHolder(mHeaderView);
+        ViewDataBinding binding;
+        if (viewType == TYPE_NORMAL){
+            binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.weapon_item,parent,false);
+        }else if (viewType == TYPE_STATTRAK){
+            binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.st_weapon_item,parent,false);
+        }else {
+            return new ViewHolder(mHeaderView);
         }
-        if (mContext == null){
-            mContext = parent.getContext();
-        }
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.weapon_item,parent,false);
         ViewHolder holder =  new ViewHolder(binding.getRoot());
         holder.setBinding(binding);
         return holder;

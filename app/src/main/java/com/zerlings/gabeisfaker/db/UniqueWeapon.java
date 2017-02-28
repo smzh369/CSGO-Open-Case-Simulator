@@ -37,7 +37,11 @@ public class UniqueWeapon extends BaseModel {
     @Column float wearValue;
 
     @Column
+    private int caseId;
+
+    @Column
     private boolean isStatTrak = false;
+
 
     public UniqueWeapon(){}
 
@@ -46,6 +50,7 @@ public class UniqueWeapon extends BaseModel {
         this.skinName = weapon.getSkinName();
         this.quality = weapon.getQuality();
         this.imageId = weapon.getImageId();
+        this.caseId = weapon.getCaseId();
         this.isStatTrak = weapon.isStatTrak();
         Random random = new Random();
         this.wearValue = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
@@ -116,6 +121,14 @@ public class UniqueWeapon extends BaseModel {
 
     public void setWearValue(float wearValue) {
         this.wearValue = wearValue;
+    }
+
+    public int getCaseId() {
+        return caseId;
+    }
+
+    public void setCaseId(int caseId) {
+        this.caseId = caseId;
     }
 
     public boolean isStatTrak() {

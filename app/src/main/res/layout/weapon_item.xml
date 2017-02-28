@@ -5,43 +5,26 @@
         <variable name="weapon" type="com.zerlings.gabeisfaker.db.Weapon"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/weapon_item_layout"
-        android:orientation="vertical"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="#00000000">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/weapon_image"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
-
-            <ImageView
-                android:id="@+id/weapon_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:background="@color/cardview_dark_background"
-                app:imageId="@{weapon.imageId}"/>
-
-            <ImageView
-                android:id="@+id/st_img"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/stat_trak"
-                app:visibility="@{weapon.isStatTrak}"/>
-
-        </RelativeLayout>
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:background="@color/cardview_dark_background"
+            app:imageId="@{weapon.imageId}"/>
 
         <LinearLayout
             android:id="@+id/quality_layout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/weapon_image"
             app:layoutColor="@{weapon.quality}">
 
             <TextView
@@ -63,7 +46,7 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>
 

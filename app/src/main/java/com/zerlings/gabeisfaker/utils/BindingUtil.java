@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.zerlings.gabeisfaker.MyApplication;
 import com.zerlings.gabeisfaker.R;
 
 /**
@@ -18,7 +17,7 @@ public class BindingUtil {
 
     @BindingAdapter("imageId")
     public static void setImage(ImageView imageView, int imageId){
-        Glide.with(MyApplication.getContext()).load(imageId).into(imageView);
+        Glide.with(imageView.getContext()).load(imageId).into(imageView);
     }
 
     @BindingAdapter("visibility")
@@ -33,15 +32,15 @@ public class BindingUtil {
     public static void setColor(LinearLayout qualityLayout, int quality){
 
         switch (quality){
-            case 7:qualityLayout.setBackgroundColor(ContextCompat.getColor(MyApplication.getContext(), R.color.knife));
+            case 7:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(), R.color.knife));
                 break;
-            case 6:qualityLayout.setBackgroundColor(ContextCompat.getColor(MyApplication.getContext(),R.color.convert));
+            case 6:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.convert));
                 break;
-            case 5:qualityLayout.setBackgroundColor(ContextCompat.getColor(MyApplication.getContext(),R.color.classified));
+            case 5:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.classified));
                 break;
-            case 4:qualityLayout.setBackgroundColor(ContextCompat.getColor(MyApplication.getContext(),R.color.restricted));
+            case 4:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.restricted));
                 break;
-            case 3:qualityLayout.setBackgroundColor(ContextCompat.getColor(MyApplication.getContext(),R.color.milspec));
+            case 3:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.milspec));
                 break;
             default:break;
         }

@@ -1,42 +1,28 @@
 package com.zerlings.gabeisfaker.db;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by 令子 on 2017/2/13.
  */
 
-@Table(database = AppDatabase.class)
-public class Weapon extends BaseModel {
+public class Weapon {
 
-    @PrimaryKey(autoincrement = true)
     private int id;
 
-    @Column
     private String weaponName;
 
-    @Column
     private String skinName;
 
-    @Column
     private int imageId;
 
-    @Column
     private int quality;
 
-    @Column
     private int minWear;
 
-    @Column
     private int maxWear;
 
-    @Column
     private int caseId;
 
-    @Column
     private boolean isStatTrak;
 
     public Weapon() {
