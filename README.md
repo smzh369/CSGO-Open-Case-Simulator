@@ -3,7 +3,7 @@
 一款知名网游CSGO的开箱模拟软件。
 
 ### DOWNLOAD
-请前往 [Releases](http://git.oschina.net/Zerlings/Gabe-is-Faker/releases)页面下载
+请前往 [Releases](http://git.oschina.net/Zerlings/Gabe-is-Faker/releases) 页面下载
 
 ### 使用指南
 1. 点击进入想要开的箱子，再单击开始按钮即可。开出物品由真实游戏中的概率决定。
