@@ -78,6 +78,7 @@ public class CaseFragment extends Fragment {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
         adapter.setOnItemClickListener(new CaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
