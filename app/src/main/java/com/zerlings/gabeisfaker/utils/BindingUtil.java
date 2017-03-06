@@ -17,7 +17,7 @@ public class BindingUtil {
 
     @BindingAdapter("imageId")
     public static void setImage(ImageView imageView, int imageId){
-        Glide.with(imageView.getContext()).load(imageId).into(imageView);
+        Glide.with(imageView.getContext()).load(imageId).dontAnimate().into(imageView);
     }
 
     @BindingAdapter("visibility")
