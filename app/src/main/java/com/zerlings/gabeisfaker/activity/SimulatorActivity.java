@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -52,6 +51,16 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     public static final String CASE_IMAGE_ID = "case_image_id";
 
+    public static final int LEVEL_RARE = 7;
+
+    public static final int LEVEL_CONVERT = 6;
+
+    public static final int LEVEL_CLASSIFIED = 5;
+
+    public static final int LEVEL_RESTRICTED = 4;
+
+    public static final int LEVEL_MILSPEC = 3;
+
     public int caseImageId;
 
     public WeaponAdapter adapter;
@@ -62,7 +71,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     private SoundPool soundPool;
 
-    private HashMap<Integer, Integer> soundMap = new HashMap<Integer, Integer>();
+    private HashMap<Integer, Integer> soundMap = new HashMap<>();
 
     private MediaPlayer player;
 
@@ -151,11 +160,11 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         milspecList.clear();
         for (int i = 0;i < weapons.size();i++) {
             Weapon weapon = weapons.get(i);
-            if (weapon.getQuality() == 6) {
+            if (weapon.getQuality() == LEVEL_CONVERT) {
                 convertList.add(weapon);
-            } else if (weapon.getQuality() == 5) {
+            } else if (weapon.getQuality() == LEVEL_CLASSIFIED) {
                 classifiedList.add(weapon);
-            } else if (weapon.getQuality() == 4) {
+            } else if (weapon.getQuality() == LEVEL_RESTRICTED) {
                 restrictedList.add(weapon);
             } else {
                 milspecList.add(weapon);
@@ -230,16 +239,16 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                                     binding.uniqueItem.stImg.setVisibility(View.GONE);
                                 }
                                 switch (uniqueWeapon.getQuality()){
-                                    case 3:
+                                    case LEVEL_MILSPEC:
                                         binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
                                         break;
-                                    case 4:
+                                    case LEVEL_RESTRICTED:
                                         binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
                                         break;
-                                    case 5:
+                                    case LEVEL_CLASSIFIED:
                                         binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
                                         break;
-                                    case 6:
+                                    case LEVEL_CONVERT:
                                         binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
                                         break;
                                 }
@@ -260,7 +269,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             rareWeapon.setWeaponName("*Rare Special Item*");
             rareWeapon.setImageId(R.drawable.rare_special);
             rareWeapon.setSkinName(null);
-            rareWeapon.setQuality(7);
+            rareWeapon.setQuality(LEVEL_RARE);
             weaponList.set(37,rareWeapon);
         }else if (degree > 495 && degree < 499){
             weaponList.set(37,convertList.get(random.nextInt(convertList.size())));

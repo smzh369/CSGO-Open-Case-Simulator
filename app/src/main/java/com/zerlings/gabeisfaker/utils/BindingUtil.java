@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
+import com.zerlings.gabeisfaker.activity.SimulatorActivity;
 
 /**
  * Created by 令子 on 2017/2/22.
@@ -32,15 +33,20 @@ public class BindingUtil {
     public static void setColor(LinearLayout qualityLayout, int quality){
 
         switch (quality){
-            case 7:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(), R.color.knife));
+            case SimulatorActivity.LEVEL_RARE:
+                qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(), R.color.knife));
                 break;
-            case 6:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.convert));
+            case SimulatorActivity.LEVEL_CONVERT:
+                qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.convert));
                 break;
-            case 5:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.classified));
+            case SimulatorActivity.LEVEL_CLASSIFIED:
+                qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.classified));
                 break;
-            case 4:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.restricted));
+            case SimulatorActivity.LEVEL_RESTRICTED:
+                qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.restricted));
                 break;
-            case 3:qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.milspec));
+            case SimulatorActivity.LEVEL_MILSPEC:
+                qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.milspec));
                 break;
             default:break;
         }
