@@ -8,8 +8,7 @@
     <RelativeLayout
         android:id="@+id/weapon_item_layout"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="#00000000">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/weapon_image"

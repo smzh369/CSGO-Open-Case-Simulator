@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.SimulatorActivity;
 
@@ -18,7 +19,10 @@ public class BindingUtil {
 
     @BindingAdapter("imageId")
     public static void setImage(ImageView imageView, int imageId){
-        Glide.with(imageView.getContext()).load(imageId).dontAnimate().into(imageView);
+        Glide.with(imageView.getContext())
+                .load(imageId)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .into(imageView);
     }
 
     @BindingAdapter("visibility")

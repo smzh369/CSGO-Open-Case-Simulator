@@ -18,9 +18,11 @@ import java.util.List;
 
 public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder> {
 
-    public static final int TYPE_HEADER = 1;
-    public static final int TYPE_NORMAL = 0;
-    public static final int TYPE_STATTRAK = 2;
+    private static final int TYPE_HEADER = 1;
+
+    private static final int TYPE_NORMAL = 0;
+
+    private static final int TYPE_STATTRAK = 2;
 
     private View mHeaderView;
 

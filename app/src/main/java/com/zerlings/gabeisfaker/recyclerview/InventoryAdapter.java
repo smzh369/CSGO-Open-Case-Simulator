@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.zerlings.gabeisfaker.R;
@@ -24,8 +23,9 @@ import java.util.Set;
 
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder>{
 
-    public static final int TYPE_NORMAL = 0;
-    public static final int TYPE_STATTRAK = 1;
+    private static final int TYPE_NORMAL = 0;
+
+    private static final int TYPE_STATTRAK = 1;
 
     private Context mContext;
 
