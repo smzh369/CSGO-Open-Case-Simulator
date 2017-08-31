@@ -60,7 +60,8 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
         if (mContext == null){
             mContext = parent.getContext();
         }
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.case_item,parent,false);
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),
+                R.layout.case_item,parent,false);
         ViewHolder holder =  new ViewHolder(binding.getRoot());
         holder.setBinding(binding);
         return holder;

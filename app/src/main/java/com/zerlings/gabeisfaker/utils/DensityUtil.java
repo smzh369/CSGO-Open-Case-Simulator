@@ -1,7 +1,5 @@
 package com.zerlings.gabeisfaker.utils;
 
-import android.content.Context;
-
 import com.zerlings.gabeisfaker.MyApplication;
 
 /**

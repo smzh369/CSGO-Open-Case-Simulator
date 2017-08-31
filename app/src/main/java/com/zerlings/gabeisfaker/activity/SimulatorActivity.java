@@ -133,7 +133,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                     case RecyclerView.SCROLL_STATE_IDLE:
                         soundPool.play(soundMap.get(2),1,1,5,0,1);
                         binding.uniqueWeaponLayout.setVisibility(View.VISIBLE);
-                        binding.uniqueItem.exteriorText.setVisibility(View.VISIBLE);
+                        //binding.uniqueItem.exteriorText.setVisibility(View.VISIBLE);
                         initList();
                         adapter.notifyDataSetChanged();
                         binding.recyclerView2.scrollToPosition(0);
