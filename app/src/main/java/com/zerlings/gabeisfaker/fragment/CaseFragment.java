@@ -74,7 +74,7 @@ public class CaseFragment extends Fragment {
         binding.fragTitle.leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DrawerLayout drawerLayout = (DrawerLayout)v.getRootView().findViewById(R.id.drawer_layout);
+                DrawerLayout drawerLayout = v.getRootView().findViewById(R.id.drawer_layout);
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });

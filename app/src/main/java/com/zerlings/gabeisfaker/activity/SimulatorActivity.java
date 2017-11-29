@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,7 +30,6 @@ import com.zerlings.gabeisfaker.BR;
 import com.zerlings.gabeisfaker.utils.InitUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -71,7 +71,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     private SoundPool soundPool;
 
-    private HashMap<Integer, Integer> soundMap = new HashMap<>();
+    private SparseArray<Integer> soundMap = new SparseArray();
 
     private MediaPlayer player;
 
