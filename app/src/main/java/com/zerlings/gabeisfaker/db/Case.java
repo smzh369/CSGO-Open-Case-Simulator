@@ -1,12 +1,11 @@
 package com.zerlings.gabeisfaker.db;
 
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by 令子 on 2017/2/13.
  */
 
-public class Case extends BaseModel {
+public class Case {
 
     private int id;
 
