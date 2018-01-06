@@ -45,7 +45,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
         public ViewHolder(View view) {
             super(view);
-            itemLayout = (RelativeLayout)view.findViewById(R.id.weapon_item_layout);
+            itemLayout = view.findViewById(R.id.weapon_item_layout);
         }
 
         public ViewDataBinding getBinding() {

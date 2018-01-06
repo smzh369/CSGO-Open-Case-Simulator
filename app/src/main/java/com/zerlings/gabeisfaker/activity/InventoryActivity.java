@@ -97,6 +97,11 @@ public class InventoryActivity extends AppCompatActivity{
                     addOrRemove(position);
                 } else {
                     // 如果不是多选状态，则进入点击事件的业务逻辑
+                    if (!positionSet.contains(position)){
+                        // 选择不同的单位时取消之前选中的单位
+                        positionSet.clear();
+                    }
+                    addOrRemove(position);
                 }
             }
 
@@ -104,6 +109,7 @@ public class InventoryActivity extends AppCompatActivity{
             public void onItemLongClick(View view, int position) {
                 if (!selectMode) {
                     selectMode = true;
+                    positionSet.clear();
                     binding.inventoryTitle.rightButton.setVisibility(View.VISIBLE);
                 }
             }

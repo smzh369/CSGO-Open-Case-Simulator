@@ -232,7 +232,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                                 binding.uniqueItem.weaponName.setText(uniqueWeapon.getWeaponName());
                                 binding.uniqueItem.skinName.setText(uniqueWeapon.getSkinName());
                                 binding.uniqueItem.exteriorText.setText(uniqueWeapon.getExterior());
-                                Glide.with(SimulatorActivity.this).load(uniqueWeapon.getImageId()).dontAnimate().into(binding.uniqueItem.weaponImage);
+                                Glide.with(SimulatorActivity.this).load(uniqueWeapon.getImageId()).into(binding.uniqueItem.weaponImage);
                                 if (uniqueWeapon.isStatTrak()){
                                     binding.uniqueItem.stImg.setVisibility(View.VISIBLE);
                                 }else {

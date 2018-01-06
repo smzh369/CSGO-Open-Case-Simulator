@@ -8,6 +8,7 @@
     android:background="@drawable/csgo_background">
 
     <fragment
+        android:id="@+id/choose_fragment"
         android:name="com.zerlings.gabeisfaker.fragment.CaseFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
