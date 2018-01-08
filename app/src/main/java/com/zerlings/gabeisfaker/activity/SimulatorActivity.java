@@ -199,7 +199,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 break;
             case R.id.keep_button:
-                uniqueWeapon.save();
+                uniqueWeapon.insert();
                 binding.startButton.setClickable(true);
                 binding.uniqueWeaponLayout.setVisibility(View.GONE);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
