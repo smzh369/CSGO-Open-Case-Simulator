@@ -12,7 +12,7 @@ public class HttpUtil {
 
     public static QueryItem retrofitConnection() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://steamcommunity.com/market/")
+                .baseUrl("https://steamcommunity.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

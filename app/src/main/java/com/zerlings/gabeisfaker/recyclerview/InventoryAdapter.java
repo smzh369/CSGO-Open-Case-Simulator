@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.InventoryActivity;
+import com.zerlings.gabeisfaker.databinding.UniqueWeaponItemBinding;
 import com.zerlings.gabeisfaker.db.UniqueWeapon;
 
 import java.util.List;
@@ -45,7 +46,6 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
         public ViewHolder(View view) {
             super(view);
-            itemLayout = view.findViewById(R.id.weapon_item_layout);
         }
 
         public ViewDataBinding getBinding() {
@@ -77,14 +77,15 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         if (mContext == null){
             mContext = parent.getContext();
         }
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.unique_weapon_item,parent,false);
+        UniqueWeaponItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.unique_weapon_item,parent,false);
         ViewHolder holder =  new ViewHolder(binding.getRoot());
         holder.setBinding(binding);
+        holder.itemLayout = binding.weaponItemLayout;
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(InventoryAdapter.ViewHolder holder,final int position) {
+    public void onBindViewHolder(final InventoryAdapter.ViewHolder holder, final int position) {
         Set<Integer> positionSet = InventoryActivity.positionSet;
         if (positionSet.contains(position)) {
             holder.itemLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.selected));

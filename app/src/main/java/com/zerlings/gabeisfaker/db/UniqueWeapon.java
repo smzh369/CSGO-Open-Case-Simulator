@@ -135,7 +135,7 @@ public class UniqueWeapon extends BaseModel {
         return isStatTrak;
     }
 
-    public void setStatTrak(boolean statTrak) {
-        isStatTrak = statTrak;
+    public void setStatTrak(boolean isStatTrak) {
+        this.isStatTrak = isStatTrak;
     }
 }

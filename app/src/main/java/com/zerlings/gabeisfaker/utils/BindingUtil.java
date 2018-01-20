@@ -2,7 +2,6 @@ package com.zerlings.gabeisfaker.utils;
 
 import android.databinding.BindingAdapter;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -23,14 +22,6 @@ public class BindingUtil {
                 .into(imageView);
     }
 
-    @BindingAdapter("visibility")
-    public static void setvisibility(ImageView imageView, boolean isStatTrak){
-        if (isStatTrak){
-            imageView.setVisibility(View.VISIBLE);
-        }else {
-            imageView.setVisibility(View.GONE);
-        }
-    }
     @BindingAdapter("layoutColor")
     public static void setColor(LinearLayout qualityLayout, int quality){
 

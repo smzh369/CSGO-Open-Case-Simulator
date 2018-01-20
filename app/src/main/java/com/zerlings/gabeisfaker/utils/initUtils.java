@@ -18,7 +18,7 @@ public class InitUtils {
 
     public static List<Case> initCase(){
 
-        List<Case> caseList = new ArrayList<>();
+        List<Case> caseList = new ArrayList<>(17);
 
         Context context = MyApplication.getContext();
 

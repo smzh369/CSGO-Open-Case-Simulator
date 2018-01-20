@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -28,7 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -56,7 +54,7 @@ public class InventoryActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        binding=DataBindingUtil.setContentView(this,R.layout.inventory_activity);
+        binding = DataBindingUtil.setContentView(this,R.layout.inventory_activity);
 
         //初始化各组件
         binding.inventoryTitle.titleText.setText(R.string.inventory);
@@ -72,14 +70,7 @@ public class InventoryActivity extends AppCompatActivity{
         binding.inventoryTitle.leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectMode){
-                    selectMode = false;
-                    positionSet.clear();
-                    adapter.notifyDataSetChanged();
-                    binding.inventoryTitle.rightButton.setVisibility(View.GONE);
-                }else {
-                    finish();
-                }
+                onBackPressed();
             }
         });
         binding.inventoryTitle.rightButton.setOnClickListener(new View.OnClickListener() {
@@ -206,4 +197,15 @@ public class InventoryActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (selectMode){
+            selectMode = false;
+            positionSet.clear();
+            adapter.notifyDataSetChanged();
+            binding.inventoryTitle.rightButton.setVisibility(View.GONE);
+        }else {
+            super.onBackPressed();
+        }
+    }
 }

@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="android.view.View"/>
         <variable name="uniqueWeapon" type="com.zerlings.gabeisfaker.db.UniqueWeapon"/>
     </data>
 
@@ -30,7 +31,7 @@
             android:layout_marginLeft="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/stat_trak"
-            app:visibility="@{uniqueWeapon.isStatTrak}"/>
+            android:visibility="@{uniqueWeapon.statTrak ? View.VISIBLE : View.GONE}"/>
 
         <LinearLayout
             android:id="@+id/quality_layout"

@@ -12,7 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -71,7 +71,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     private SoundPool soundPool;
 
-    private SparseArray<Integer> soundMap = new SparseArray();
+    private SparseIntArray soundMap = new SparseIntArray();
 
     private MediaPlayer player;
 
@@ -79,7 +79,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     public SimulatorActivityBinding binding;
 
-    private List<Weapon> weaponList = new ArrayList<>();
+    private List<Weapon> weaponList = new ArrayList<>(40);
     private List<Weapon> convertList = new ArrayList<>();
     private List<Weapon> classifiedList = new ArrayList<>();
     private List<Weapon> restrictedList = new ArrayList<>();
@@ -224,7 +224,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                         e.onNext(uniqueWeapon);
                     }
                 });
-                observable.subscribeOn(Schedulers.io())
+                observable.subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<UniqueWeapon>() {
                             @Override
@@ -279,6 +279,15 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             weaponList.set(37,restrictedList.get(random.nextInt(restrictedList.size())));
         }else {
             weaponList.set(37,milspecList.get(random.nextInt(milspecList.size())));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(binding.uniqueWeaponLayout.getVisibility() == View.VISIBLE){
+            onClick(binding.discardButton);
+        }else{
+            super.onBackPressed();
         }
     }
 

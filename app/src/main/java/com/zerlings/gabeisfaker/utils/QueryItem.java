@@ -15,7 +15,7 @@ import retrofit2.http.QueryMap;
 
 public interface QueryItem {
 
-    @GET("priceoverview/")
+    @GET("market/priceoverview/")
     Observable<Sale> queryLowestPrice(@QueryMap Map<String,String> map,@Query("market_hash_name") String marketHashName);
 
 }
