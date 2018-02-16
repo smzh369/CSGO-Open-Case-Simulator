@@ -79,7 +79,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     public SimulatorActivityBinding binding;
 
-    private List<Weapon> weaponList = new ArrayList<>(40);
+    private List<Weapon> weaponList = new ArrayList<>(42);
     private List<Weapon> convertList = new ArrayList<>();
     private List<Weapon> classifiedList = new ArrayList<>();
     private List<Weapon> restrictedList = new ArrayList<>();

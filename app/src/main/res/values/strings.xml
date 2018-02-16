@@ -20,6 +20,10 @@
     <string name="well_worn">Well-Worn</string>
     <string name="battle_scarred">Battle-Scarred</string>
 
+    <string name="clutch_case">Clutch Case</string>
+    <string name="spectrum_2_case">Spectrum 2 Case</string>
+    <string name="operation_hydra_case">Operation Hydra Case</string>
+    <string name="spectrum_case">Spectrum Case</string>
     <string name="glove_case">Glove Case</string>
     <string name="gamma_2_case">Gamma 2 Case</string>
     <string name="gamma_case">Gamma Case</string>
@@ -42,6 +46,67 @@
     <string name="revolver_case">Revolver Case</string>
     <string name="shadow_case">Shadow Case</string>
     <string name="winter_offensive_weapon_case">Winter Offensive Weapon Case</string>
+
+
+    <string name="mortis">Mortis</string>
+    <string name="cortex">Cortex</string>
+    <string name="stymphalian">Stymphalian</string>
+    <string name="moonrise">Moonrise</string>
+    <string name="swag_7">SWAG-7</string>
+    <string name="wild_six">Wild Six</string>
+    <string name="lionfish">Lionfish</string>
+    <string name="arctic_wolf">Arctic Wolf</string>
+    <string name="night_riot">Night Riot</string>
+    <string name="grip">Grip</string>
+    <string name="flame_test">Flame Test</string>
+
+    <string name="the_empress">The Empress</string>
+    <string name="see_ya_later">See Ya Later</string>
+    <string name="high_roller">High Roller</string>
+    <string name="leaded_glass">Leaded Glass</string>
+    <string name="llama_cannon">Llama Cannon</string>
+    <string name="exposure">Exposure</string>
+    <string name="phantom">Phantom</string>
+    <string name="ziggy">Ziggy</string>
+    <string name="goo">Goo</string>
+    <string name="tacticat">Tacticat</string>
+    <string name="triqua">Triqua</string>
+    <string name="hunter">Hunter</string>
+    <string name="morris">Morris</string>
+    <string name="cracked_opal">Cracked Opal</string>
+    <string name="off_world">Off World</string>
+    <string name="jungle_slipstream">Jungle Slipstream</string>
+
+    <string name="oni_taiji">Oni Taiji</string>
+    <string name="sugar_rush">Sugar Rush</string>
+    <string name="hellfire">Hellfire</string>
+    <string name="cobra_strike">Cobra Strike</string>
+    <string name="deaths_head">Death\'s Head</string>
+    <string name="death_grip">Death Grip</string>
+    <string name="orbit_mk01">Orbit Mk01</string>
+    <string name="woodsman">Woodsman</string>
+    <string name="red_rock">Red Rock</string>
+    <string name="macabre">Macabre</string>
+    <string name="blueprint">Blueprint</string>
+    <string name="hard_water">Hard Water</string>
+    <string name="aloha">Aloha</string>
+    <string name="metal_flowers">Metal Flowers</string>
+    <string name="cut_out">Cut Out</string>
+
+    <string name="neo_noir">Neo-Noir</string>
+    <string name="xiangliu">Xiangliu</string>
+    <string name="fever_dream">Fever Dream</string>
+    <string name="decimator">Decimator</string>
+    <string name="scaffold">Scaffold</string>
+    <string name="seasons">Seasons</string>
+    <string name="last_dive">Last Dive</string>
+    <string name="crimson_tsunami">Crimson Tsunami</string>
+    <string name="emerald_poison_dart">Emerald Poison Dart</string>
+    <string name="oxide_blaze">Oxide Blaze</string>
+    <string name="capillary">Capillary</string>
+    <string name="akoben">Akoben</string>
+    <string name="ripple">Ripple</string>
+    <string name="zander">Zander</string>
 
     <string name="buzz_kill">Buzz Kill</string>
     <string name="dragonfire">Dragonfire</string>
@@ -184,6 +249,250 @@
     <string name="memento">Memento</string>
     <string name="faded_zebra">Faded Zebra</string>
     <string name="doomkitty">Doomkitty</string>
+
+    <string name="x_ray">X-Ray</string>
+    <string name="cobalt_disruption">Cobalt Disruption</string>
+    <string name="afterimage">Afterimage</string>
+    <string name="electric_hive">Electric Hive</string>
+    <string name="blue_laminate">Blue Laminate</string>
+    <string name="blind_spot">Blind Spot</string>
+    <string name="water_sigil">Water Sigil</string>
+    <string name="steel_disruption">Steel Disruption</string>
+    <string name="nightshade">Nightshade</string>
+    <string name="azure_zebra">Azure Zebra</string>
+    <string name="ghost_gamo">ghost_gamo</string>
+
+    <string name="bullet_rain">Bullet Rain</string>
+    <string name="jaguar">Jaguar</string>
+    <string name="corticera">Corticera</string>
+    <string name="bengal_tiger">Bengal Tiger</string>
+    <string name="bloomstick">Bloomstick</string>
+    <string name="blue_streak">Blue Streak</string>
+    <string name="virus">Virus</string>
+    <string name="ocean_foam">Ocean Foam</string>
+    <string name="bratatat">Bratatat</string>
+    <string name="red_python">Red Python</string>
+
+    <string name="aquamarine_revenge">Aquamarine Revenge</string>
+    <string name="nemesis">Nemesis</string>
+    <string name="yellow_jacket">Yellow Jacket</string>
+    <string name="ruby_poison_dart">Ruby Poison Dart</string>
+    <string name="loudmouth">Loudmouth</string>
+    <string name="handgun">Handgun</string>
+    <string name="neural_net">Neural Net</string>
+    <string name="evil_daimyo">Evil Daimyo</string>
+    <string name="riot">Riot</string>
+    <string name="rocket_pop">Rocket Pop</string>
+    <string name="bunsen_burner">Bunsen Burner</string>
+    <string name="torque">Torque</string>
+    <string name="ranger">Ranger</string>
+
+    <string name="desert_strike">Desert-Strike</string>
+    <string name="vulcan">Vulcan</string>
+    <string name="caiman">Caiman</string>
+    <string name="atomic_alloy">Atomic Alloy</string>
+    <string name="orion">Orion</string>
+    <string name="tatter">Tatter</string>
+    <string name="curse">Curse</string>
+    <string name="antique">Antique</string>
+    <string name="heaven_guard">Heaven Guard</string>
+    <string name="poison_dart">Poison Dart</string>
+    <string name="twist">Twist</string>
+    <string name="retribution">Retribution</string>
+    <string name="desert_warfare">Desert Warfare</string>
+    <string name="slashed">Slashed</string>
+    <string name="pulse">Pulse</string>
+    <string name="module">Module</string>
+    <string name="isaac">Isaac</string>
+    <string name="kami">Kami</string>
+
+    <string name="fire_serpent">Fire Serpent</string>
+    <string name="golden_koi">Golden Koi</string>
+    <string name="emerald_dragon">Emerald Dragon</string>
+    <string name="graven">Graven</string>
+    <string name="bright_water">Bright Water</string>
+    <string name="zirka">Zirka</string>
+    <string name="overgrowth">Overgrowth</string>
+    <string name="wave_spray">Wave Spray</string>
+    <string name="tempest">Tempest</string>
+    <string name="shattered">Shattered</string>
+    <string name="black_limba">Black Limba</string>
+    <string name="demeter">Demeter</string>
+    <string name="bone_pile">Bone Pile</string>
+
+    <string name="fowl_play">Fowl Play</string>
+    <string name="water_elemental">Water Elemental</string>
+    <string name="conspiracy">Conspiracy</string>
+    <string name="osiris">Osiris</string>
+    <string name="supernova">Supernova</string>
+    <string name="koi">Koi</string>
+    <string name="tigris">Tigris</string>
+    <string name="ivory">Ivory</string>
+    <string name="labyrinth">Labyrinth</string>
+    <string name="urban_hazard">Urban Hazard</string>
+    <string name="abyss">Abyss</string>
+
+    <string name="chameleon">Chameleon</string>
+    <string name="trigon">Trigon</string>
+    <string name="redline">Redline</string>
+    <string name="guardian">Guardian</string>
+    <string name="sergeant">Sergeant</string>
+    <string name="sandstorm">Sandstorm</string>
+    <string name="terrain">Terrain</string>
+    <string name="corporal">Corporal</string>
+
+    <string name="fire_elemental">Fire Elemental</string>
+    <string name="cardiac">Cardiac</string>
+    <string name="tranquility">Tranquility</string>
+    <string name="basilisk">Basilisk</string>
+    <string name="grinder">Grinder</string>
+    <string name="highwayman">Highwayman</string>
+    <string name="griffin">Griffin</string>
+    <string name="firestarter">Firestarter</string>
+    <string name="dart">Dart</string>
+    <string name="murky">Murky</string>
+    <string name="delusion">Delusion</string>
+
+    <string name="the_battlestar">The Battlestar</string>
+    <string name="kumicho_dragon">Kumicho Dragon</string>
+    <string name="royal_legion">Royal Legion</string>
+    <string name="praetorian">Praetorian</string>
+    <string name="impire">Impire</string>
+    <string name="triumvirate">Triumvirate</string>
+    <string name="photic_zone">Photic Zone</string>
+    <string name="lead_conduit">Lead Conduit</string>
+    <string name="lapis_gator">Lapis Gator</string>
+    <string name="necropos">Necropos</string>
+    <string name="jambiya">Jambiya</string>
+
+    <string name="royal_paladin">Royal Paladin</string>
+    <string name="fade">Fade</string>
+    <string name="the_executioner">The Executioner</string>
+    <string name="point_disarray">Point Disarray</string>
+    <string name="shapewood">Shapewood</string>
+    <string name="teclu_burner">Teclu Burner</string>
+    <string name="avalanche">Avalanche</string>
+    <string name="tiger_moth">Tiger Moth</string>
+    <string name="fuel_rod">Fuel Rod</string>
+    <string name="retrobution">Retrobution</string>
+    <string name="power_loader">Power Loader</string>
+    <string name="imperial">Imperial</string>
+    <string name="ricochet">Ricochet</string>
+    <string name="yorick">Yorick</string>
+    <string name="corinthian">Corinthian</string>
+    <string name="outbreak">Outbreak</string>
+
+    <string name="kill_confirmed">Kill Confirmed</string>
+    <string name="golden_coil">Golden Coil</string>
+    <string name="frontside_misty">Frontside Misty</string>
+    <string name="big_iron">Big Iron</string>
+    <string name="flux">Flux</string>
+    <string name="stone_cold">Stone Cold</string>
+    <string name="nebula_crusader">Nebula Crusader</string>
+    <string name="wingshot">Wingshot</string>
+    <string name="special_delivery">Special Delivery</string>
+    <string name="wraiths">Wraiths</string>
+    <string name="dualing_dragons">Dualing Dragons</string>
+    <string name="survivor_z">Survivor Z</string>
+    <string name="rangeen">Rangeen</string>
+    <string name="green_marine">Green Marine</string>
+    <string name="cobalt_core">Cobalt Core</string>
+
+    <string name="the_kraken">The Kraken</string>
+    <string name="mehndi">Mehndi</string>
+    <string name="rising_skull">Rising Skull</string>
+    <string name="rose_iron">Rose Iron</string>
+    <string name="marina">Marina</string>
+    <string name="magma">Magma</string>
+    <string name="cobalt_halftone">Cobalt Halftone</string>
+
+
+    <string name="bayonet">Bayonet</string>
+    <string name="bowie_knife">Bowie Knife</string>
+    <string name="butterfly_knife">Butterfly Knife</string>
+    <string name="falchion_knife">Falchion Knife</string>
+    <string name="flip_knife">Flip Knife</string>
+    <string name="gut_knife">Gut Knife</string>
+    <string name="huntsman_knife">Huntsman Knife</string>
+    <string name="karambit">Karambit</string>
+    <string name="m9_bayonet">M9 Bayonet</string>
+    <string name="shadow_daggers">Shadow Daggers</string>
+
+
+    <string name="vanilla">Vanilla</string>
+    <string name="lore">Lore</string>
+    <string name="gamma_doppler">Gamma Doppler</string>
+    <string name="autotronic">Autotronic</string>
+    <string name="freehand">Freehand</string>
+    <string name="black_laminate">Black Laminate</string>
+    <string name="marble_fade">Marble Fade</string>
+    <string name="tiger_tooth">Tiger Tooth</string>
+    <string name="doppler">Doppler</string>
+    <string name="damascus_steel">Damascus Steel</string>
+    <string name="rust_coat">Rust Coat</string>
+    <string name="boreal_forest">Lore</string>
+    <string name="slaughter">Slaughter</string>
+    <string name="stained">Stained</string>
+    <string name="blue_steel">Blue Steel</string>
+    <string name="night">Night</string>
+    <string name="urban_masked">Urban Masked</string>
+    <string name="scorched">Scorched</string>
+    <string name="forest_ddpat">Forest DDPAT</string>
+    <string name="safari_mesh">Safari Mesh</string>
+
+
+    <string name="bloodhound_gloves">Bloodhound Gloves</string>
+    <string name="driver_gloves">Driver Gloves</string>
+    <string name="hand_wraps">Hand Wraps</string>
+    <string name="moto_gloves">Moto Gloves</string>
+    <string name="specialist_gloves">Specialist Gloves</string>
+    <string name="sport_gloves">Sport Gloves</string>
+
+
+    <string name="charred">Charred</string>
+    <string name="snakebite">Snakebite</string>
+    <string name="guerrilla">Guerrilla</string>
+    <string name="bronzed">Bronzed</string>
+    <string name="crimson_weave">Crimson Weave</string>
+    <string name="diamondback">Diamondback</string>
+    <string name="lunar_weave">Lunar Weave</string>
+    <string name="convoy">Convoy</string>
+    <string name="spruce_ddpat">Spruce DDPAT</string>
+    <string name="leather">Leather</string>
+    <string name="badlands">Badlands</string>
+    <string name="spearmint">Spearmint</string>
+    <string name="cool_mint">Cool Mint</string>
+    <string name="eclipse">Eclipse</string>
+    <string name="boom_">Boom!</string>
+    <string name="crimson_kimono">Crimson Kimono</string>
+    <string name="emerald_web">Emerald Web</string>
+    <string name="foundation">Foundation</string>
+    <string name="pandoras_box">Pandora\'s Box</string>
+    <string name="hedge_maze">Hedge Maze</string>
+    <string name="superconductor">Superconductor</string>
+    <string name="arid">Arid</string>
+
+    <string name="emerald">Emerald</string>
+    <string name="rattler">Rattler</string>
+    <string name="mangrove">Mangrove</string>
+    <string name="mogul">Mogul</string>
+    <string name="buckshot">Buckshot</string>
+    <string name="omega">Omega</string>
+    <string name="vice">Vice</string>
+    <string name="amphibious">Amphibious</string>
+    <string name="bronze_morph">Bronze Morph</string>
+    <string name="cobalt_skulls">Cobalt Skulls</string>
+    <string name="overprint">Overprint</string>
+    <string name="duct_tape">Duct Tape</string>
+    <string name="arboreal">Arboreal</string>
+    <string name="pow">POW!</string>
+    <string name="turtle">Turtle</string>
+    <string name="transport">Transport</string>
+    <string name="polygon">Polygon</string>
+    <string name="king_snake">King Snake</string>
+    <string name="imperial_plaid">Imperial Plaid</string>
+    <string name="overtake">Overtake</string>
+    <string name="racing_green">Racing Green</string>
 
 
 </resources>
