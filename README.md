@@ -1,6 +1,6 @@
 #Gabe is Faker
 
-一款知名网游CSGO的开箱模拟软件。
+一款知名网游CSGO的开箱模拟软件，支持全部26种武器箱。
 
 ### DOWNLOAD
 请前往 [Releases](http://git.oschina.net/Zerlings/Gabe-is-Faker/releases) 页面下载
@@ -12,7 +12,7 @@
 
 ### 已知问题
 1. 暂时开不出额外物品（刀和手套），各箱子出额外的规律还在研究中
-2. 目前只有10个箱子，其余后续会添加
+2. 目前不支持地图收藏品（数据量太大以后慢慢加-_-）
 3. 在部分国产系统上会出现部分UI变形
 
 ### UPCOMING
