@@ -18,9 +18,12 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.bumptech.glide.Glide;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.databinding.SimulatorActivityBinding;
-import com.zerlings.gabeisfaker.db.UniqueWeapon;
+import com.zerlings.gabeisfaker.db.RareItem;
+import com.zerlings.gabeisfaker.db.RareItem_Table;
+import com.zerlings.gabeisfaker.db.UniqueItem;
 import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
 import com.zerlings.gabeisfaker.db.Weapon;
 import com.zerlings.gabeisfaker.recyclerview.WeaponItemDecoration;
@@ -30,6 +33,7 @@ import com.zerlings.gabeisfaker.BR;
 import com.zerlings.gabeisfaker.utils.InitUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -51,6 +55,10 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     public static final String CASE_IMAGE_ID = "case_image_id";
 
+    public static final String RARE_ITEM_TYPE = "rare_item_type";
+
+    public static final String RARE_SKIN_TYPE = "rare_skin_type";
+
     public static final int LEVEL_RARE = 7;
 
     public static final int LEVEL_CONVERT = 6;
@@ -61,11 +69,17 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     public static final int LEVEL_MILSPEC = 3;
 
+    public List<String> rareItems ;
+
+    public List<String> rareSkins ;
+
     public int caseImageId;
+
+    public SimulatorActivityBinding binding;
 
     public WeaponAdapter adapter;
 
-    private UniqueWeapon uniqueWeapon;
+    private UniqueItem uniqueItem;
 
     private List<Weapon> weapons;
 
@@ -76,8 +90,6 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
     private MediaPlayer player;
 
     private Random random = new Random();
-
-    public SimulatorActivityBinding binding;
 
     private List<Weapon> weaponList = new ArrayList<>(42);
     private List<Weapon> convertList = new ArrayList<>();
@@ -109,8 +121,11 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
         //获取传入的箱子信息
         Intent intent = getIntent();
-        binding.simulatorTitle.titleText.setText(intent.getStringExtra(CASE_NAME));
         caseImageId = intent.getIntExtra(CASE_IMAGE_ID,0);
+        binding.simulatorTitle.titleText.setText(intent.getStringExtra(CASE_NAME));
+        rareItems = Arrays.asList(intent.getStringArrayExtra(RARE_ITEM_TYPE));
+        rareSkins = Arrays.asList(intent.getStringArrayExtra(RARE_SKIN_TYPE));
+
         initWeapons();//初始化各项武器列表
         initList();//初始化游戏列表
 
@@ -132,7 +147,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 switch (newState){
                     case RecyclerView.SCROLL_STATE_IDLE:
                         soundPool.play(soundMap.get(2),1,1,5,0,1);
-                        binding.uniqueWeaponLayout.setVisibility(View.VISIBLE);
+                        binding.uniqueItemLayout.setVisibility(View.VISIBLE);
                         //binding.uniqueItem.exteriorText.setVisibility(View.VISIBLE);
                         initList();
                         adapter.notifyDataSetChanged();
@@ -195,13 +210,13 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
             case R.id.discard_button:
                 binding.startButton.setClickable(true);
-                binding.uniqueWeaponLayout.setVisibility(View.GONE);
+                binding.uniqueItemLayout.setVisibility(View.GONE);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 break;
             case R.id.keep_button:
-                uniqueWeapon.insert();
+                uniqueItem.insert();
                 binding.startButton.setClickable(true);
-                binding.uniqueWeaponLayout.setVisibility(View.GONE);
+                binding.uniqueItemLayout.setVisibility(View.GONE);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 break;
             case R.id.left_button:
@@ -216,40 +231,47 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 binding.startButton.setClickable(false);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 binding.recyclerView2.smoothScrollToPosition(38);
-                final Observable<UniqueWeapon> observable = Observable.create(new ObservableOnSubscribe<UniqueWeapon>() {
+                final Observable<UniqueItem> observable = Observable.create(new ObservableOnSubscribe<UniqueItem>() {
                     @Override
-                    public void subscribe(ObservableEmitter<UniqueWeapon> e) throws Exception {
-                        setUniqueWeapon();
-                        uniqueWeapon = new UniqueWeapon(weaponList.get(37));//根据武器基本类型生成具体的独有武器
-                        e.onNext(uniqueWeapon);
+                    public void subscribe(ObservableEmitter<UniqueItem> e) throws Exception {
+                        setChosenWeapon();
+                        setUniqueItem();
+                        e.onNext(uniqueItem);
                     }
                 });
                 observable.subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<UniqueWeapon>() {
+                        .subscribe(new Consumer<UniqueItem>() {
                             @Override
-                            public void accept(UniqueWeapon uniqueWeapon) throws Exception {
-                                binding.uniqueItem.weaponName.setText(uniqueWeapon.getWeaponName());
-                                binding.uniqueItem.skinName.setText(uniqueWeapon.getSkinName());
-                                binding.uniqueItem.exteriorText.setText(uniqueWeapon.getExterior());
-                                Glide.with(SimulatorActivity.this).load(uniqueWeapon.getImageId()).into(binding.uniqueItem.weaponImage);
-                                if (uniqueWeapon.isStatTrak()){
-                                    binding.uniqueItem.stImg.setVisibility(View.VISIBLE);
+                            public void accept(UniqueItem uniqueItem) throws Exception {
+                                binding.getItem.itemName.setText(uniqueItem.getItemName());
+                                binding.getItem.skinName.setText(uniqueItem.getSkinName());
+                                //原版刀无磨损
+                                if (uniqueItem.getSkinName().equals(getString(R.string.vanilla))){
+                                    binding.getItem.exteriorText.setVisibility(View.GONE);
                                 }else {
-                                    binding.uniqueItem.stImg.setVisibility(View.GONE);
+                                    binding.getItem.exteriorText.setVisibility(View.VISIBLE);
+                                    binding.getItem.exteriorText.setText(uniqueItem.getExterior());
                                 }
-                                switch (uniqueWeapon.getQuality()){
+                                Glide.with(SimulatorActivity.this).load(uniqueItem.getImageId())
+                                        .into(binding.getItem.itemImage);
+                                if (uniqueItem.isStatTrak()){
+                                    binding.getItem.stImg.setVisibility(View.VISIBLE);
+                                }else {
+                                    binding.getItem.stImg.setVisibility(View.GONE);
+                                }
+                                switch (uniqueItem.getQuality()){
                                     case LEVEL_MILSPEC:
-                                        binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
+                                        binding.getItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
                                         break;
                                     case LEVEL_RESTRICTED:
-                                        binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
+                                        binding.getItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
                                         break;
                                     case LEVEL_CLASSIFIED:
-                                        binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
+                                        binding.getItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
                                         break;
                                     case LEVEL_CONVERT:
-                                        binding.uniqueItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
+                                        binding.getItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
                                         break;
                                 }
                             }
@@ -260,10 +282,11 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
     }
 
     /**计算得到的最终物品类型并替换列表中的相应位置**/
-    private void setUniqueWeapon(){
-        //计算最终得到的物品
-        int degree = random.nextInt(500);
-        if (degree == 499){
+    private void setChosenWeapon(){
+
+        int degree = random.nextInt(5000);
+        if (degree >= 0 && degree < 13){
+            //极其稀有的物品
             Weapon rareWeapon = new Weapon();
             rareWeapon.setStatTrak(false);
             rareWeapon.setWeaponName("*Rare Special Item*");
@@ -271,20 +294,51 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
             rareWeapon.setSkinName(null);
             rareWeapon.setQuality(LEVEL_RARE);
             weaponList.set(37,rareWeapon);
-        }else if (degree > 495 && degree < 499){
+        }else if (degree >= 13 && degree < 45){
             weaponList.set(37,convertList.get(random.nextInt(convertList.size())));
-        }else if (degree > 480 && degree < 496){
+        }else if (degree >= 45 && degree < 205){
             weaponList.set(37,classifiedList.get(random.nextInt(classifiedList.size())));
-        }else if (degree > 400 && degree < 481){
+        }else if (degree >= 205 && degree < 1004){
             weaponList.set(37,restrictedList.get(random.nextInt(restrictedList.size())));
         }else {
             weaponList.set(37,milspecList.get(random.nextInt(milspecList.size())));
         }
     }
+    /**根据基本物品类型生成具体的独特物品**/
+    private void setUniqueItem(){
+
+        if (weaponList.get(37).getQuality() == LEVEL_RARE){
+            //判断出手套还是刀，手套不能有计数器
+            String itemType = rareItems.get(random.nextInt(rareItems.size()));
+            String skinType = rareSkins.get(random.nextInt(rareSkins.size()));
+            RareItem rareItem;
+            if (caseImageId == R.drawable.glove_case || caseImageId == R.drawable.operation_hydra_case
+                    || caseImageId == R.drawable.clutch_case){
+                rareItem = SQLite.select().from(RareItem.class)
+                        .where(RareItem_Table.skinName.eq(skinType),RareItem_Table.type.eq(2))
+                        .querySingle();
+                uniqueItem = new UniqueItem(rareItem);
+                uniqueItem.setStatTrak(false);
+            }else {
+                rareItem = SQLite.select().from(RareItem.class)
+                        .where(RareItem_Table.skinName.eq(skinType),RareItem_Table.itemName.eq(itemType))
+                        .querySingle();
+                uniqueItem = new UniqueItem(rareItem);
+                if (random.nextInt(10) == 0){
+                    uniqueItem.setStatTrak(true);
+                }else {
+                    uniqueItem.setStatTrak(false);
+                }
+            }
+        }else {
+            uniqueItem = new UniqueItem(weaponList.get(37));
+        }
+
+    }
 
     @Override
     public void onBackPressed() {
-        if(binding.uniqueWeaponLayout.getVisibility() == View.VISIBLE){
+        if(binding.uniqueItemLayout.getVisibility() == View.VISIBLE){
             onClick(binding.discardButton);
         }else{
             super.onBackPressed();

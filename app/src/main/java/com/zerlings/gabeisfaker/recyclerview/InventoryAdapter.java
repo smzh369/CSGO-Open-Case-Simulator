@@ -12,8 +12,8 @@ import android.widget.RelativeLayout;
 
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.InventoryActivity;
-import com.zerlings.gabeisfaker.databinding.UniqueWeaponItemBinding;
-import com.zerlings.gabeisfaker.db.UniqueWeapon;
+import com.zerlings.gabeisfaker.databinding.UniqueItemBinding;
+import com.zerlings.gabeisfaker.db.UniqueItem;
 
 import java.util.List;
 import java.util.Set;
@@ -30,7 +30,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
     private Context mContext;
 
-    private List<UniqueWeapon> mWeaponList;
+    private List<UniqueItem> mItemList;
 
     private int brId;
 
@@ -44,7 +44,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         ViewDataBinding binding;
         RelativeLayout itemLayout;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
         }
 
@@ -58,14 +58,14 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
     }
 
-    public InventoryAdapter(List<UniqueWeapon> weaponList, int brId){
-        mWeaponList = weaponList;
+    public InventoryAdapter(List<UniqueItem> itemList, int brId){
+        mItemList = itemList;
         this.brId = brId;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (mWeaponList.get(position).isStatTrak()){
+        if (mItemList.get(position).isStatTrak()){
             return TYPE_STATTRAK;
         }else {
             return TYPE_NORMAL;
@@ -77,10 +77,10 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         if (mContext == null){
             mContext = parent.getContext();
         }
-        UniqueWeaponItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.unique_weapon_item,parent,false);
+        UniqueItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.unique_item,parent,false);
         ViewHolder holder =  new ViewHolder(binding.getRoot());
         holder.setBinding(binding);
-        holder.itemLayout = binding.weaponItemLayout;
+        holder.itemLayout = binding.itemLayout;
         return holder;
     }
 
@@ -92,7 +92,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         } else {
             holder.itemLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.unSelected));
         }
-        holder.getBinding().setVariable(brId,mWeaponList.get(position));
+        holder.getBinding().setVariable(brId,mItemList.get(position));
         holder.getBinding().executePendingBindings();
         if (onItemClickListener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +113,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
     @Override
     public int getItemCount() {
-        return mWeaponList.size();
+        return mItemList.size();
     }
 
     public interface OnItemClickListener{

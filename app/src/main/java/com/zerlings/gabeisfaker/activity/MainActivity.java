@@ -9,7 +9,16 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.structure.database.transaction.FastStoreModelTransaction;
 import com.zerlings.gabeisfaker.R;
+import com.zerlings.gabeisfaker.db.AppDatabase;
+import com.zerlings.gabeisfaker.db.RareItem;
+import com.zerlings.gabeisfaker.utils.InitUtils;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +30,17 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        //判断数据库是否完整，不完整则重新录入数据
+        long count = SQLite.selectCountOf().from(RareItem.class).count();
+        if (count != 268){
+            Delete.table(RareItem.class);
+            List<RareItem> allRareItems = InitUtils.initRareItem();
+            FastStoreModelTransaction transaction = FastStoreModelTransaction
+                    .saveBuilder(FlowManager.getModelAdapter(RareItem.class))
+                    .addAll(allRareItems).build();
+            FlowManager.getDatabase(AppDatabase.class).executeTransaction(transaction);
+        }
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

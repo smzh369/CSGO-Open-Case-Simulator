@@ -13,11 +13,17 @@ public class Case {
 
     private int imageId;
 
+    private String[] rareItemType;
+
+    private String[] rareSkinType;
+
     public Case(){}
 
-    public Case(String caseName, int imageId) {
+    public Case(String caseName, int imageId, String[] rareItemType, String[] rareSkinType) {
         this.caseName = caseName;
         this.imageId = imageId;
+        this.rareItemType = rareItemType;
+        this.rareSkinType = rareSkinType;
     }
 
     public int getId() {
@@ -42,5 +48,21 @@ public class Case {
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
+    }
+
+    public String[] getRareItemType() {
+        return rareItemType;
+    }
+
+    public void setRareItemType(String[] rareItemType) {
+        this.rareItemType = rareItemType;
+    }
+
+    public String[] getRareSkinType() {
+        return rareSkinType;
+    }
+
+    public void setRareSkinType(String[] rareSkinType) {
+        this.rareSkinType = rareSkinType;
     }
 }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"/>
-        <variable name="uniqueWeapon" type="com.zerlings.gabeisfaker.db.UniqueWeapon"/>
+        <variable name="uniqueItem" type="com.zerlings.gabeisfaker.db.UniqueItem"/>
     </data>
 
     <RelativeLayout
-        android:id="@+id/weapon_item_layout"
+        android:id="@+id/item_layout"
         android:layout_width="150dp"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/weapon_image"
+            android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginLeft="1dp"
@@ -20,7 +20,7 @@
             android:layout_marginTop="1dp"
             android:scaleType="fitCenter"
             android:background="@color/cardview_dark_background"
-            app:imageId="@{uniqueWeapon.imageId}"/>
+            app:imageId="@{uniqueItem.imageId}"/>
 
         <ImageView
             android:id="@+id/st_img"
@@ -31,26 +31,26 @@
             android:layout_marginLeft="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/stat_trak"
-            android:visibility="@{uniqueWeapon.statTrak ? View.VISIBLE : View.GONE}"/>
+            android:visibility="@{uniqueItem.statTrak ? View.VISIBLE : View.GONE}"/>
 
         <LinearLayout
             android:id="@+id/quality_layout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/weapon_image"
+            android:layout_below="@+id/item_image"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             android:layout_marginBottom="1dp"
-            app:layoutColor="@{uniqueWeapon.quality}">
+            app:layoutColor="@{uniqueItem.quality}">
 
             <TextView
-                android:id="@+id/weapon_name"
+                android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textSize="14sp"
-                android:text="@{uniqueWeapon.weaponName}"/>
+                android:text="@{uniqueItem.itemName}"/>
 
             <TextView
                 android:id="@+id/skin_name"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textSize="14sp"
-                android:text="@{uniqueWeapon.skinName}"/>
+                android:text="@{uniqueItem.skinName}"/>
 
             <TextView
                 android:id="@+id/exterior_text"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textSize="14sp"
-                android:text="@{uniqueWeapon.exterior}"/>
+                android:text="@{uniqueItem.exterior}"/>
 
         </LinearLayout>
 

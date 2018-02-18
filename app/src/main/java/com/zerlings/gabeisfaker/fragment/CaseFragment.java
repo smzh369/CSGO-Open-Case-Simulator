@@ -22,6 +22,7 @@ import com.zerlings.gabeisfaker.utils.InitUtils;
 import com.zerlings.gabeisfaker.BR;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -50,17 +51,6 @@ public class CaseFragment extends Fragment {
             binding.fragTitle.titleText.setText(getString(R.string.another_case));
         }
 
-        /*//判断数据库是否完整，不完整则重新录入数据
-        long count = SQLite.selectCountOf().from(Weapon.class).count();
-        if (count < 139){
-            Delete.table(Weapon.class);
-            List<Weapon> allWeapons = InitUtils.initWeapon();
-            FastStoreModelTransaction transaction = FastStoreModelTransaction
-                    .saveBuilder(FlowManager.getModelAdapter(Weapon.class))
-                    .addAll(allWeapons).build();
-            FlowManager.getDatabase(AppDatabase.class).executeTransaction(transaction);
-        }*/
-
         caseList = InitUtils.initCase();
         adapter = new CaseAdapter(caseList,BR.case1);
         binding.recyclerView.setAdapter(adapter);
@@ -87,12 +77,16 @@ public class CaseFragment extends Fragment {
                     Intent intent = new Intent(getActivity(),SimulatorActivity.class);
                     intent.putExtra(SimulatorActivity.CASE_NAME,mCase.getCaseName());
                     intent.putExtra(SimulatorActivity.CASE_IMAGE_ID,mCase.getImageId());
+                    intent.putExtra(SimulatorActivity.RARE_ITEM_TYPE,mCase.getRareItemType());
+                    intent.putExtra(SimulatorActivity.RARE_SKIN_TYPE,mCase.getRareSkinType());
                     startActivity(intent);
                 }else {
                     SimulatorActivity activity = (SimulatorActivity)getActivity();
                     activity.binding.drawerLayout2.closeDrawers();
                     activity.caseImageId = mCase.getImageId();
                     activity.binding.simulatorTitle.titleText.setText(mCase.getCaseName());
+                    activity.rareItems = Arrays.asList(mCase.getRareItemType());
+                    activity.rareSkins = Arrays.asList(mCase.getRareSkinType());
                     activity.initWeapons();
                     activity.initList();
                     activity.adapter.notifyDataSetChanged();
@@ -100,4 +94,5 @@ public class CaseFragment extends Fragment {
             }
         });
     }
+
 }

@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.databinding.InventoryActivityBinding;
-import com.zerlings.gabeisfaker.db.UniqueWeapon;
+import com.zerlings.gabeisfaker.db.UniqueItem;
 import com.zerlings.gabeisfaker.gson.Sale;
 import com.zerlings.gabeisfaker.recyclerview.InventoryAdapter;
 import com.zerlings.gabeisfaker.recyclerview.InventoryItemDecoration;
@@ -41,9 +41,9 @@ public class InventoryActivity extends AppCompatActivity{
 
     private InventoryAdapter adapter;
 
-    private List<UniqueWeapon> uniqueWeaponList = new ArrayList<>();
+    private List<UniqueItem> uniqueItemList = new ArrayList<>();
 
-    private UniqueWeapon uniqueWeapon;
+    private UniqueItem uniqueItem;
 
     private Boolean selectMode = false;
 
@@ -62,9 +62,9 @@ public class InventoryActivity extends AppCompatActivity{
         binding.recyclerView3.setLayoutManager(layoutManager);
         int spacingInPixels = DensityUtil.dip2px(11f);
         binding.recyclerView3.addItemDecoration(new InventoryItemDecoration(spacingInPixels));
-        uniqueWeaponList = SQLite.select().from(UniqueWeapon.class).queryList();
+        uniqueItemList = SQLite.select().from(UniqueItem.class).queryList();
         positionSet.clear();
-        adapter = new InventoryAdapter(uniqueWeaponList,BR.uniqueWeapon);
+        adapter = new InventoryAdapter(uniqueItemList,BR.uniqueItem);
         binding.recyclerView3.setAdapter(adapter);
 
         binding.inventoryTitle.leftButton.setOnClickListener(new View.OnClickListener() {
@@ -78,14 +78,14 @@ public class InventoryActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if (selectMode){
                     // 删除已选
-                    List<UniqueWeapon> uniqueWeapons = new ArrayList<>();
-                    uniqueWeapons.addAll(uniqueWeaponList);
+                    List<UniqueItem> uniqueItems = new ArrayList<>();
+                    uniqueItems.addAll(uniqueItemList);
                     for (int position : positionSet) {
-                        UniqueWeapon weapon = uniqueWeapons.get(position);
-                        int newPosition = uniqueWeaponList.indexOf(weapon);
-                        uniqueWeaponList.remove(newPosition);
+                        UniqueItem weapon = uniqueItems.get(position);
+                        int newPosition = uniqueItemList.indexOf(weapon);
+                        uniqueItemList.remove(newPosition);
                         adapter.notifyItemRemoved(newPosition);
-                        adapter.notifyItemRangeChanged(newPosition,uniqueWeaponList.size() - newPosition);
+                        adapter.notifyItemRangeChanged(newPosition,uniqueItemList.size() - newPosition);
                         weapon.delete();
                     }
                     positionSet.clear();
@@ -97,13 +97,13 @@ public class InventoryActivity extends AppCompatActivity{
                     Map<String,String> marketMap = new HashMap<>();
                     marketMap.put("appid","730");
                     marketMap.put("currency","1");
-                    String marketHashName = uniqueWeapon.getWeaponName()
+                    String marketHashName = uniqueItem.getItemName()
                             + " | "
-                            + uniqueWeapon.getSkinName()
+                            + uniqueItem.getSkinName()
                             + " ("
-                            + uniqueWeapon.getExterior()
+                            + uniqueItem.getExterior()
                             + ")";
-                    if (uniqueWeapon.isStatTrak()){
+                    if (uniqueItem.isStatTrak()){
                         marketHashName = "StatTrak™ " + marketHashName;
                     }
                     HttpUtil.retrofitConnection()
@@ -152,7 +152,7 @@ public class InventoryActivity extends AppCompatActivity{
                     addOrRemove(position);
                 } else {
                     // 如果不是多选状态，则进入单选事件的业务逻辑
-                    uniqueWeapon = uniqueWeaponList.get(position);
+                    uniqueItem = uniqueItemList.get(position);
                     if (positionSet.isEmpty()){
                         //第一次选取，显示查询图标
                         binding.inventoryTitle.rightButton.setBackgroundResource(R.drawable.ic_query);

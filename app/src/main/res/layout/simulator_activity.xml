@@ -90,7 +90,7 @@
         </android.support.v4.widget.DrawerLayout>
 
         <RelativeLayout
-            android:id="@+id/unique_weapon_layout"
+            android:id="@+id/unique_item_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/darkblue"
@@ -114,12 +114,12 @@
                 android:layout_centerInParent="true"
                 android:background="@drawable/item_frame">
 
-                <include layout="@layout/unique_weapon_item"
+                <include layout="@layout/unique_item"
                          android:layout_margin="20dp"
                          android:layout_width="150dp"
                          android:layout_height="wrap_content"
                          android:layout_centerInParent="true"
-                         android:id="@+id/unique_item"/>
+                         android:id="@+id/get_item"/>
 
             </RelativeLayout>
 

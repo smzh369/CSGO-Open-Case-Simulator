@@ -10,17 +10,17 @@ import com.zerlings.gabeisfaker.R;
 import java.util.Random;
 
 /**
- * Created by 令子 on 2017/2/13.
+ * Created by 令子 on 2018/2/17.
  */
 
 @Table(database = AppDatabase.class)
-public class UniqueWeapon extends BaseModel {
+public class UniqueItem extends BaseModel {
 
     @PrimaryKey(autoincrement = true)
     private int id;
 
     @Column
-    private String weaponName;
+    private String itemName;
 
     @Column
     private String skinName;
@@ -34,24 +34,25 @@ public class UniqueWeapon extends BaseModel {
     @Column
     private String exterior;
 
-    @Column float wearValue;
+    @Column
+    private float wearValue;
 
     @Column
-    private int caseId;
+    private boolean isStatTrak;
 
     @Column
-    private boolean isStatTrak = false;
+    private int type;
 
 
-    public UniqueWeapon(){}
+    public UniqueItem(){}
 
-    public UniqueWeapon(Weapon weapon){
-        this.weaponName = weapon.getWeaponName();
+    public UniqueItem(Weapon weapon){
+        this.itemName = weapon.getWeaponName();
         this.skinName = weapon.getSkinName();
         this.quality = weapon.getQuality();
         this.imageId = weapon.getImageId();
-        this.caseId = weapon.getCaseId();
         this.isStatTrak = weapon.isStatTrak();
+        this.type = 0;
         Random random = new Random();
         this.wearValue = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
         if (wearValue >= 0 && wearValue < 7){
@@ -67,6 +68,27 @@ public class UniqueWeapon extends BaseModel {
         }
     }
 
+    public UniqueItem(RareItem rareItem){
+        this.itemName = rareItem.getItemName();
+        this.skinName = rareItem.getSkinName();
+        this.quality = 6;
+        this.imageId = rareItem.getImageId();
+        this.type = rareItem.getType();
+        Random random = new Random();
+        this.wearValue = random.nextFloat()*(rareItem.getMaxWear()-rareItem.getMinWear()) + rareItem.getMinWear();
+        if (wearValue >= 0 && wearValue < 7){
+            this.exterior = MyApplication.getContext().getString(R.string.factory_new);
+        }else if (wearValue >= 7 && wearValue < 15){
+            this.exterior = MyApplication.getContext().getString(R.string.minimal_wear);
+        }else if (wearValue >= 15 && wearValue < 38){
+            this.exterior = MyApplication.getContext().getString(R.string.field_tested);
+        }else if (wearValue >= 38 && wearValue < 45){
+            this.exterior = MyApplication.getContext().getString(R.string.well_worn);
+        }else {
+            this.exterior = MyApplication.getContext().getString(R.string.battle_scarred);
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -75,12 +97,12 @@ public class UniqueWeapon extends BaseModel {
         this.id = id;
     }
 
-    public String getWeaponName() {
-        return weaponName;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setWeaponName(String weaponName) {
-        this.weaponName = weaponName;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public String getSkinName() {
@@ -123,12 +145,12 @@ public class UniqueWeapon extends BaseModel {
         this.wearValue = wearValue;
     }
 
-    public int getCaseId() {
-        return caseId;
+    public int getType() {
+        return type;
     }
 
-    public void setCaseId(int caseId) {
-        this.caseId = caseId;
+    public void setType(int type) {
+        this.type = type;
     }
 
     public boolean isStatTrak() {
