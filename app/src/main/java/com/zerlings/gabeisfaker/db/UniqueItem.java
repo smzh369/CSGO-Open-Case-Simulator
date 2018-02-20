@@ -41,20 +41,20 @@ public class UniqueItem extends BaseModel {
     private boolean isStatTrak;
 
     @Column
-    private int type;
+    private int itemType;
 
 
     public UniqueItem(){}
 
-    public UniqueItem(Weapon weapon){
-        this.itemName = weapon.getWeaponName();
-        this.skinName = weapon.getSkinName();
-        this.quality = weapon.getQuality();
-        this.imageId = weapon.getImageId();
-        this.isStatTrak = weapon.isStatTrak();
-        this.type = 0;
+    public UniqueItem(Gun gun){
+        this.itemName = gun.getGunName();
+        this.skinName = gun.getSkinName();
+        this.quality = gun.getQuality();
+        this.imageId = gun.getImageId();
+        this.isStatTrak = gun.isStatTrak();
+        this.itemType = 0;
         Random random = new Random();
-        this.wearValue = random.nextFloat()*(weapon.getMaxWear()-weapon.getMinWear()) + weapon.getMinWear();
+        this.wearValue = random.nextFloat()*(gun.getMaxWear()-gun.getMinWear()) + gun.getMinWear();
         if (wearValue >= 0 && wearValue < 7){
             this.exterior = MyApplication.getContext().getResources().getString(R.string.factory_new);
         }else if (wearValue >= 7 && wearValue < 15){
@@ -68,14 +68,14 @@ public class UniqueItem extends BaseModel {
         }
     }
 
-    public UniqueItem(RareItem rareItem){
-        this.itemName = rareItem.getItemName();
-        this.skinName = rareItem.getSkinName();
+    public UniqueItem(Knife knife){
+        this.itemName = knife.getKnifeName();
+        this.skinName = knife.getSkinName();
         this.quality = 6;
-        this.imageId = rareItem.getImageId();
-        this.type = rareItem.getType();
+        this.imageId = knife.getImageId();
+        this.itemType = 1;
         Random random = new Random();
-        this.wearValue = random.nextFloat()*(rareItem.getMaxWear()-rareItem.getMinWear()) + rareItem.getMinWear();
+        this.wearValue = random.nextFloat()*(knife.getMaxWear()-knife.getMinWear()) + knife.getMinWear();
         if (wearValue >= 0 && wearValue < 7){
             this.exterior = MyApplication.getContext().getString(R.string.factory_new);
         }else if (wearValue >= 7 && wearValue < 15){
@@ -87,6 +87,33 @@ public class UniqueItem extends BaseModel {
         }else {
             this.exterior = MyApplication.getContext().getString(R.string.battle_scarred);
         }
+        if (random.nextInt(10) == 0){
+            this.setStatTrak(true);
+        }else {
+            this.setStatTrak(false);
+        }
+    }
+
+    public UniqueItem(Glove glove){
+        this.itemName = glove.getGloveName();
+        this.skinName = glove.getSkinName();
+        this.quality = 6;
+        this.imageId = glove.getImageId();
+        this.itemType = 1;
+        Random random = new Random();
+        this.wearValue = random.nextFloat()*(glove.getMaxWear()-glove.getMinWear()) + glove.getMinWear();
+        if (wearValue >= 0 && wearValue < 7){
+            this.exterior = MyApplication.getContext().getString(R.string.factory_new);
+        }else if (wearValue >= 7 && wearValue < 15){
+            this.exterior = MyApplication.getContext().getString(R.string.minimal_wear);
+        }else if (wearValue >= 15 && wearValue < 38){
+            this.exterior = MyApplication.getContext().getString(R.string.field_tested);
+        }else if (wearValue >= 38 && wearValue < 45){
+            this.exterior = MyApplication.getContext().getString(R.string.well_worn);
+        }else {
+            this.exterior = MyApplication.getContext().getString(R.string.battle_scarred);
+        }
+        this.isStatTrak = false;
     }
 
     public int getId() {
@@ -145,12 +172,12 @@ public class UniqueItem extends BaseModel {
         this.wearValue = wearValue;
     }
 
-    public int getType() {
-        return type;
+    public int getItemType() {
+        return itemType;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setItemType(int itemType) {
+        this.itemType = itemType;
     }
 
     public boolean isStatTrak() {

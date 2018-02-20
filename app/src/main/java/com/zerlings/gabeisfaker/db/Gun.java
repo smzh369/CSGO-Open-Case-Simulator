@@ -5,11 +5,11 @@ package com.zerlings.gabeisfaker.db;
  * Created by 令子 on 2017/2/13.
  */
 
-public class Weapon {
+public class Gun {
 
     private int id;
 
-    private String weaponName;
+    private String gunName;
 
     private String skinName;
 
@@ -25,11 +25,11 @@ public class Weapon {
 
     private boolean isStatTrak;
 
-    public Weapon() {
+    public Gun() {
     }
 
-    public Weapon(String weaponName, String skinName, int imageId, int quality, int minWear, int maxWear, int caseId) {
-        this.weaponName = weaponName;
+    public Gun(String gunName, String skinName, int imageId, int quality, int minWear, int maxWear, int caseId) {
+        this.gunName = gunName;
         this.skinName = skinName;
         this.imageId = imageId;
         this.quality = quality;
@@ -46,12 +46,12 @@ public class Weapon {
         this.id = id;
     }
 
-    public String getWeaponName() {
-        return weaponName;
+    public String getGunName() {
+        return gunName;
     }
 
-    public void setWeaponName(String weaponName) {
-        this.weaponName = weaponName;
+    public void setGunName(String gunName) {
+        this.gunName = gunName;
     }
 
     public String getSkinName() {

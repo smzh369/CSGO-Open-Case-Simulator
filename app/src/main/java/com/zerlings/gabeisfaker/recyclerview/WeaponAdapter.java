@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zerlings.gabeisfaker.R;
-import com.zerlings.gabeisfaker.db.Weapon;
+import com.zerlings.gabeisfaker.db.Gun;
 
 import java.util.List;
 
@@ -22,11 +22,9 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
 
     private static final int TYPE_NORMAL = 0;
 
-    private static final int TYPE_STATTRAK = 2;
-
     private View mHeaderView;
 
-    private List<Weapon> mWeaponList;
+    private List<Gun> mWeaponList;
 
     private int brId;
 
@@ -46,7 +44,7 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
         }
     }
 
-    public WeaponAdapter(List<Weapon> weaponList,int brId){
+    public WeaponAdapter(List<Gun> weaponList,int brId){
         mWeaponList = weaponList;
         this.brId = brId;
     }
@@ -66,8 +64,6 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
         if (position == 0 && mHeaderView != null){
             //第一个item应该加载Header
             return TYPE_HEADER;
-        }else if (mWeaponList.get(position).isStatTrak()){
-            return TYPE_STATTRAK;
         }else {
             return TYPE_NORMAL;
         }
@@ -79,8 +75,6 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
         ViewDataBinding binding;
         if (viewType == TYPE_NORMAL){
             binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.weapon_item,parent,false);
-        }else if (viewType == TYPE_STATTRAK){
-            binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.st_weapon_item,parent,false);
         }else {
             return new ViewHolder(mHeaderView);
         }
@@ -91,7 +85,7 @@ public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(WeaponAdapter.ViewHolder holder, int position) {
-        if(getItemViewType(position) == TYPE_NORMAL || getItemViewType(position) == TYPE_STATTRAK){
+        if( getItemViewType(position) == TYPE_NORMAL ){
             holder.getBinding().setVariable(brId,mWeaponList.get(position));
             holder.getBinding().executePendingBindings();
         }

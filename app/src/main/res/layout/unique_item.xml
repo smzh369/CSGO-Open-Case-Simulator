@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"/>
         <variable name="uniqueItem" type="com.zerlings.gabeisfaker.db.UniqueItem"/>
     </data>
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/item_layout"
         android:layout_width="150dp"
         android:layout_height="wrap_content">
@@ -15,12 +16,15 @@
             android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="1dp"
-            android:scaleType="fitCenter"
             android:background="@color/cardview_dark_background"
-            app:imageId="@{uniqueItem.imageId}"/>
+            android:scaleType="fitCenter"
+            app:imageId="@{uniqueItem.imageId}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/st_img"
@@ -28,48 +32,59 @@
             android:layout_height="40dp"
             android:layout_above="@+id/quality_layout"
             android:layout_marginBottom="3dp"
+            android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/stat_trak"
-            android:visibility="@{uniqueItem.statTrak ? View.VISIBLE : View.GONE}"/>
+            android:visibility="@{uniqueItem.statTrak ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/item_image"
+            app:layout_constraintStart_toStartOf="@+id/item_image" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/quality_layout"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_image"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
             android:layout_marginBottom="1dp"
-            app:layoutColor="@{uniqueItem.quality}">
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
+            app:layoutColor="@{uniqueItem.quality}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_image">
 
             <TextView
                 android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:textSize="14sp"
-                android:text="@{uniqueItem.itemName}"/>
+                android:text="@{uniqueItem.itemName}"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/skin_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/item_name"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:textSize="14sp"
-                android:text="@{uniqueItem.skinName}"/>
+                android:text="@{uniqueItem.skinName}"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/exterior_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/skin_name"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:textSize="14sp"
-                android:text="@{uniqueItem.exterior}"/>
+                android:text="@{uniqueItem.exterior}"
+                android:textSize="14sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </layout>

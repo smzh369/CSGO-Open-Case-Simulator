@@ -3,12 +3,12 @@ package com.zerlings.gabeisfaker.recyclerview;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.InventoryActivity;
@@ -24,10 +24,6 @@ import java.util.Set;
 
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder>{
 
-    private static final int TYPE_NORMAL = 0;
-
-    private static final int TYPE_STATTRAK = 1;
-
     private Context mContext;
 
     private List<UniqueItem> mItemList;
@@ -42,7 +38,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         ViewDataBinding binding;
-        RelativeLayout itemLayout;
+        ConstraintLayout itemLayout;
 
         ViewHolder(View view) {
             super(view);
@@ -61,15 +57,6 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     public InventoryAdapter(List<UniqueItem> itemList, int brId){
         mItemList = itemList;
         this.brId = brId;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (mItemList.get(position).isStatTrak()){
-            return TYPE_STATTRAK;
-        }else {
-            return TYPE_NORMAL;
-        }
     }
 
     @Override

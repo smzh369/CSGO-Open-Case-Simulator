@@ -10,13 +10,13 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 
 @Table(database = AppDatabase.class)
-public class RareItem extends BaseModel {
+public class Knife extends BaseModel {
 
     @PrimaryKey(autoincrement = true)
     private int id;
 
     @Column
-    private String itemName;
+    private String knifeName;
 
     @Column
     private String skinName;
@@ -30,21 +30,17 @@ public class RareItem extends BaseModel {
     @Column
     private float maxWear;
 
-    @Column
-    private int type;
 
-
-    public RareItem() {
+    public Knife() {
     }
 
-    public RareItem(String knifeName, String skinName, int imageId, int minWear, int maxWear,int type) {
+    public Knife(String knifeName, String skinName, int imageId, int minWear, int maxWear) {
 
-        this.itemName = knifeName;
+        this.knifeName = knifeName;
         this.skinName = skinName;
         this.imageId = imageId;
         this.minWear = minWear;
         this.maxWear = maxWear;
-        this.type = type;
 
     }
 
@@ -56,12 +52,12 @@ public class RareItem extends BaseModel {
         this.id = id;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getKnifeName() {
+        return knifeName;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setKnifeName(String knifeName) {
+        this.knifeName = knifeName;
     }
 
     public String getSkinName() {
@@ -96,11 +92,4 @@ public class RareItem extends BaseModel {
         this.maxWear = maxWear;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
 }

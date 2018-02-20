@@ -21,11 +21,13 @@ import com.bumptech.glide.Glide;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.databinding.SimulatorActivityBinding;
-import com.zerlings.gabeisfaker.db.RareItem;
-import com.zerlings.gabeisfaker.db.RareItem_Table;
+import com.zerlings.gabeisfaker.db.Glove;
+import com.zerlings.gabeisfaker.db.Glove_Table;
+import com.zerlings.gabeisfaker.db.Gun;
+import com.zerlings.gabeisfaker.db.Knife;
+import com.zerlings.gabeisfaker.db.Knife_Table;
 import com.zerlings.gabeisfaker.db.UniqueItem;
 import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
-import com.zerlings.gabeisfaker.db.Weapon;
 import com.zerlings.gabeisfaker.recyclerview.WeaponItemDecoration;
 import com.zerlings.gabeisfaker.utils.DensityUtil;
 import com.zerlings.gabeisfaker.recyclerview.WeaponAdapter;
@@ -81,7 +83,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     private UniqueItem uniqueItem;
 
-    private List<Weapon> weapons;
+    private List<Gun> weapons;
 
     private SoundPool soundPool;
 
@@ -91,11 +93,11 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     private Random random = new Random();
 
-    private List<Weapon> weaponList = new ArrayList<>(42);
-    private List<Weapon> convertList = new ArrayList<>();
-    private List<Weapon> classifiedList = new ArrayList<>();
-    private List<Weapon> restrictedList = new ArrayList<>();
-    private List<Weapon> milspecList = new ArrayList<>();
+    private List<Gun> weaponList = new ArrayList<>(42);
+    private List<Gun> convertList = new ArrayList<>();
+    private List<Gun> classifiedList = new ArrayList<>();
+    private List<Gun> restrictedList = new ArrayList<>();
+    private List<Gun> milspecList = new ArrayList<>();
 
 
     @Override
@@ -130,7 +132,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         initList();//初始化游戏列表
 
         //设置recyclerview显示方式
-        adapter = new WeaponAdapter(weaponList,BR.weapon);
+        adapter = new WeaponAdapter(weaponList,BR.gun);
         CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
         layoutManager.setSpeed(0.5f);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -168,21 +170,21 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     //初始化各类武器列表
     public void initWeapons(){
-        weapons = InitUtils.initWeapon(caseImageId);
+        weapons = InitUtils.initGun(caseImageId);
         convertList.clear();
         classifiedList.clear();
         restrictedList.clear();
         milspecList.clear();
         for (int i = 0;i < weapons.size();i++) {
-            Weapon weapon = weapons.get(i);
-            if (weapon.getQuality() == LEVEL_CONVERT) {
-                convertList.add(weapon);
-            } else if (weapon.getQuality() == LEVEL_CLASSIFIED) {
-                classifiedList.add(weapon);
-            } else if (weapon.getQuality() == LEVEL_RESTRICTED) {
-                restrictedList.add(weapon);
+            Gun gun = weapons.get(i);
+            if (gun.getQuality() == LEVEL_CONVERT) {
+                convertList.add(gun);
+            } else if (gun.getQuality() == LEVEL_CLASSIFIED) {
+                classifiedList.add(gun);
+            } else if (gun.getQuality() == LEVEL_RESTRICTED) {
+                restrictedList.add(gun);
             } else {
-                milspecList.add(weapon);
+                milspecList.add(gun);
             }
         }
     }
@@ -193,14 +195,14 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         for (int i = 0;i<40;i++){
             int index = random.nextInt(weapons.size());
             int st = random.nextInt(10);
-            Weapon weapon = weapons.get(index);
+            Gun gun = weapons.get(index);
             if (st == 0){
-                weapon.setStatTrak(true);
+                gun.setStatTrak(true);
             }
             else {
-                weapon.setStatTrak(false);
+                gun.setStatTrak(false);
             }
-            weaponList.add(weapon);
+            weaponList.add(gun);
         }
 
     }
@@ -287,9 +289,9 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         int degree = random.nextInt(5000);
         if (degree >= 0 && degree < 13){
             //极其稀有的物品
-            Weapon rareWeapon = new Weapon();
+            Gun rareWeapon = new Gun();
             rareWeapon.setStatTrak(false);
-            rareWeapon.setWeaponName("*Rare Special Item*");
+            rareWeapon.setGunName("*Rare Special Item*");
             rareWeapon.setImageId(R.drawable.rare_special);
             rareWeapon.setSkinName(null);
             rareWeapon.setQuality(LEVEL_RARE);
@@ -309,26 +311,19 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
         if (weaponList.get(37).getQuality() == LEVEL_RARE){
             //判断出手套还是刀，手套不能有计数器
-            String itemType = rareItems.get(random.nextInt(rareItems.size()));
+            String knifeType = rareItems.get(random.nextInt(rareItems.size()));
             String skinType = rareSkins.get(random.nextInt(rareSkins.size()));
-            RareItem rareItem;
             if (caseImageId == R.drawable.glove_case || caseImageId == R.drawable.operation_hydra_case
                     || caseImageId == R.drawable.clutch_case){
-                rareItem = SQLite.select().from(RareItem.class)
-                        .where(RareItem_Table.skinName.eq(skinType),RareItem_Table.type.eq(2))
+                Glove glove = SQLite.select().from(Glove.class)
+                        .where(Glove_Table.skinName.eq(skinType))
                         .querySingle();
-                uniqueItem = new UniqueItem(rareItem);
-                uniqueItem.setStatTrak(false);
+                uniqueItem = new UniqueItem(glove);
             }else {
-                rareItem = SQLite.select().from(RareItem.class)
-                        .where(RareItem_Table.skinName.eq(skinType),RareItem_Table.itemName.eq(itemType))
+                Knife knife = SQLite.select().from(Knife.class)
+                        .where(Knife_Table.knifeName.eq(knifeType),Knife_Table.skinName.eq(skinType))
                         .querySingle();
-                uniqueItem = new UniqueItem(rareItem);
-                if (random.nextInt(10) == 0){
-                    uniqueItem.setStatTrak(true);
-                }else {
-                    uniqueItem.setStatTrak(false);
-                }
+                uniqueItem = new UniqueItem(knife);
             }
         }else {
             uniqueItem = new UniqueItem(weaponList.get(37));

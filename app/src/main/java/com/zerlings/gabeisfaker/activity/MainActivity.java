@@ -15,7 +15,8 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.FastStoreModelTransaction;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.db.AppDatabase;
-import com.zerlings.gabeisfaker.db.RareItem;
+import com.zerlings.gabeisfaker.db.Glove;
+import com.zerlings.gabeisfaker.db.Knife;
 import com.zerlings.gabeisfaker.utils.InitUtils;
 
 import java.util.List;
@@ -32,13 +33,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //判断数据库是否完整，不完整则重新录入数据
-        long count = SQLite.selectCountOf().from(RareItem.class).count();
-        if (count != 268){
-            Delete.table(RareItem.class);
-            List<RareItem> allRareItems = InitUtils.initRareItem();
+        long count = SQLite.selectCountOf().from(Knife.class).count();
+        if (count != 220){
+            Delete.table(Knife.class);
+            List<Knife> allKnives = InitUtils.initKnife();
             FastStoreModelTransaction transaction = FastStoreModelTransaction
-                    .saveBuilder(FlowManager.getModelAdapter(RareItem.class))
-                    .addAll(allRareItems).build();
+                    .saveBuilder(FlowManager.getModelAdapter(Knife.class))
+                    .addAll(allKnives).build();
+            FlowManager.getDatabase(AppDatabase.class).executeTransaction(transaction);
+        }
+        count = SQLite.selectCountOf().from(Glove.class).count();
+        if (count != 48){
+            Delete.table(Glove.class);
+            List<Glove> allGloves = InitUtils.initGlove();
+            FastStoreModelTransaction transaction = FastStoreModelTransaction
+                    .saveBuilder(FlowManager.getModelAdapter(Glove.class))
+                    .addAll(allGloves).build();
             FlowManager.getDatabase(AppDatabase.class).executeTransaction(transaction);
         }
 

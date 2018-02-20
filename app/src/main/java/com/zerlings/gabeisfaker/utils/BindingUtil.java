@@ -3,7 +3,7 @@ package com.zerlings.gabeisfaker.utils;
 import android.databinding.BindingAdapter;
 import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.zerlings.gabeisfaker.R;
@@ -23,7 +23,7 @@ public class BindingUtil {
     }
 
     @BindingAdapter("layoutColor")
-    public static void setColor(LinearLayout qualityLayout, int quality){
+    public static void setColor(RelativeLayout qualityLayout, int quality){
 
         switch (quality){
             case SimulatorActivity.LEVEL_RARE:
