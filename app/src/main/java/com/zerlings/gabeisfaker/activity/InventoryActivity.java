@@ -2,7 +2,6 @@ package com.zerlings.gabeisfaker.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.view.WindowManager;
@@ -35,7 +34,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by 令子 on 2017/2/19.
  */
 
-public class InventoryActivity extends AppCompatActivity{
+public class InventoryActivity extends BaseActivity{
 
     public static Set<Integer> positionSet = new HashSet<>();
 
@@ -58,6 +57,7 @@ public class InventoryActivity extends AppCompatActivity{
 
         //初始化各组件
         binding.inventoryTitle.titleText.setText(R.string.inventory);
+        binding.inventoryTitle.leftButton.setBackgroundResource(R.drawable.ic_back);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         binding.recyclerView3.setLayoutManager(layoutManager);
         int spacingInPixels = DensityUtil.dip2px(11f);

@@ -10,10 +10,10 @@
             android:id="@+id/left_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_back"
+            android:background="@drawable/ic_swap"
             />
 
         <TextView
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="20sp"/>
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/right_button"
@@ -30,7 +30,7 @@
             android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/nav_inventory"
+            android:background="@drawable/ic_inventory"
             android:visibility="gone"/>
 
     </RelativeLayout>

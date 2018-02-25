@@ -18,6 +18,7 @@ import com.zerlings.gabeisfaker.activity.SimulatorActivity;
 import com.zerlings.gabeisfaker.databinding.ChooseCaseBinding;
 import com.zerlings.gabeisfaker.db.Case;
 import com.zerlings.gabeisfaker.recyclerview.CaseAdapter;
+import com.zerlings.gabeisfaker.utils.DensityUtil;
 import com.zerlings.gabeisfaker.utils.InitUtils;
 import com.zerlings.gabeisfaker.BR;
 
@@ -54,7 +55,11 @@ public class CaseFragment extends Fragment {
         caseList = InitUtils.initCase();
         adapter = new CaseAdapter(caseList,BR.case1);
         binding.recyclerView.setAdapter(adapter);
-        binding.fragTitle.leftButton.setBackgroundResource(R.drawable.ic_cs);
+        binding.fragTitle.leftButton.setBackgroundResource(R.drawable.ic_setting);
+        ViewGroup.MarginLayoutParams params =
+                (ViewGroup.MarginLayoutParams)binding.fragTitle.leftButton.getLayoutParams();
+        params.leftMargin = DensityUtil.dip2px(25f);
+        binding.fragTitle.leftButton.setLayoutParams(params);
         return binding.getRoot();
     }
 

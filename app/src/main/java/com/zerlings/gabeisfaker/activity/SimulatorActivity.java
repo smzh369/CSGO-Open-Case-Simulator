@@ -7,9 +7,8 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
@@ -17,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.bumptech.glide.Glide;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.databinding.SimulatorActivityBinding;
@@ -51,7 +49,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by 令子 on 2017/2/15.
  */
 
-public class SimulatorActivity extends AppCompatActivity implements View.OnClickListener{
+public class SimulatorActivity extends BaseActivity implements View.OnClickListener{
 
     public static final String CASE_NAME = "case_name";
 
@@ -149,8 +147,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                 switch (newState){
                     case RecyclerView.SCROLL_STATE_IDLE:
                         soundPool.play(soundMap.get(2),1,1,5,0,1);
-                        binding.uniqueItemLayout.setVisibility(View.VISIBLE);
-                        //binding.uniqueItem.exteriorText.setVisibility(View.VISIBLE);
+                        binding.decideLayout.setVisibility(View.VISIBLE);
                         initList();
                         adapter.notifyDataSetChanged();
                         binding.recyclerView2.scrollToPosition(0);
@@ -165,10 +162,12 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         binding.startButton.setOnClickListener(this);
         binding.discardButton.setOnClickListener(this);
         binding.keepButton.setOnClickListener(this);
+        binding.icHome.setOnClickListener(this);
+        binding.icQuit.setOnClickListener(this);
 
     }
 
-    //初始化各类武器列表
+    /**初始化各类武器列表**/
     public void initWeapons(){
         weapons = InitUtils.initGun(caseImageId);
         convertList.clear();
@@ -212,26 +211,45 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
             case R.id.discard_button:
                 binding.startButton.setClickable(true);
-                binding.uniqueItemLayout.setVisibility(View.GONE);
+                binding.decideLayout.setVisibility(View.GONE);
+
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                //开箱结束后恢复侧滑菜单及标题栏左右按钮
+                binding.simulatorTitle.leftButton.setClickable(true);
+                binding.simulatorTitle.rightButton.setClickable(true);
                 break;
             case R.id.keep_button:
                 uniqueItem.insert();
                 binding.startButton.setClickable(true);
-                binding.uniqueItemLayout.setVisibility(View.GONE);
+                binding.decideLayout.setVisibility(View.GONE);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                binding.simulatorTitle.leftButton.setClickable(true);
+                binding.simulatorTitle.rightButton.setClickable(true);
                 break;
             case R.id.left_button:
-                finish();break;
+                binding.drawerLayout2.openDrawer(GravityCompat.START);
+                break;
             case R.id.right_button:
                 Intent intent = new Intent(this,InventoryActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.ic_home:
+                binding.drawerLayout2.closeDrawers();
+                finish();
+                break;
+            case R.id.ic_quit:
+                binding.drawerLayout2.closeDrawers();
+                ActivityCollector.finishAll();
                 break;
             case R.id.start_button:
                 soundPool.play(soundMap.get(1),1,1,5,0,1);
                 player.start();
                 binding.startButton.setClickable(false);
+                //一次开箱结束前锁定侧滑菜单并使标题栏左右按钮失效
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                binding.simulatorTitle.leftButton.setClickable(false);
+                binding.simulatorTitle.rightButton.setClickable(false);
+                //游戏开始
                 binding.recyclerView2.smoothScrollToPosition(38);
                 final Observable<UniqueItem> observable = Observable.create(new ObservableOnSubscribe<UniqueItem>() {
                     @Override
@@ -246,35 +264,13 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
                         .subscribe(new Consumer<UniqueItem>() {
                             @Override
                             public void accept(UniqueItem uniqueItem) throws Exception {
-                                binding.getItem.itemName.setText(uniqueItem.getItemName());
-                                binding.getItem.skinName.setText(uniqueItem.getSkinName());
+                                binding.setUniqueItem(uniqueItem);
                                 //原版刀无磨损
                                 if (uniqueItem.getSkinName().equals(getString(R.string.vanilla))){
                                     binding.getItem.exteriorText.setVisibility(View.GONE);
                                 }else {
                                     binding.getItem.exteriorText.setVisibility(View.VISIBLE);
                                     binding.getItem.exteriorText.setText(uniqueItem.getExterior());
-                                }
-                                Glide.with(SimulatorActivity.this).load(uniqueItem.getImageId())
-                                        .into(binding.getItem.itemImage);
-                                if (uniqueItem.isStatTrak()){
-                                    binding.getItem.stImg.setVisibility(View.VISIBLE);
-                                }else {
-                                    binding.getItem.stImg.setVisibility(View.GONE);
-                                }
-                                switch (uniqueItem.getQuality()){
-                                    case LEVEL_MILSPEC:
-                                        binding.getItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.milspec));
-                                        break;
-                                    case LEVEL_RESTRICTED:
-                                        binding.getItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.restricted));
-                                        break;
-                                    case LEVEL_CLASSIFIED:
-                                        binding.getItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.classified));
-                                        break;
-                                    case LEVEL_CONVERT:
-                                        binding.getItem.qualityLayout.setBackgroundColor(ContextCompat.getColor(SimulatorActivity.this,R.color.convert));
-                                        break;
                                 }
                             }
                         });
@@ -333,7 +329,7 @@ public class SimulatorActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
-        if(binding.uniqueItemLayout.getVisibility() == View.VISIBLE){
+        if(binding.decideLayout.getVisibility() == View.VISIBLE){
             onClick(binding.discardButton);
         }else{
             super.onBackPressed();

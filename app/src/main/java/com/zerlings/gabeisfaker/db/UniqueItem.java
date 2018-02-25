@@ -76,7 +76,9 @@ public class UniqueItem extends BaseModel {
         this.itemType = 1;
         Random random = new Random();
         this.wearValue = random.nextFloat()*(knife.getMaxWear()-knife.getMinWear()) + knife.getMinWear();
-        if (wearValue >= 0 && wearValue < 7){
+        if (knife.getKnifeName().equals(MyApplication.getContext().getString(R.string.vanilla))){
+            this.exterior = null;
+        }else if (wearValue >= 0 && wearValue < 7){
             this.exterior = MyApplication.getContext().getString(R.string.factory_new);
         }else if (wearValue >= 7 && wearValue < 15){
             this.exterior = MyApplication.getContext().getString(R.string.minimal_wear);

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/alipay"
+        android:icon="@drawable/nav_alipay"
+        android:title="@string/alipay">
+    </item>
+    <item
+        android:id="@+id/wechat"
+        android:icon="@drawable/nav_wechat"
+        android:title="@string/wechat">
+    </item>
+    <item
+        android:id="@+id/steam"
+        android:icon="@drawable/nav_steam"
+        android:title="@string/steam">
+    </item>
+</menu>
