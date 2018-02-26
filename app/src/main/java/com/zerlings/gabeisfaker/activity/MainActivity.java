@@ -37,6 +37,8 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
+    public static Snackbar snackbar;
+
     private DrawerLayout drawerLayout;
 
     private NavigationView navigationView;
@@ -135,17 +137,17 @@ public class MainActivity extends BaseActivity {
                     case R.id.wechat:
                         boolean hasInstalledWeCinClient = WeiXinDonate.hasInstalledWeiXinClient(MainActivity.this);
                         if (hasInstalledWeCinClient){
-                            Snackbar.make(navigationView,R.string.wechat_guide,Snackbar.LENGTH_INDEFINITE)
-                                    .setAction("Go", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            InputStream weixinQrIs = getResources().openRawResource(R.raw.donate_wechat);
-                                            String qrPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                                                    + File.separator + "AndroidDonateSample" + File.separator + "donate_wechat.png";
-                                            WeiXinDonate.saveDonateQrImage2SDCard(qrPath, BitmapFactory.decodeStream(weixinQrIs));
-                                            WeiXinDonate.donateViaWeiXin(MainActivity.this, qrPath);
-                                        }
-                                    }).show();
+                            snackbar = Snackbar.make(navigationView,R.string.wechat_guide,Snackbar.LENGTH_INDEFINITE);
+                            snackbar.setAction("Go", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    InputStream weixinQrIs = getResources().openRawResource(R.raw.donate_wechat);
+                                    String qrPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                                            + File.separator + "AndroidDonateSample" + File.separator + "donate_wechat.png";
+                                    WeiXinDonate.saveDonateQrImage2SDCard(qrPath, BitmapFactory.decodeStream(weixinQrIs));
+                                    WeiXinDonate.donateViaWeiXin(MainActivity.this, qrPath);
+                                }
+                            }).show();
                         }else{
                             Toast.makeText(MainActivity.this,R.string.wechat_text,Toast.LENGTH_SHORT).show();
                         }
@@ -167,5 +169,20 @@ public class MainActivity extends BaseActivity {
         });
         /*显示PopupMenu*/
         popupHelper.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (snackbar != null && snackbar.isShown()){
+            snackbar.dismiss();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        snackbar = null;
+        super.onDestroy();
     }
 }

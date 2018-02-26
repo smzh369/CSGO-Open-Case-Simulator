@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -70,6 +69,9 @@ public class CaseFragment extends Fragment {
         binding.fragTitle.leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MainActivity.snackbar != null && MainActivity.snackbar.isShown()){
+                    MainActivity.snackbar.dismiss();
+                }
                 DrawerLayout drawerLayout = v.getRootView().findViewById(R.id.drawer_layout);
                 drawerLayout.openDrawer(GravityCompat.START);
             }
@@ -80,12 +82,16 @@ public class CaseFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 Case mCase = caseList.get(position);
                 if (getActivity() instanceof MainActivity){
-                    Intent intent = new Intent(getActivity(),SimulatorActivity.class);
-                    intent.putExtra(SimulatorActivity.CASE_NAME,mCase.getCaseName());
-                    intent.putExtra(SimulatorActivity.CASE_IMAGE_ID,mCase.getImageId());
-                    intent.putExtra(SimulatorActivity.RARE_ITEM_TYPE,mCase.getRareItemType());
-                    intent.putExtra(SimulatorActivity.RARE_SKIN_TYPE,mCase.getRareSkinType());
-                    startActivity(intent);
+                    if (MainActivity.snackbar != null && MainActivity.snackbar.isShown()){
+                        MainActivity.snackbar.dismiss();
+                    }else{
+                        Intent intent = new Intent(getActivity(),SimulatorActivity.class);
+                        intent.putExtra(SimulatorActivity.CASE_NAME,mCase.getCaseName());
+                        intent.putExtra(SimulatorActivity.CASE_IMAGE_ID,mCase.getImageId());
+                        intent.putExtra(SimulatorActivity.RARE_ITEM_TYPE,mCase.getRareItemType());
+                        intent.putExtra(SimulatorActivity.RARE_SKIN_TYPE,mCase.getRareSkinType());
+                        startActivity(intent);
+                    }
                 }else {
                     SimulatorActivity activity = (SimulatorActivity)getActivity();
                     activity.binding.drawerLayout2.closeDrawers();

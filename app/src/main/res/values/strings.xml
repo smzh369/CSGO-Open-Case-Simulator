@@ -11,7 +11,7 @@
     <string name="shared_text">I\'m playing CS:GO Case Opening Simulator.\n Have a try !</string>
     <string name="alipay_text">Please install alipay first</string>
     <string name="wechat_text">Please install WeChat first</string>
-    <string name="wechat_guide">The picture of QR code has been added into your album. Go into the
+    <string name="wechat_guide">The picture of QR code has been added into your album. Please go into the
         album from the button at the top-right corner of the scanning page of WeChat to choose it.</string>
 
     <string name="inventory">Inventory</string>

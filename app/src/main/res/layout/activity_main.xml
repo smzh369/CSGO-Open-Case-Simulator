@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/csgo_background">
 
-        <android.support.design.widget.CoordinatorLayout
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/choose_fragment"
+            android:name="com.zerlings.gabeisfaker.fragment.CaseFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <fragment
-                android:id="@+id/choose_fragment"
-                android:name="com.zerlings.gabeisfaker.fragment.CaseFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </android.support.design.widget.CoordinatorLayout>
+            android:layout_height="match_parent"/>
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
@@ -27,5 +25,6 @@
             app:menu="@menu/nav_menu"
             app:headerLayout="@layout/nav_header"/>
 
+    </android.support.v4.widget.DrawerLayout>
 
-</android.support.v4.widget.DrawerLayout>
+</android.support.design.widget.CoordinatorLayout>

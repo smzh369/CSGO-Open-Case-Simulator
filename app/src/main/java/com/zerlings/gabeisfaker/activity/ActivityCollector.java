@@ -27,6 +27,5 @@ public class ActivityCollector {
                 activity.finish();
             }
         }
-
     }
 }

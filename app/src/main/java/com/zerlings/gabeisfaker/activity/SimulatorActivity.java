@@ -238,7 +238,6 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.ic_quit:
-                binding.drawerLayout2.closeDrawers();
                 ActivityCollector.finishAll();
                 break;
             case R.id.start_button:
@@ -338,10 +337,10 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (player != null){
             player.stop();
             player.release();
         }
+        super.onDestroy();
     }
 }
