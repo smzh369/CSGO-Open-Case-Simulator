@@ -7,18 +7,24 @@
     android:layout_height="match_parent"
     android:background="@drawable/csgo_background">
 
-    <fragment
-        android:id="@+id/choose_fragment"
-        android:name="com.zerlings.gabeisfaker.fragment.CaseFragment"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_height="match_parent"
-        android:layout_width="180dp"
-        android:layout_gravity="start"
-        app:menu="@menu/nav_menu"
-        app:headerLayout="@layout/nav_header"/>
+        <fragment
+            android:id="@+id/choose_fragment"
+            android:name="com.zerlings.gabeisfaker.fragment.CaseFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_height="match_parent"
+            android:layout_width="180dp"
+            android:layout_gravity="start"
+            app:menu="@menu/nav_menu"
+            app:headerLayout="@layout/nav_header"/>
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </android.support.v4.widget.DrawerLayout>

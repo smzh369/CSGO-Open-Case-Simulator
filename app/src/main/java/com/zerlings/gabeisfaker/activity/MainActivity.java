@@ -135,7 +135,7 @@ public class MainActivity extends BaseActivity {
                     case R.id.wechat:
                         boolean hasInstalledWeCinClient = WeiXinDonate.hasInstalledWeiXinClient(MainActivity.this);
                         if (hasInstalledWeCinClient){
-                            Snackbar.make(navigationView.getRootView(),R.string.wechat_guide,Snackbar.LENGTH_INDEFINITE)
+                            Snackbar.make(navigationView,R.string.wechat_guide,Snackbar.LENGTH_INDEFINITE)
                                     .setAction("Go", new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
