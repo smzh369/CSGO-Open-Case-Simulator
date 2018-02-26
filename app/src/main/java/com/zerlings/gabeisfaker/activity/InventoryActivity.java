@@ -128,7 +128,7 @@ public class InventoryActivity extends BaseActivity{
                                 public void onError(Throwable e) {
                                     e.printStackTrace();
                                     Toast.makeText(InventoryActivity.this,
-                                            "Network Error !（由于steamcommunity被封，查询价格需要翻墙）",
+                                            R.string.network_error,
                                             Toast.LENGTH_SHORT).show();
                                     binding.progressBarLayout.setVisibility(View.GONE);
                                 }

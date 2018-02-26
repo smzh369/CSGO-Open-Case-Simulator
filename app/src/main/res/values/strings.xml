@@ -13,6 +13,7 @@
     <string name="wechat_text">Please install WeChat first</string>
     <string name="wechat_guide">The picture of QR code has been added into your album. Please go into the
         album from the button at the top-right corner of the scanning page of WeChat to choose it.</string>
+    <string name="network_error">Network Error !</string>
 
     <string name="inventory">Inventory</string>
     <string name="guide">Guide</string>
