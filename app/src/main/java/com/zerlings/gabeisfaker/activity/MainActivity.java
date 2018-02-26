@@ -9,12 +9,14 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.support.v7.widget.PopupMenu;
 import android.widget.Toast;
@@ -133,11 +135,17 @@ public class MainActivity extends BaseActivity {
                     case R.id.wechat:
                         boolean hasInstalledWeCinClient = WeiXinDonate.hasInstalledWeiXinClient(MainActivity.this);
                         if (hasInstalledWeCinClient){
-                            InputStream weixinQrIs = getResources().openRawResource(R.raw.donate_wechat);
-                            String qrPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "AndroidDonateSample" + File.separator +
-                                    "donate_wechat.png";
-                            WeiXinDonate.saveDonateQrImage2SDCard(qrPath, BitmapFactory.decodeStream(weixinQrIs));
-                            WeiXinDonate.donateViaWeiXin(MainActivity.this, qrPath);
+                            Snackbar.make(navigationView.getRootView(),R.string.wechat_guide,Snackbar.LENGTH_INDEFINITE)
+                                    .setAction("Go", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            InputStream weixinQrIs = getResources().openRawResource(R.raw.donate_wechat);
+                                            String qrPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                                                    + File.separator + "AndroidDonateSample" + File.separator + "donate_wechat.png";
+                                            WeiXinDonate.saveDonateQrImage2SDCard(qrPath, BitmapFactory.decodeStream(weixinQrIs));
+                                            WeiXinDonate.donateViaWeiXin(MainActivity.this, qrPath);
+                                        }
+                                    }).show();
                         }else{
                             Toast.makeText(MainActivity.this,R.string.wechat_text,Toast.LENGTH_SHORT).show();
                         }

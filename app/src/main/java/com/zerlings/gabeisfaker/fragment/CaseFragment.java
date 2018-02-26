@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -58,7 +59,7 @@ public class CaseFragment extends Fragment {
         binding.fragTitle.leftButton.setBackgroundResource(R.drawable.ic_setting);
         ViewGroup.MarginLayoutParams params =
                 (ViewGroup.MarginLayoutParams)binding.fragTitle.leftButton.getLayoutParams();
-        params.leftMargin = DensityUtil.dip2px(25f);
+        params.leftMargin = DensityUtil.dip2px(23f);
         binding.fragTitle.leftButton.setLayoutParams(params);
         return binding.getRoot();
     }

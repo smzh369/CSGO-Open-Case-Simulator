@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group
-        android:id="@+id/group_1"
-        android:checkableBehavior="single">
+        android:id="@+id/group_1">
         <item
             android:id="@+id/nav_inventory"
             android:icon="@drawable/nav_inventory"
@@ -14,8 +13,7 @@
             android:title="@string/guide"/>
     </group>
     <group
-        android:id="@+id/group_2"
-        android:checkableBehavior="single">
+        android:id="@+id/group_2">
         <item
             android:id="@+id/nav_share"
             android:icon="@drawable/nav_share"
@@ -27,8 +25,7 @@
             app:actionLayout="@layout/anchor"/>
     </group>
     <group
-        android:id="@+id/group_3"
-        android:checkableBehavior="single">
+        android:id="@+id/group_3">
         <item
             android:id="@+id/nav_quit"
             android:icon="@drawable/nav_quit"

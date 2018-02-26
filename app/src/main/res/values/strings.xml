@@ -7,10 +7,12 @@
     <string name="guide_text">You can visit your inventory at this menu or from the button at the top
     right corner in the open-case game page.\n In the inventory page you can select the item and query
     its price by clicking the button at the top right corner. In this page you can also delete the
-    items in the delete-mode by long-clicking the item</string>
+    items in the delete-mode by long-clicking the item.</string>
     <string name="shared_text">I\'m playing CS:GO Case Opening Simulator.\n Have a try !</string>
     <string name="alipay_text">Please install alipay first</string>
     <string name="wechat_text">Please install WeChat first</string>
+    <string name="wechat_guide">The picture of QR code has been added into your album. Go into the
+        album from the button at the top-right corner of the scanning page of WeChat to choose it.</string>
 
     <string name="inventory">Inventory</string>
     <string name="guide">Guide</string>

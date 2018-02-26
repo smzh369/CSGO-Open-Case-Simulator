@@ -80,7 +80,7 @@
             <RelativeLayout
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
-                android:background="@color/darkblue"
+                android:background="@drawable/star_background"
                 android:layout_gravity="start">
 
                 <fragment
