@@ -213,7 +213,7 @@ public class InitUtils {
                 gunList.add(gun);
                 gun = new Gun("Sawed-Off",context.getString(R.string.morris),R.drawable.sawed_off_morris,3,0,100,R.drawable.spectrum_2_case);
                 gunList.add(gun);
-                gun = new Gun("Jungle Slipstream",context.getString(R.string.jungle_slipstream),R.drawable.scar_20_jungle_slipstream,3,0,50,R.drawable.spectrum_2_case);
+                gun = new Gun("SCAR-20",context.getString(R.string.jungle_slipstream),R.drawable.scar_20_jungle_slipstream,3,0,50,R.drawable.spectrum_2_case);
                 gunList.add(gun);
                 break;
 
