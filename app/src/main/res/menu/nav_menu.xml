@@ -10,7 +10,7 @@
         <item
             android:id="@+id/nav_guide"
             android:icon="@drawable/nav_guide"
-            android:title="@string/guide"/>
+            android:title="@string/instruction"/>
     </group>
     <group
         android:id="@+id/group_2">

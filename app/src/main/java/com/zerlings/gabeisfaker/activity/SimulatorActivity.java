@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -330,6 +331,8 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
     public void onBackPressed() {
         if(binding.decideLayout.getVisibility() == View.VISIBLE){
             onClick(binding.discardButton);
+        }else if (binding.drawerLayout2.isDrawerOpen(Gravity.START)){
+            binding.drawerLayout2.closeDrawers();
         }else{
             super.onBackPressed();
         }

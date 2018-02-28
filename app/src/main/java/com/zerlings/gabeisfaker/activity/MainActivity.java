@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.didikee.donate.AlipayDonate;
 import android.didikee.donate.WeiXinDonate;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -14,11 +16,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.support.v7.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -82,13 +88,19 @@ public class MainActivity extends BaseActivity {
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.nav_guide:
-                        Toast.makeText(MainActivity.this,R.string.guide_text,Toast.LENGTH_LONG).show();
+                        View guideView = LayoutInflater.from(MainActivity.this).inflate(R.layout.instruction,null);
+                        PopupWindow guideWindow = new PopupWindow(guideView, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                        guideWindow.setFocusable(true);
+                        guideWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        guideWindow.showAtLocation(drawerLayout, Gravity.CENTER,0,0);
+                        drawerLayout.closeDrawers();
                         break;
                     case R.id.nav_share:
                         Intent sharedIntent = new Intent();
                         sharedIntent.setAction(Intent.ACTION_SEND);
                         sharedIntent.putExtra(Intent.EXTRA_SUBJECT,R.string.shared_text);
-                        sharedIntent.putExtra(Intent.EXTRA_TEXT,"");
+                        sharedIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.shared_text) +
+                        " https://pan.baidu.com/s/1pMubID9");
                         sharedIntent.setType("text/plain");
                         startActivity(Intent.createChooser(sharedIntent,getString(R.string.shared_title)));
                         drawerLayout.closeDrawers();
@@ -175,7 +187,9 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         if (snackbar != null && snackbar.isShown()){
             snackbar.dismiss();
-        }else{
+        }else if (drawerLayout.isDrawerOpen(Gravity.START)){
+            drawerLayout.closeDrawers();
+        }else {
             super.onBackPressed();
         }
     }

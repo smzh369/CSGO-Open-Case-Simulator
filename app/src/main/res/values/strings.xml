@@ -1,14 +1,19 @@
 <resources>
-    <string name="app_name">Gabe is Faker</string>
+    <string name="app_name">CS:GO Case-Open Simulator</string>
     <string name="another_case">Another case ?</string>
-    <string name="shared_title">share to ...</string>
+    <string name="shared_title">Share to ...</string>
     <string name="love_life">Love your Life</string>
     <string name="away">Away from Case</string>
-    <string name="guide_text">You can visit your inventory at this menu or from the button at the top
-    right corner in the open-case game page.\n In the inventory page you can select the item and query
-    its price by clicking the button at the top right corner. In this page you can also delete the
-    items in the delete-mode by long-clicking the item.</string>
-    <string name="shared_text">I\'m playing CS:GO Case Opening Simulator.\n Have a try !</string>
+    <string name="instruction_text1">You can visit your inventory at the navigation menu or from the icon at the top
+    right corner in the open-case game page.</string>
+    <string name="instruction_text2">In the inventory page you can select the item and query its price by
+        clicking the icon at the top right corner.</string>
+    <string name="instruction_text3">In the inventory you can also delete the items in delete-mode by
+        long-clicking the item.</string>
+    <string name="instruction_text4">If you like this app please mark it 5 stars in the market and share it to your friends !</string>
+    <string name="instruction_text5">If this app helps you save a lot of money from Gabe\'s deception , please
+    don\'t be stingy to show your kindness. You can donate me $ via Alipay/WeChat or skins via Steam :)</string>
+    <string name="shared_text">I\'m playing CS:GO Case-Open Simulator. Have a try ! \nDownload URL :</string>
     <string name="alipay_text">Please install alipay first</string>
     <string name="wechat_text">Please install WeChat first</string>
     <string name="wechat_guide">The picture of QR code has been added into your album. Please go into the
@@ -16,8 +21,7 @@
     <string name="network_error">Network Error !</string>
 
     <string name="inventory">Inventory</string>
-    <string name="guide">Guide</string>
-    <string name="music">Music</string>
+    <string name="instruction">Instruction</string>
     <string name="share">Share</string>
     <string name="donate">Donate</string>
     <string name="alipay">Alipay</string>

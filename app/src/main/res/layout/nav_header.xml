@@ -11,9 +11,10 @@
         android:layout_height="wrap_content"
         android:text="@string/love_life"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:textColor="#fff"
         android:textSize="18sp"
-        android:paddingTop="1dp"/>
+        android:paddingTop="2dp"/>
 
     <TextView
         android:id="@+id/nav_title2"
@@ -22,6 +23,7 @@
         android:text="@string/away"
         android:layout_below="@id/nav_title1"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:textColor="#fff"
         android:textSize="18sp"
         android:paddingBottom="5dp"/>
