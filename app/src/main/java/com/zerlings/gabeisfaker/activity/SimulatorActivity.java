@@ -1,5 +1,8 @@
 package com.zerlings.gabeisfaker.activity;
 
+import android.animation.Animator;
+import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.media.AudioManager;
@@ -126,6 +129,14 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         binding.simulatorTitle.titleText.setText(intent.getStringExtra(CASE_NAME));
         rareItems = Arrays.asList(intent.getStringArrayExtra(RARE_ITEM_TYPE));
         rareSkins = Arrays.asList(intent.getStringArrayExtra(RARE_SKIN_TYPE));
+
+        //设置布局动画
+        LayoutTransition transition = new LayoutTransition();
+        int windowHeight = getResources().getDisplayMetrics().heightPixels;
+        Animator appearAnim = ObjectAnimator.ofFloat(null,"translationY",windowHeight,0);
+        appearAnim.setDuration(transition.getDuration(LayoutTransition.APPEARING));
+        transition.setAnimator(LayoutTransition.APPEARING,appearAnim);
+        binding.simulatorLayout.setLayoutTransition(transition);
 
         initWeapons();//初始化各项武器列表
         initList();//初始化游戏列表

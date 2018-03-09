@@ -6,7 +6,7 @@
     <string name="love_life">珍爱生命</string>
     <string name="away">远离开箱</string>
     <string name="instruction_text1">从主页导航菜单和开箱页面的右上角可以进入虚拟库存页面。</string>
-    <string name="instruction_text2">在虚拟库存页面选中物品可以通过点击右上角查询市场价格。</string>
+    <string name="instruction_text2">在虚拟库存页面选中物品可以通过点击右上角查询市场价格。（但由于steam市场被封该功能需要翻墙）</string>
     <string name="instruction_text3">在虚拟库存页面长按物品可以进入复选删除模式。</string>
     <string name="instruction_text4">如果您喜欢本应用请在市场上给予五星好评并分享给你的基友们 !</string>
     <string name="instruction_text5">如果本应用帮您从G胖的开箱骗局中剩下了麒麟臂，请不要吝啬于打赏！接受支付宝/微信和Steam皮肤^^</string>
@@ -14,7 +14,7 @@
     <string name="alipay_text">请先安装支付宝</string>
     <string name="wechat_text">请先安装微信</string>
     <string name="wechat_guide">微信付款二维码已加入到您的相册，请从微信扫码页面的右上角进入相册选取，感谢您的支持!</string>
-    <string name="network_error">网络错误 !</string>
+    <string name="network_error">网络错误 !（由于steam市场被封该功能需要翻墙）</string>
 
     <string name="inventory">库存</string>
     <string name="instruction">指南</string>
@@ -28,7 +28,7 @@
     <string name="keep">保留</string>
     <string name="start">试试手气</string>
 
-    <string name="clutch_case">残局武器箱</string>
+    <string name="clutch_case">命悬一线武器箱</string>
     <string name="spectrum_2_case">光谱 2 号武器箱</string>
     <string name="operation_hydra_case">“九头蛇行动” 武器箱</string>
     <string name="spectrum_case">光谱武器箱</string>
