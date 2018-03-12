@@ -43,6 +43,12 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
+    public static final String payCode = "FKX04508GKMZBVRPRF3U8A";
+
+    public static final String tradeUrl = "https://steamcommunity.com/tradeoffer/new/?partner=106454411&token=jSG5eL6U";
+
+    public static final String downloadUrl = " https://pan.baidu.com/s/1pMubID9";
+
     public static Snackbar snackbar;
 
     private DrawerLayout drawerLayout;
@@ -99,8 +105,7 @@ public class MainActivity extends BaseActivity {
                         Intent sharedIntent = new Intent();
                         sharedIntent.setAction(Intent.ACTION_SEND);
                         sharedIntent.putExtra(Intent.EXTRA_SUBJECT,R.string.shared_text);
-                        sharedIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.shared_text) +
-                        " https://pan.baidu.com/s/1pMubID9");
+                        sharedIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.shared_text) + downloadUrl);
                         sharedIntent.setType("text/plain");
                         startActivity(Intent.createChooser(sharedIntent,getString(R.string.shared_title)));
                         drawerLayout.closeDrawers();
@@ -140,7 +145,7 @@ public class MainActivity extends BaseActivity {
                     case R.id.alipay:
                         boolean hasInstalledAlipayClient = AlipayDonate.hasInstalledAlipayClient(MainActivity.this);
                         if(hasInstalledAlipayClient){
-                            AlipayDonate.startAlipayClient(MainActivity.this,"FKX04508GKMZBVRPRF3U8A");
+                            AlipayDonate.startAlipayClient(MainActivity.this,payCode);
                         }else{
                             Toast.makeText(MainActivity.this,R.string.alipay_text,Toast.LENGTH_SHORT).show();
                         }
@@ -168,7 +173,7 @@ public class MainActivity extends BaseActivity {
                     case R.id.steam:
                         Intent intent = new Intent();
                         intent.setAction("android.intent.action.VIEW");
-                        Uri url = Uri.parse("https://steamcommunity.com/tradeoffer/new/?partner=106454411&token=jSG5eL6U");
+                        Uri url = Uri.parse(tradeUrl);
                         intent.setData(url);
                         startActivity(intent);
                         drawerLayout.closeDrawers();
