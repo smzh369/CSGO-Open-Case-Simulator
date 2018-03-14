@@ -160,9 +160,6 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
                     case RecyclerView.SCROLL_STATE_IDLE:
                         soundPool.play(soundMap.get(2),1,1,5,0,1);
                         binding.decideLayout.setVisibility(View.VISIBLE);
-                        initList();
-                        adapter.notifyDataSetChanged();
-                        binding.recyclerView2.scrollToPosition(0);
                         break;
                     default:break;
                 }
@@ -223,20 +220,23 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.discard_button:
                 binding.startButton.setClickable(true);
-                binding.decideLayout.setVisibility(View.GONE);
-
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 //开箱结束后恢复侧滑菜单及标题栏左右按钮
                 binding.simulatorTitle.leftButton.setClickable(true);
                 binding.simulatorTitle.rightButton.setClickable(true);
+                initList();
+                binding.recyclerView2.scrollToPosition(0);
+                binding.decideLayout.setVisibility(View.GONE);
                 break;
             case R.id.keep_button:
                 uniqueItem.insert();
                 binding.startButton.setClickable(true);
-                binding.decideLayout.setVisibility(View.GONE);
                 binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 binding.simulatorTitle.leftButton.setClickable(true);
                 binding.simulatorTitle.rightButton.setClickable(true);
+                initList();
+                binding.recyclerView2.scrollToPosition(0);
+                binding.decideLayout.setVisibility(View.GONE);
                 break;
             case R.id.left_button:
                 binding.drawerLayout2.openDrawer(GravityCompat.START);
