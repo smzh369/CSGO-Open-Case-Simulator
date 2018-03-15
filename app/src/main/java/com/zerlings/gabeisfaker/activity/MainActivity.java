@@ -1,5 +1,6 @@
 package com.zerlings.gabeisfaker.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.didikee.donate.AlipayDonate;
@@ -31,6 +32,7 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.FastStoreModelTransaction;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.db.AppDatabase;
 import com.zerlings.gabeisfaker.db.Glove;
@@ -40,6 +42,8 @@ import com.zerlings.gabeisfaker.utils.InitUtils;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
+
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity {
 
@@ -152,23 +156,34 @@ public class MainActivity extends BaseActivity {
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.wechat:
-                        boolean hasInstalledWeCinClient = WeiXinDonate.hasInstalledWeiXinClient(MainActivity.this);
-                        if (hasInstalledWeCinClient){
-                            snackbar = Snackbar.make(navigationView,R.string.wechat_guide,Snackbar.LENGTH_INDEFINITE);
-                            snackbar.setAction("Go", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    InputStream weixinQrIs = getResources().openRawResource(R.raw.donate_wechat);
-                                    String qrPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                                            + File.separator + "AndroidDonateSample" + File.separator + "donate_wechat.png";
-                                    WeiXinDonate.saveDonateQrImage2SDCard(qrPath, BitmapFactory.decodeStream(weixinQrIs));
-                                    WeiXinDonate.donateViaWeiXin(MainActivity.this, qrPath);
-                                }
-                            }).show();
-                        }else{
-                            Toast.makeText(MainActivity.this,R.string.wechat_text,Toast.LENGTH_SHORT).show();
-                        }
-                        drawerLayout.closeDrawers();
+                        RxPermissions permissions = new RxPermissions(MainActivity.this);
+                        permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                .subscribe(new Consumer<Boolean>() {
+                                    @Override
+                                    public void accept(Boolean aBoolean) throws Exception {
+                                        if (aBoolean){
+                                            boolean hasInstalledWeCinClient = WeiXinDonate.hasInstalledWeiXinClient(MainActivity.this);
+                                            if (hasInstalledWeCinClient){
+                                            snackbar = Snackbar.make(navigationView,R.string.wechat_guide,Snackbar.LENGTH_INDEFINITE);
+                                            snackbar.setAction("Go", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    InputStream weixinQrIs = getResources().openRawResource(R.raw.donate_wechat);
+                                                    String qrPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                                                            + File.separator + "AndroidDonateSample" + File.separator + "donate_wechat.png";
+                                                    WeiXinDonate.saveDonateQrImage2SDCard(qrPath, BitmapFactory.decodeStream(weixinQrIs));
+                                                    WeiXinDonate.donateViaWeiXin(MainActivity.this, qrPath);
+                                                }
+                                            }).show();
+                                            }else{
+                                                Toast.makeText(MainActivity.this,R.string.wechat_text,Toast.LENGTH_SHORT).show();
+                                            }
+                                            drawerLayout.closeDrawers();
+                                        }else{
+                                            Toast.makeText(MainActivity.this,R.string.wechat_permission,Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                         break;
                     case R.id.steam:
                         Intent intent = new Intent();

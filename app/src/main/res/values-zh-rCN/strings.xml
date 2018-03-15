@@ -13,7 +13,8 @@
     <string name="shared_text">我正在玩CS:GO开箱模拟器! 来试试手气吧! 下载地址 :</string>
     <string name="alipay_text">请先安装支付宝</string>
     <string name="wechat_text">请先安装微信</string>
-    <string name="wechat_guide">微信付款二维码已加入到您的相册，请从微信扫码页面的右上角进入相册选取，感谢您的支持!</string>
+    <string name="wechat_permission">权限获取失败 ！</string>
+    <string name="wechat_guide">微信付款二维码将加入到您的相册，请从微信扫码页面的右上角进入相册选取，感谢您的支持!</string>
     <string name="network_error">网络错误 !（由于steam市场被封该功能需要翻墙）</string>
 
     <string name="inventory">库存</string>

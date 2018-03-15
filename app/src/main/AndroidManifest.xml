@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity"
             android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -25,9 +26,11 @@
         </activity>
         <activity android:name=".activity.SimulatorActivity"
                   android:screenOrientation="landscape"
+                  android:configChanges="orientation|screenSize"
                   android:launchMode="singleTask"/>
         <activity android:name=".activity.InventoryActivity"
                   android:screenOrientation="landscape"
+                  android:configChanges="orientation|screenSize"
                   android:launchMode="singleTask"/>
     </application>
 
