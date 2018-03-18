@@ -183,8 +183,7 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         classifiedList.clear();
         restrictedList.clear();
         milspecList.clear();
-        for (int i = 0;i < weapons.size();i++) {
-            Gun gun = weapons.get(i);
+        for (Gun gun : weapons) {
             if (gun.getQuality() == LEVEL_CONVERT) {
                 convertList.add(gun);
             } else if (gun.getQuality() == LEVEL_CLASSIFIED) {
