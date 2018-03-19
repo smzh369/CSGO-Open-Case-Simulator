@@ -41,13 +41,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
 
 /**
  * Created by 令子 on 2017/2/15.
@@ -261,15 +260,15 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
                 binding.simulatorTitle.rightButton.setClickable(false);
                 //游戏开始
                 binding.recyclerView2.smoothScrollToPosition(38);
-                final Observable<UniqueItem> observable = Observable.create(new ObservableOnSubscribe<UniqueItem>() {
+                Single<UniqueItem> single = Single.create(new SingleOnSubscribe<UniqueItem>() {
                     @Override
-                    public void subscribe(ObservableEmitter<UniqueItem> e) throws Exception {
+                    public void subscribe(SingleEmitter<UniqueItem> e) throws Exception {
                         setChosenWeapon();
                         setUniqueItem();
-                        e.onNext(uniqueItem);
+                        e.onSuccess(uniqueItem);
                     }
                 });
-                observable.subscribeOn(Schedulers.computation())
+                single.subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<UniqueItem>() {
                             @Override
@@ -353,6 +352,9 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         if (player != null){
             player.stop();
             player.release();
+        }
+        if (soundPool != null){
+            soundPool.release();
         }
         super.onDestroy();
     }

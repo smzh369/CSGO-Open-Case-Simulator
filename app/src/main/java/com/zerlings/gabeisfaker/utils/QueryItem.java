@@ -4,7 +4,7 @@ import com.zerlings.gabeisfaker.gson.Sale;
 
 import java.util.Map;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -16,6 +16,6 @@ import retrofit2.http.QueryMap;
 public interface QueryItem {
 
     @GET("market/priceoverview/")
-    Observable<Sale> queryLowestPrice(@QueryMap Map<String,String> map,@Query("market_hash_name") String marketHashName);
+    Single<Sale> queryLowestPrice(@QueryMap Map<String,String> map, @Query("market_hash_name") String marketHashName);
 
 }

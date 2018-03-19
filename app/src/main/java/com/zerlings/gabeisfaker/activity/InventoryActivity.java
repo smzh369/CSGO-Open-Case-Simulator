@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -47,6 +47,8 @@ public class InventoryActivity extends BaseActivity{
     private Boolean selectMode = false;
 
     private InventoryActivityBinding binding;
+
+    private Disposable disposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,6 @@ public class InventoryActivity extends BaseActivity{
                     binding.inventoryTitle.rightButton.setVisibility(View.GONE);
                 } else {
                     //查询价格
-                    binding.progressBarLayout.setVisibility(View.VISIBLE);
                     Map<String,String> marketMap = new HashMap<>();
                     marketMap.put("appid","730");
                     marketMap.put("currency","1");
@@ -110,18 +111,19 @@ public class InventoryActivity extends BaseActivity{
                             .queryLowestPrice(marketMap,marketHashName)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Observer<Sale>() {
-
+                            .subscribe(new SingleObserver<Sale>() {
                                 @Override
                                 public void onSubscribe(Disposable d) {
-
+                                    disposable = d;
+                                    binding.progressBarLayout.setVisibility(View.VISIBLE);
                                 }
 
                                 @Override
-                                public void onNext(Sale sale) {
+                                public void onSuccess(Sale sale) {
                                     Toast.makeText(InventoryActivity.this,
                                             "Price: " + sale.getLowest_price(),
                                             Toast.LENGTH_SHORT).show();
+                                    binding.progressBarLayout.setVisibility(View.GONE);
                                 }
 
                                 @Override
@@ -130,11 +132,6 @@ public class InventoryActivity extends BaseActivity{
                                     Toast.makeText(InventoryActivity.this,
                                             R.string.network_error,
                                             Toast.LENGTH_SHORT).show();
-                                    binding.progressBarLayout.setVisibility(View.GONE);
-                                }
-
-                                @Override
-                                public void onComplete() {
                                     binding.progressBarLayout.setVisibility(View.GONE);
                                 }
                             });
@@ -204,7 +201,11 @@ public class InventoryActivity extends BaseActivity{
             positionSet.clear();
             adapter.notifyDataSetChanged();
             binding.inventoryTitle.rightButton.setVisibility(View.GONE);
-        }else {
+        }else if (disposable != null){
+            disposable.dispose();
+            disposable = null;
+            binding.progressBarLayout.setVisibility(View.GONE);
+        }else{
             super.onBackPressed();
         }
     }
