@@ -80,8 +80,7 @@ public class InventoryActivity extends BaseActivity{
             public void onClick(View v) {
                 if (selectMode){
                     // 删除已选
-                    List<UniqueItem> uniqueItems = new ArrayList<>();
-                    uniqueItems.addAll(uniqueItemList);
+                    List<UniqueItem> uniqueItems = new ArrayList<>(uniqueItemList);
                     for (int position : positionSet) {
                         UniqueItem weapon = uniqueItems.get(position);
                         int newPosition = uniqueItemList.indexOf(weapon);
@@ -139,7 +138,6 @@ public class InventoryActivity extends BaseActivity{
 
             }
         });
-
         adapter.setOnItemClickListener(new InventoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

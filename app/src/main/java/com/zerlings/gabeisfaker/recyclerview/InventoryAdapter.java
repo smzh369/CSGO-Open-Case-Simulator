@@ -72,7 +72,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(final InventoryAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(InventoryAdapter.ViewHolder holder, final int position) {
         Set<Integer> positionSet = InventoryActivity.positionSet;
         if (positionSet.contains(position)) {
             holder.itemLayout.setBackgroundColor(ContextCompat.getColor(mContext,R.color.selected));
@@ -107,4 +107,5 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         void onItemClick(View view, int position);
         void onItemLongClick(View view,int position);
     }
+
 }
