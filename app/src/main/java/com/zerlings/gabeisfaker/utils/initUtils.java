@@ -31,6 +31,7 @@ public class InitUtils {
         String[] knifeGroup5 = {"Falchion Knife"};
         String[] knifeGroup6 = {"Huntsman Knife"};
         String[] knifeGroup7 = {"Shadow Daggers"};
+        String[] knifeGroup8 = {"Talon Knife","Stiletto Knife","Talon Knife","Ursus Knife"};
 
         String[] knifeSkinGroup1 = {context.getString(R.string.vanilla),
                 context.getString(R.string.fade), context.getString(R.string.boreal_forest),
@@ -47,6 +48,13 @@ public class InitUtils {
                 context.getString(R.string.autotronic),context.getString(R.string.gamma_doppler),
                 context.getString(R.string.freehand),context.getString(R.string.black_laminate),
                 context.getString(R.string.bright_water)};
+        String[] knifeSkinGroup4 = {context.getString(R.string.vanilla),
+                context.getString(R.string.fade), context.getString(R.string.boreal_forest),
+                context.getString(R.string.slaughter), context.getString(R.string.case_hardened),
+                context.getString(R.string.crimson_web), context.getString(R.string.stained),
+                context.getString(R.string.blue_steel), context.getString(R.string.night_stripe),
+                context.getString(R.string.urban_masked), context.getString(R.string.forest_ddpat),
+                context.getString(R.string.scorched), context.getString(R.string.safari_mesh)};
 
         String[] gloveGroup1 = {"Specialist Gloves","Moto Gloves","Hand Wraps","Driver Gloves","Sport Gloves","Bloodhound Gloves"};
         String[] gloveGroup2 = {"Hydra Gloves","Specialist Gloves","Sport Gloves","Hand Wraps","Moto Gloves","Driver Gloves"};
@@ -78,6 +86,12 @@ public class InitUtils {
                 context.getString(R.string.imperial_plaid), context.getString(R.string.overtake),
                 context.getString(R.string.racing_green)};
 
+        Case prismaCase = new Case(context.getString(R.string.prisma_case),R.drawable.prisma_case,knifeGroup8,knifeSkinGroup2);
+        caseList.add(prismaCase);
+        Case dangerZoneCase = new Case(context.getString(R.string.danger_zone_case),R.drawable.danger_zone_case,knifeGroup8,knifeSkinGroup4);
+        caseList.add(dangerZoneCase);
+        Case horizonCase = new Case(context.getString(R.string.horizon_case),R.drawable.horizon_case,knifeGroup8,knifeSkinGroup4);
+        caseList.add(horizonCase);
         Case clutchCase = new Case(context.getString(R.string.clutch_case),R.drawable.clutch_case,gloveGroup2,gloveSkinGroup2);
         caseList.add(clutchCase);
         Case spectrum2Case = new Case(context.getString(R.string.spectrum_2_case),R.drawable.spectrum_2_case,knifeGroup2,knifeSkinGroup2);
@@ -143,6 +157,117 @@ public class InitUtils {
         Gun gun;
 
         switch (caseImgId){
+            case R.drawable.prisma_case:
+                gun = new Gun("MP7",context.getString(R.string.mischief),R.drawable.mp7_mischief,3,10,100,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("Galil AR",context.getString(R.string.akoben),R.drawable.galil_ar_akoben,3,0,75,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("P250",context.getString(R.string.verdigris),R.drawable.p250_verdigris,3,0,70,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("FAMAS",context.getString(R.string.crypsis),R.drawable.famas_crypsis,3,0,55,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("P90",context.getString(R.string.off_world),R.drawable.p90_off_world,3,0,75,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("MAC-10",context.getString(R.string.whitefish),R.drawable.mac_10_whitefish,3,0,100,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("AK-47",context.getString(R.string.uncharted),R.drawable.ak_47_uncharted,3,0,75,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("Tec-9",context.getString(R.string.bamboozle),R.drawable.tec_9_bamboozle,4,0,80,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("UMP-45",context.getString(R.string.moonrise),R.drawable.ump_45_moonrise,4,0,40,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("MP5-SD",context.getString(R.string.gauss),R.drawable.mp5_sd_gauss,4,0,100,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("Desert Eagle",context.getString(R.string.light_rail),R.drawable.desert_eagle_light_rail,4,0,90,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("AWP",context.getString(R.string.atheris),R.drawable.awp_atheris,4,0,100,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("R8 Revolver",context.getString(R.string.skull_crusher),R.drawable.r8_revolver_skull_crusher,5,25,80,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("XM1014",context.getString(R.string.incinegator),R.drawable.xm1014_incinegator,5,14,65,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("AUG",context.getString(R.string.momentum),R.drawable.aug_momentum,5,5,100,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("Five-SeveN",context.getString(R.string.angry_mob),R.drawable.five_seven_angry_mob,6,0,70,R.drawable.prisma_case);
+                gunList.add(gun);
+                gun = new Gun("M4A4",context.getString(R.string.the_emperor),R.drawable.m4a4_the_emperor,6,0,80,R.drawable.prisma_case);
+                gunList.add(gun);
+                break;
+                
+            case R.drawable.danger_zone_case:
+                gun = new Gun("Nova",context.getString(R.string.wood_fired),R.drawable.nova_wood_fired,3,0,75,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("Sawed-Off",context.getString(R.string.black_sand),R.drawable.sawed_off_black_sand,3,0,90,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("MP9",context.getString(R.string.modest_Threat),R.drawable.mp9_modest_threat,3,0,75,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("SG 553",context.getString(R.string.danger_close),R.drawable.sg_553_danger_close,3,2,80,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("Tec-9",context.getString(R.string.fubar),R.drawable.tec_9_fubar,3,14,100,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("Glock-18",context.getString(R.string.oxide_blaze),R.drawable.glock_18_oxide_blaze,3,0,85,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("M4A4",context.getString(R.string.magnesium),R.drawable.m4a4_magnesium,3,0,100,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("G3SG1",context.getString(R.string.scavenger),R.drawable.g3sg1_scavenger,4,0,65,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("Galil AR",context.getString(R.string.signal),R.drawable.galil_ar_signal,4,0,50,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("MAC-10",context.getString(R.string.pipe_down),R.drawable.mac_10_pipe_down,4,0,90,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("P250",context.getString(R.string.nevermore),R.drawable.p250_nevermore,4,0,40,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("USP-S",context.getString(R.string.flash_back),R.drawable.usp_s_flashback,4,0,50,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("MP5-SD",context.getString(R.string.phosphor),R.drawable.mp5_sd_phosphor,5,0,80,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("UMP-45",context.getString(R.string.momentum),R.drawable.ump_45_momentum,5,0,50,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("Desert Eagle",context.getString(R.string.mecha_industries),R.drawable.desert_eagle_mecha_industries,5,0,60,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("AWP",context.getString(R.string.neo_noir),R.drawable.awp_neo_noir,6,0,50,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                gun = new Gun("AK-47",context.getString(R.string.asiimov),R.drawable.ak_47_asiimove,6,5,70,R.drawable.danger_zone_case);
+                gunList.add(gun);
+                break;
+                
+            case R.drawable.horizon_case:
+                gun = new Gun("R8 Revolver",context.getString(R.string.survivalist),R.drawable.r8_revolver_survivalist,3,0,70,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("Dual Berettas",context.getString(R.string.shred),R.drawable.dual_berettas_shred,3,0,50,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("MP9",context.getString(R.string.capillary),R.drawable.mp9_capillary,3,0,70,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("Tec-9",context.getString(R.string.snek_9),R.drawable.tec_9_snek_9,3,0,100,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("P90",context.getString(R.string.traction),R.drawable.p90_traction,3,0,100,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("AUG",context.getString(R.string.amber_slipstream),R.drawable.aug_amber_slipstream,3,0,55,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("Glock-18",context.getString(R.string.warhawk),R.drawable.glock_18_warhawk,3,0,100,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("Nova",context.getString(R.string.toy_soldier),R.drawable.nova_toy_soldier,4,0,100,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("MP7",context.getString(R.string.powercore),R.drawable.mp7_powercore,4,0,80,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("G3SG1",context.getString(R.string.high_seas),R.drawable.g3sg1_high_seas,4,0,70,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("CZ75-Auto",context.getString(R.string.eco),R.drawable.cz75_auto_eco,4,0,100,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("AWP",context.getString(R.string.paw),R.drawable.awp_paw,4,0,50,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("Sawed-Off",context.getString(R.string.devourer),R.drawable.sawed_off_devourer,5,0,80,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("FAMAS",context.getString(R.string.eye_of_athena),R.drawable.famas_eye_of_athena,5,0,70,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("M4A1-S",context.getString(R.string.nightmare),R.drawable.m4a1_s_nightmare,5,0,100,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("Desert Eagle",context.getString(R.string.code_red),R.drawable.desert_eagle_code_red,6,0,100,R.drawable.horizon_case);
+                gunList.add(gun);
+                gun = new Gun("AK-47",context.getString(R.string.neon_rider),R.drawable.ak_47_neon_rider,6,0,80,R.drawable.horizon_case);
+                gunList.add(gun);
+                break;
+
             case R.drawable.clutch_case:
                 gun = new Gun("MP9",context.getString(R.string.black_sand),R.drawable.mp9_black_sand,3,0,100,R.drawable.clutch_case);
                 gunList.add(gun);
@@ -1014,6 +1139,162 @@ public class InitUtils {
         Context context = MyApplication.getContext();
 
         Knife knife;
+
+        knife = new Knife("Navaja Knife",context.getString(R.string.vanilla),R.drawable.navaja_knife,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.marble_fade),R.drawable.navaja_knife_marble_fade,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.doppler),R.drawable.navaja_knife_doppler,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.tiger_tooth),R.drawable.navaja_knife_tiger_tooth,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.ultraviolet),R.drawable.navaja_knife_ultraviolet,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.damascus_steel),R.drawable.navaja_knife_damascus_steel,0,50);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.rust_coat),R.drawable.navaja_knife_rust_coat,40,100);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.fade),R.drawable.navaja_knife_fade,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.boreal_forest),R.drawable.navaja_knife_boreal_forest,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.slaughter),R.drawable.navaja_knife_slaughter,1,26);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.case_hardened),R.drawable.navaja_knife_case_hardened,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.crimson_web),R.drawable.navaja_knife_crimson_web,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.stained),R.drawable.navaja_knife_stained,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.blue_steel),R.drawable.navaja_knife_blue_steel,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.night_stripe),R.drawable.navaja_knife_night_stripe,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.urban_masked),R.drawable.navaja_knife_urban_masked,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.scorched),R.drawable.navaja_knife_scorched,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.forest_ddpat),R.drawable.navaja_knife_forest_ddpat,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Navaja Knife",context.getString(R.string.safari_mesh),R.drawable.navaja_knife_safari_mesh,6,80);
+        knifeList.add(knife);
+
+        knife = new Knife("Stiletto Knife",context.getString(R.string.vanilla),R.drawable.stiletto_knife,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.marble_fade),R.drawable.stiletto_knife_marble_fade,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.doppler),R.drawable.stiletto_knife_doppler,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.tiger_tooth),R.drawable.stiletto_knife_tiger_tooth,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.ultraviolet),R.drawable.stiletto_knife_ultraviolet,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.damascus_steel),R.drawable.stiletto_knife_damascus_steel,0,50);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.rust_coat),R.drawable.stiletto_knife_rust_coat,40,100);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.fade),R.drawable.stiletto_knife_fade,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.boreal_forest),R.drawable.stiletto_knife_boreal_forest,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.slaughter),R.drawable.stiletto_knife_slaughter,1,26);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.case_hardened),R.drawable.stiletto_knife_case_hardened,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.crimson_web),R.drawable.stiletto_knife_crimson_web,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.stained),R.drawable.stiletto_knife_stained,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.blue_steel),R.drawable.stiletto_knife_blue_steel,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.night_stripe),R.drawable.stiletto_knife_night_stripe,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.urban_masked),R.drawable.stiletto_knife_urban_masked,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.scorched),R.drawable.stiletto_knife_scorched,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.forest_ddpat),R.drawable.stiletto_knife_forest_ddpat,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Stiletto Knife",context.getString(R.string.safari_mesh),R.drawable.stiletto_knife_safari_mesh,6,80);
+        knifeList.add(knife);
+
+        knife = new Knife("Talon Knife",context.getString(R.string.vanilla),R.drawable.talon_knife,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.marble_fade),R.drawable.talon_knife_marble_fade,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.doppler),R.drawable.talon_knife_doppler,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.tiger_tooth),R.drawable.talon_knife_tiger_tooth,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.ultraviolet),R.drawable.talon_knife_ultraviolet,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.damascus_steel),R.drawable.talon_knife_damascus_steel,0,50);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.rust_coat),R.drawable.talon_knife_rust_coat,40,100);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.fade),R.drawable.talon_knife_fade,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.boreal_forest),R.drawable.talon_knife_boreal_forest,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.slaughter),R.drawable.talon_knife_slaughter,1,26);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.case_hardened),R.drawable.talon_knife_case_hardened,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.crimson_web),R.drawable.talon_knife_crimson_web,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.stained),R.drawable.talon_knife_stained,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.blue_steel),R.drawable.talon_knife_blue_steel,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.night_stripe),R.drawable.talon_knife_night_stripe,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.urban_masked),R.drawable.talon_knife_urban_masked,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.scorched),R.drawable.talon_knife_scorched,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.forest_ddpat),R.drawable.talon_knife_forest_ddpat,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Talon Knife",context.getString(R.string.safari_mesh),R.drawable.talon_knife_safari_mesh,6,80);
+        knifeList.add(knife);
+
+        knife = new Knife("Ursus Knife",context.getString(R.string.vanilla),R.drawable.ursus_knife,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.marble_fade),R.drawable.ursus_knife_marble_fade,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.doppler),R.drawable.ursus_knife_doppler,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.tiger_tooth),R.drawable.ursus_knife_tiger_tooth,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.ultraviolet),R.drawable.ursus_knife_ultraviolet,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.damascus_steel),R.drawable.ursus_knife_damascus_steel,0,50);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.rust_coat),R.drawable.ursus_knife_rust_coat,40,100);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.fade),R.drawable.ursus_knife_fade,0,8);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.boreal_forest),R.drawable.ursus_knife_boreal_forest,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.slaughter),R.drawable.ursus_knife_slaughter,1,26);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.case_hardened),R.drawable.ursus_knife_case_hardened,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.crimson_web),R.drawable.ursus_knife_crimson_web,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.stained),R.drawable.ursus_knife_stained,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.blue_steel),R.drawable.ursus_knife_blue_steel,0,100);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.night_stripe),R.drawable.ursus_knife_night_stripe,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.urban_masked),R.drawable.ursus_knife_urban_masked,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.scorched),R.drawable.ursus_knife_scorched,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.forest_ddpat),R.drawable.ursus_knife_forest_ddpat,6,80);
+        knifeList.add(knife);
+        knife = new Knife("Ursus Knife",context.getString(R.string.safari_mesh),R.drawable.ursus_knife_safari_mesh,6,80);
+        knifeList.add(knife);
 
         knife = new Knife("Bayonet",context.getString(R.string.vanilla),R.drawable.bayonet,0,100);
         knifeList.add(knife);

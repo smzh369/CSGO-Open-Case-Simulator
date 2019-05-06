@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity {
 
         /*判断数据库是否完整，不完整则重新录入数据*/
         long count = SQLite.selectCountOf().from(Knife.class).count();
-        if (count != 220){
+        if (count != 296){
             Delete.table(Knife.class);
             List<Knife> allKnives = InitUtils.initKnife();
             FastStoreModelTransaction transaction = FastStoreModelTransaction

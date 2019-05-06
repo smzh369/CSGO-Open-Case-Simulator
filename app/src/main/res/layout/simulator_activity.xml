@@ -5,6 +5,7 @@
 
     <data>
         <variable name="uniqueItem" type="com.zerlings.gabeisfaker.db.UniqueItem"/>
+        <variable name="stats" type="com.zerlings.gabeisfaker.db.Stats" />
     </data>
 
     <FrameLayout
@@ -26,6 +27,7 @@
                     android:id="@+id/simulator_title"/>
 
                 <RelativeLayout
+                    android:id="@+id/border"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -75,6 +77,125 @@
                     android:gravity="center"
                     android:layout_marginTop="30dp"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/border"
+                    android:padding="1dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@string/mode"
+                        android:textSize="14sp"/>
+
+                    <Switch
+                        android:id="@+id/switch_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:textOn=""
+                        android:textOff=""/>
+
+                    <TextView
+                        android:id="@+id/animation_speed"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@string/normal"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/border"
+                    android:padding="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@string/stats"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@{stats.rareCount}"
+                        android:textSize="12sp"
+                        android:textColor="@color/rare"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@{stats.convertCount}"
+                        android:textSize="12sp"
+                        android:textColor="@color/convert"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@{stats.classifiedCount}"
+                        android:textSize="12sp"
+                        android:textColor="@color/classified"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@{stats.restrictedCount}"
+                        android:textSize="12sp"
+                        android:textColor="@color/restricted"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@{stats.milspecCount}"
+                        android:textSize="12sp"
+                        android:textColor="@color/milspec"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="@{stats.totalCount}"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -95,7 +216,7 @@
                     android:id="@+id/ic_home"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_home"
+                    android:background="@drawable/nav_back"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="35dp"/>
 

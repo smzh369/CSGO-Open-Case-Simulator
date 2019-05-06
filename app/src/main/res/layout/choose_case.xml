@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
 
         <include layout="@layout/title"
-            android:id="@+id/frag_title"/>
+            android:id="@+id/frag_title" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

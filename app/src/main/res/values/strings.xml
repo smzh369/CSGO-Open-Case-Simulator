@@ -34,6 +34,10 @@
     <string name="discard">Discard</string>
     <string name="keep">Keep</string>
     <string name="start">Start this</string>
+    <string name="mode">Mode</string>
+    <string name="normal">Normal</string>
+    <string name="fast">Fast</string>
+    <string name="stats">Stats</string>
 
     <string name="factory_new">Factory New</string>
     <string name="minimal_wear">Minimal Wear</string>
@@ -41,33 +45,75 @@
     <string name="well_worn">Well-Worn</string>
     <string name="battle_scarred">Battle-Scarred</string>
 
-    <string name="clutch_case">Clutch Case</string>
-    <string name="spectrum_2_case">Spectrum 2 Case</string>
-    <string name="operation_hydra_case">Operation Hydra Case</string>
-    <string name="spectrum_case">Spectrum Case</string>
-    <string name="glove_case">Glove Case</string>
-    <string name="gamma_2_case">Gamma 2 Case</string>
-    <string name="gamma_case">Gamma Case</string>
-    <string name="csgo_weapon_case">CS:GO Weapon Case</string>
-    <string name="csgo_weapon_case_2">CS:GO Weapon Case 2</string>
-    <string name="csgo_weapon_case_3">CS:GO Weapon Case 3</string>
-    <string name="chroma_case">Chroma Case</string>
-    <string name="chroma_case_2">Chroma 2 Case</string>
-    <string name="chroma_case_3">Chroma 3 Case</string>
-    <string name="esports_2013_case">eSports 2013 Case</string>
-    <string name="esports_2013_winter_case">eSports 2013 Winter Case</string>
-    <string name="esports_2014_summer_case">eSports 2013 Winter Case</string>
-    <string name="falchion_case">Falchion Case</string>
-    <string name="huntsman_weapon_case">Huntsman Weapon Case</string>
-    <string name="operation_bravo_case">Operation Bravo Case</string>
-    <string name="operation_breakout_weapon_case">Operation Breakout Weapon Case</string>
-    <string name="operation_phoenix_weapon_case">Operation Phoenix Weapon Case</string>
-    <string name="operation_vanguard_weapon_case">Operation Vanguard Weapon Case</string>
-    <string name="operation_wildfire_case">Operation Wildfire Case</string>
-    <string name="revolver_case">Revolver Case</string>
-    <string name="shadow_case">Shadow Case</string>
-    <string name="winter_offensive_weapon_case">Winter Offensive Weapon Case</string>
+    <string name="prisma_case">The Prisma Collection</string>
+    <string name="danger_zone_case">The Danger Zone Collection</string>
+    <string name="horizon_case">The Horizon Collection</string>
+    <string name="clutch_case">The Clutch Collection</string>
+    <string name="spectrum_2_case">The Spectrum 2 Collection</string>
+    <string name="operation_hydra_case">The Operation Hydra Collection</string>
+    <string name="spectrum_case">The Spectrum Collection</string>
+    <string name="glove_case">The Glove Collection</string>
+    <string name="gamma_2_case">The Gamma 2 Collection</string>
+    <string name="gamma_case">The Gamma Collection</string>
+    <string name="csgo_weapon_case">The Arms Deal Collection</string>
+    <string name="csgo_weapon_case_2">The Arms Deal 2 Collection</string>
+    <string name="csgo_weapon_case_3">The Arms Deal 3 Collection</string>
+    <string name="chroma_case">The Chroma Collection</string>
+    <string name="chroma_case_2">The Chroma 2 Collection</string>
+    <string name="chroma_case_3">The Chroma 3 Collection</string>
+    <string name="esports_2013_case">The eSports 2013 Collection</string>
+    <string name="esports_2013_winter_case">The eSports 2013 Winter Collection</string>
+    <string name="esports_2014_summer_case">The eSports 2014 Summer Collection</string>
+    <string name="falchion_case">The Falchion Collection</string>
+    <string name="huntsman_weapon_case">The Huntsman Collection</string>
+    <string name="operation_bravo_case">The Bravo Collection</string>
+    <string name="operation_breakout_weapon_case">The Breakout Collection</string>
+    <string name="operation_phoenix_weapon_case">The Phoenix Collection</string>
+    <string name="operation_vanguard_weapon_case">The Vanguard Collection</string>
+    <string name="operation_wildfire_case">The Wildfire Collection</string>
+    <string name="revolver_case">The Revolver Case Collection</string>
+    <string name="shadow_case">The Shadow Collection</string>
+    <string name="winter_offensive_weapon_case">The Winter Offensive Collection</string>
 
+    <string name="the_emperor">The Emperor</string>
+    <string name="angry_mob">Angry Mob</string>
+    <string name="incinegator">Incinegator</string>
+    <string name="skull_crusher">Skull Crusher</string>
+    <string name="atheris">Atheris</string>
+    <string name="light_rail">Light Rail</string>
+    <string name="gauss">Gauss</string>
+    <string name="bamboozle">Bamboozle</string>
+    <string name="uncharted">Uncharted</string>
+    <string name="whitefish">Whitefish</string>
+    <string name="verdigris">Verdigris</string>
+    <string name="crypsis">Crypsis</string>
+    <string name="mischief">Mischief</string>
+
+    <string name="momentum">Momentum</string>
+    <string name="phosphor">Phosphor</string>
+    <string name="flashback">Flashback</string>
+    <string name="nevermore">Nevermore</string>
+    <string name="pipe_down">Pipe Down</string>
+    <string name="signal">Signal</string>
+    <string name="scavenger">Scavenger</string>
+    <string name="magnesium">Magnesium</string>
+    <string name="danger_close">Danger Close</string>
+    <string name="modest_Threat">Modest Threat</string>
+    <string name="wood_fired">Wood Fired</string>
+
+    <string name="code_red">Code Red</string>
+    <string name="nightmare">Nightmare</string>
+    <string name="eye_of_athena">Eye of Athena</string>
+    <string name="devourer">Devourer</string>
+    <string name="paw">PAW</string>
+    <string name="high_seas">High Seas</string>
+    <string name="toy_soldier">Toy Soldier</string>
+    <string name="warhawk">Warhawk</string>
+    <string name="amber_slipstream">Amber Slipstream</string>
+    <string name="traction">Traction</string>
+    <string name="snek_9">Snek-9</string>
+    <string name="shred">Shred</string>
+    <string name="survivalist">Survivalist</string>
 
     <string name="mortis">Mortis</string>
     <string name="cortex">Cortex</string>
@@ -428,6 +474,7 @@
     <string name="cobalt_halftone">Cobalt Halftone</string>
 
 
+    <!--knife-->
     <string name="bayonet">Bayonet</string>
     <string name="bowie_knife">Bowie Knife</string>
     <string name="butterfly_knife">Butterfly Knife</string>
@@ -440,6 +487,7 @@
     <string name="shadow_daggers">Shadow Daggers</string>
 
 
+    <!--knife skin-->
     <string name="vanilla">★ (Vanilla)</string>
     <string name="lore">Lore</string>
     <string name="gamma_doppler">Gamma Doppler</string>
@@ -451,7 +499,7 @@
     <string name="doppler">Doppler</string>
     <string name="damascus_steel">Damascus Steel</string>
     <string name="rust_coat">Rust Coat</string>
-    <string name="boreal_forest">Lore</string>
+    <string name="boreal_forest">Boreal Forest</string>
     <string name="slaughter">Slaughter</string>
     <string name="stained">Stained</string>
     <string name="blue_steel">Blue Steel</string>
@@ -460,7 +508,7 @@
     <string name="scorched">Scorched</string>
     <string name="forest_ddpat">Forest DDPAT</string>
     <string name="safari_mesh">Safari Mesh</string>
-
+    <string name="night_stripe">Night Stripe</string>
 
 
     <string name="charred">Charred</string>

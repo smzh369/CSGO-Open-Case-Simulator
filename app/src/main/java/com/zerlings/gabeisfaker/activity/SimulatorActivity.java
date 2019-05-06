@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zerlings.gabeisfaker.R;
@@ -28,6 +29,7 @@ import com.zerlings.gabeisfaker.db.Glove_Table;
 import com.zerlings.gabeisfaker.db.Gun;
 import com.zerlings.gabeisfaker.db.Knife;
 import com.zerlings.gabeisfaker.db.Knife_Table;
+import com.zerlings.gabeisfaker.db.Stats;
 import com.zerlings.gabeisfaker.db.UniqueItem;
 import com.zerlings.gabeisfaker.recyclerview.CustomLinearLayoutManager;
 import com.zerlings.gabeisfaker.recyclerview.WeaponItemDecoration;
@@ -94,6 +96,8 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
 
     private Random random = new Random();
 
+    Stats stats = new Stats();
+
     private List<Gun> weaponList = new ArrayList<>(42);
     private List<Gun> convertList = new ArrayList<>();
     private List<Gun> classifiedList = new ArrayList<>();
@@ -109,6 +113,15 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this,R.layout.simulator_activity);
         binding.simulatorTitle.rightButton.setVisibility(View.VISIBLE);
         binding.selectBar.setMinimumWidth(1);
+
+        /*初始化统计数据*/
+        stats.setRareCount("0");
+        stats.setConvertCount("0");
+        stats.setClassifiedCount("0");
+        stats.setRestrictedCount("0");
+        stats.setMilspecCount("0");
+        stats.setTotalCount("0");
+        binding.setStats(stats);
 
         //初始化SoundPool和MediaPlayer
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -140,27 +153,45 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         initWeapons();//初始化各项武器列表
         initList();//初始化游戏列表
 
-        //设置recyclerview显示方式
+        //设置recyclerview
         adapter = new WeaponAdapter(weaponList,BR.gun);
-        CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
-        layoutManager.setSpeed(0.5f);
+        final CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
+        layoutManager.setSpeed(0.5f);//动画速度
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         binding.recyclerView2.setLayoutManager(layoutManager);
         int spacingInPixels = DensityUtil.dip2px(10f);//设置item间隔
         binding.recyclerView2.addItemDecoration(new WeaponItemDecoration(spacingInPixels));
         View header = LayoutInflater.from(this).inflate(R.layout.item_header,binding.recyclerView2,false);//添加表头
         adapter.setHeaderView(header);
-
         binding.recyclerView2.setAdapter(adapter);
+
+        /*滑动结束展示所得物品*/
         binding.recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 switch (newState){
                     case RecyclerView.SCROLL_STATE_IDLE:
+                        player.pause();
+                        player.seekTo(0);
                         soundPool.play(soundMap.get(2),1,1,5,0,1);
                         binding.decideLayout.setVisibility(View.VISIBLE);
+                        binding.setStats(stats);
                         break;
                     default:break;
+                }
+            }
+        });
+
+        /*切换模式*/
+        binding.switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    layoutManager.setSpeed(0.1f);
+                    binding.animationSpeed.setText(R.string.fast);
+                }else{
+                    layoutManager.setSpeed(0.5f);
+                    binding.animationSpeed.setText(R.string.normal);
                 }
             }
         });
@@ -290,10 +321,11 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
 
     /**计算得到的最终物品类型并替换列表中的相应位置**/
     private void setChosenWeapon(){
-
+        stats.setTotalCount(String.valueOf(Integer.parseInt(stats.getTotalCount()) + 1));
         int degree = random.nextInt(5000);
         if (degree >= 0 && degree < 13){
             //极其稀有的物品
+            stats.setRareCount(String.valueOf(Integer.parseInt(stats.getRareCount()) + 1));
             Gun rareWeapon = new Gun();
             rareWeapon.setStatTrak(false);
             rareWeapon.setGunName("*Rare Special Item*");
@@ -302,12 +334,16 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
             rareWeapon.setQuality(LEVEL_RARE);
             weaponList.set(37,rareWeapon);
         }else if (degree >= 13 && degree < 45){
+            stats.setConvertCount(String.valueOf(Integer.parseInt(stats.getConvertCount()) + 1));
             weaponList.set(37,convertList.get(random.nextInt(convertList.size())));
         }else if (degree >= 45 && degree < 205){
+            stats.setClassifiedCount(String.valueOf(Integer.parseInt(stats.getClassifiedCount()) + 1));
             weaponList.set(37,classifiedList.get(random.nextInt(classifiedList.size())));
         }else if (degree >= 205 && degree < 1004){
+            stats.setRestrictedCount(String.valueOf(Integer.parseInt(stats.getRestrictedCount()) + 1));
             weaponList.set(37,restrictedList.get(random.nextInt(restrictedList.size())));
         }else {
+            stats.setMilspecCount(String.valueOf(Integer.parseInt(stats.getMilspecCount()) + 1));
             weaponList.set(37,milspecList.get(random.nextInt(milspecList.size())));
         }
     }

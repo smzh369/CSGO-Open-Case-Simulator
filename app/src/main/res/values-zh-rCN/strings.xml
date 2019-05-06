@@ -15,7 +15,7 @@
     <string name="wechat_text">请先安装微信</string>
     <string name="wechat_permission">权限获取失败 ！</string>
     <string name="wechat_guide">微信付款二维码将加入到您的相册，请从微信扫码页面的右上角进入相册选取，感谢您的支持!</string>
-    <string name="network_error">网络错误 !（由于steam市场被封该功能需要翻墙）</string>
+    <string name="network_error">网络错误 !（由于steam市场被封该功能需要加速器）</string>
 
     <string name="inventory">库存</string>
     <string name="instruction">指南</string>
@@ -28,7 +28,14 @@
     <string name="discard">舍弃</string>
     <string name="keep">保留</string>
     <string name="start">试试手气</string>
+    <string name="mode">模式</string>
+    <string name="normal">正常</string>
+    <string name="fast">急速</string>
+    <string name="stats">统计</string>
 
+    <string name="prisma_case">棱彩武器箱</string>
+    <string name="danger_zone_case">“头号特训”武器箱</string>
+    <string name="horizon_case">地平线武器箱</string>
     <string name="clutch_case">命悬一线武器箱</string>
     <string name="spectrum_2_case">光谱 2 号武器箱</string>
     <string name="operation_hydra_case">“九头蛇行动” 武器箱</string>

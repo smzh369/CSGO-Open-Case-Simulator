@@ -27,7 +27,7 @@ public class BindingUtil {
 
         switch (quality){
             case SimulatorActivity.LEVEL_RARE:
-                qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(), R.color.knife));
+                qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(), R.color.rare));
                 break;
             case SimulatorActivity.LEVEL_CONVERT:
                 qualityLayout.setBackgroundColor(ContextCompat.getColor(qualityLayout.getContext(),R.color.convert));
