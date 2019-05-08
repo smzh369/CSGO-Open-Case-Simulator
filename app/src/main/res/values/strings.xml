@@ -1,8 +1,5 @@
-<resources
-    tools:ignore="MissingTranslation"
-    xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">CS:GO Case-Open Simulator</string>
-    <string name="another_case">Another case ?</string>
     <string name="shared_title">Share to ...</string>
     <string name="love_life">Love your Life</string>
     <string name="away">Away from Case</string>
@@ -181,7 +178,6 @@
     <string name="mecha_industries">Mecha Industries</string>
     <string name="shallow_grave">Shallow Grave</string>
     <string name="gila">Gila</string>
-    <string name="flash_back">Flash Back</string>
     <string name="royal_consorts">Royal Consorts</string>
     <string name="stinger">Stinger</string>
     <string name="cyrex">Cyrex</string>

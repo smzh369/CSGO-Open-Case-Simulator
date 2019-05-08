@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CS:GO 开箱模拟器</string>
-    <string name="another_case">换个手气 ?</string>
     <string name="shared_title">分享</string>
     <string name="love_life">珍爱生命</string>
     <string name="away">远离开箱</string>

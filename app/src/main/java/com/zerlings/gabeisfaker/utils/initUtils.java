@@ -217,7 +217,7 @@ public class InitUtils {
                 gunList.add(gun);
                 gun = new Gun("P250",context.getString(R.string.nevermore),R.drawable.p250_nevermore,4,0,40,R.drawable.danger_zone_case);
                 gunList.add(gun);
-                gun = new Gun("USP-S",context.getString(R.string.flash_back),R.drawable.usp_s_flashback,4,0,50,R.drawable.danger_zone_case);
+                gun = new Gun("USP-S",context.getString(R.string.flashback),R.drawable.usp_s_flashback,4,0,50,R.drawable.danger_zone_case);
                 gunList.add(gun);
                 gun = new Gun("MP5-SD",context.getString(R.string.phosphor),R.drawable.mp5_sd_phosphor,5,0,80,R.drawable.danger_zone_case);
                 gunList.add(gun);
@@ -363,7 +363,7 @@ public class InitUtils {
                 gunList.add(gun);
                 gun = new Gun("P250",context.getString(R.string.red_rock),R.drawable.p250_red_rock,4,0,100,R.drawable.operation_hydra_case);
                 gunList.add(gun);
-                gun = new Gun("USP-S",context.getString(R.string.blueprint),R.drawable.scar_20_blueprint,3,0,86,R.drawable.operation_hydra_case);
+                gun = new Gun("USP-S",context.getString(R.string.blueprint),R.drawable.usp_s_blueprint,3,0,86,R.drawable.operation_hydra_case);
                 gunList.add(gun);
                 gun = new Gun("MAC-10",context.getString(R.string.aloha),R.drawable.mac_10_aloha,3,0,65,R.drawable.operation_hydra_case);
                 gunList.add(gun);
@@ -429,7 +429,7 @@ public class InitUtils {
                 gunList.add(gun);
                 gun = new Gun("Nova",context.getString(R.string.gila),R.drawable.nova_gila,4,0,30,R.drawable.glove_case);
                 gunList.add(gun);
-                gun = new Gun("M4A1-S",context.getString(R.string.flash_back),R.drawable.m4a1_s_flash_back,4,0,100,R.drawable.glove_case);
+                gun = new Gun("M4A1-S",context.getString(R.string.flashback),R.drawable.m4a1_s_flashback,4,0,100,R.drawable.glove_case);
                 gunList.add(gun);
                 gun = new Gun("Dual Berettas",context.getString(R.string.royal_consorts),R.drawable.dual_berettas_royal_consorts,4,0,100,R.drawable.glove_case);
                 gunList.add(gun);
@@ -817,7 +817,7 @@ public class InitUtils {
                 gunList.add(gun);
                 gun = new Gun("Glock-18",context.getString(R.string.bunsen_burner),R.drawable.glock_18_bunsen_burner,3,0,80,R.drawable.falchion_case);
                 gunList.add(gun);
-                gun = new Gun("P90",context.getString(R.string.elite_build),R.drawable.ak_47_elite_build,3,0,100,R.drawable.falchion_case);
+                gun = new Gun("P90",context.getString(R.string.elite_build),R.drawable.p90_elite_build,3,0,100,R.drawable.falchion_case);
                 gunList.add(gun);
                 gun = new Gun("Nova",context.getString(R.string.ranger),R.drawable.nova_ranger,3,0,100,R.drawable.falchion_case);
                 gunList.add(gun);
@@ -867,7 +867,7 @@ public class InitUtils {
                 break;
 
             case R.drawable.operation_bravo_case:
-                gun = new Gun("Desert Eagle",context.getString(R.string.golden_coil),R.drawable.desert_eagle_golden_koi,6,0,12,R.drawable.operation_bravo_case);
+                gun = new Gun("Desert Eagle",context.getString(R.string.golden_koi),R.drawable.desert_eagle_golden_koi,6,0,12,R.drawable.operation_bravo_case);
                 gunList.add(gun);
                 gun = new Gun("AK-47",context.getString(R.string.fire_serpent),R.drawable.ak_47_fire_serpent,6,6,76,R.drawable.operation_bravo_case);
                 gunList.add(gun);
@@ -1009,7 +1009,7 @@ public class InitUtils {
                 gunList.add(gun);
                 gun = new Gun("Five-SeveN",context.getString(R.string.triumvirate),R.drawable.five_seven_triumvirate,4,0,61,R.drawable.operation_wildfire_case);
                 gunList.add(gun);
-                gun = new Gun("MP7",context.getString(R.string.imperial),R.drawable.mp7_impire,4,0,40,R.drawable.operation_wildfire_case);
+                gun = new Gun("MP7",context.getString(R.string.impire),R.drawable.mp7_impire,4,0,40,R.drawable.operation_wildfire_case);
                 gunList.add(gun);
                 gun = new Gun("Tec-9",context.getString(R.string.jambiya),R.drawable.tec_9_jambiya,3,0,100,R.drawable.operation_wildfire_case);
                 gunList.add(gun);

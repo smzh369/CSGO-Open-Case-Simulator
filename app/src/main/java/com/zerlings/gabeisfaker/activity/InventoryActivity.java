@@ -61,13 +61,13 @@ public class InventoryActivity extends BaseActivity{
         binding.inventoryTitle.titleText.setText(R.string.inventory);
         binding.inventoryTitle.leftButton.setBackgroundResource(R.drawable.ic_back);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
-        binding.recyclerView3.setLayoutManager(layoutManager);
+        binding.inventoryList.setLayoutManager(layoutManager);
         int spacingInPixels = DensityUtil.dip2px(11f);
-        binding.recyclerView3.addItemDecoration(new InventoryItemDecoration(spacingInPixels));
+        binding.inventoryList.addItemDecoration(new InventoryItemDecoration(spacingInPixels));
         uniqueItemList = SQLite.select().from(UniqueItem.class).queryList();
         positionSet.clear();
         adapter = new InventoryAdapter(uniqueItemList,BR.uniqueItem);
-        binding.recyclerView3.setAdapter(adapter);
+        binding.inventoryList.setAdapter(adapter);
 
         binding.inventoryTitle.leftButton.setOnClickListener(new View.OnClickListener() {
             @Override

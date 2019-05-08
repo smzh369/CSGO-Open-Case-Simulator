@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/csgo_background">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/csgo_background">
 
-        <fragment
-            android:id="@+id/choose_fragment"
-            android:name="com.zerlings.gabeisfaker.fragment.CaseFragment"
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/main_drawer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_height="match_parent"
-            android:layout_width="150dp"
-            android:layout_gravity="start"
-            app:menu="@menu/nav_menu"
-            app:headerLayout="@layout/nav_header"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
-    </android.support.v4.widget.DrawerLayout>
+                <include
+                    layout="@layout/title"
+                    android:id="@+id/main_title" />
 
-</android.support.design.widget.CoordinatorLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/case_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <fragment
+                android:id="@+id/nav_fragment"
+                android:name="com.zerlings.gabeisfaker.fragment.NavFragment"
+                android:layout_gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </android.support.v4.widget.DrawerLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

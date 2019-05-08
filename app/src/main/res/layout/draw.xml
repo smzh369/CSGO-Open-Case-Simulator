@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/item_frame">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/simulator_list"
+            android:layout_width="485dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="#000510" />
+
+        <FrameLayout
+            android:layout_width="485dp"
+            android:layout_height="170dp"
+            android:layout_centerInParent="true"
+            android:background="#00000000"
+            android:clickable="true">
+
+        </FrameLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/select_bar"
+            android:layout_width="1dp"
+            android:layout_height="170dp"
+            android:layout_centerInParent="true"
+            app:cardCornerRadius="4dp"
+            app:cardBackgroundColor="#FF9900"
+            app:cardElevation="8dp" />
+
+    </RelativeLayout>
+</layout>

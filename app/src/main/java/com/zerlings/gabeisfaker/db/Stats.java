@@ -2,12 +2,12 @@ package com.zerlings.gabeisfaker.db;
 
 public class Stats {
 
-    private String rareCount;
-    private String convertCount;
-    private String classifiedCount;
-    private String restrictedCount;
-    private String milspecCount;
-    private String totalCount;
+    private String rareCount = "0";
+    private String convertCount = "0";
+    private String classifiedCount = "0";
+    private String restrictedCount = "0";
+    private String milspecCount = "0";
+    private String totalCount = "0";
 
     public String getRareCount() {
         return rareCount;

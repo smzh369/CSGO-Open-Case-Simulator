@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="stats" type="com.zerlings.gabeisfaker.db.Stats" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/draw_layout"
+        android:padding="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/stats"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@{stats.rareCount}"
+            android:textSize="12sp"
+            android:textColor="@color/rare" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@{stats.convertCount}"
+            android:textSize="12sp"
+            android:textColor="@color/convert" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@{stats.classifiedCount}"
+            android:textSize="12sp"
+            android:textColor="@color/classified" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@{stats.restrictedCount}"
+            android:textSize="12sp"
+            android:textColor="@color/restricted" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@{stats.milspecCount}"
+            android:textSize="12sp"
+            android:textColor="@color/milspec" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@{stats.totalCount}"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</layout>

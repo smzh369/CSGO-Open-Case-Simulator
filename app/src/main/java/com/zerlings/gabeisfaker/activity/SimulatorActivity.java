@@ -4,12 +4,14 @@ import android.animation.Animator;
 import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -82,8 +84,6 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
 
     public SimulatorActivityBinding binding;
 
-    public WeaponAdapter adapter;
-
     private UniqueItem uniqueItem;
 
     private List<Gun> weapons;
@@ -96,7 +96,7 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
 
     private Random random = new Random();
 
-    Stats stats = new Stats();
+    private Stats stats = new Stats();
 
     private List<Gun> weaponList = new ArrayList<>(42);
     private List<Gun> convertList = new ArrayList<>();
@@ -112,15 +112,16 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this,R.layout.simulator_activity);
         binding.simulatorTitle.rightButton.setVisibility(View.VISIBLE);
-        binding.selectBar.setMinimumWidth(1);
+        binding.drawLayout.selectBar.setMinimumWidth(1);
 
         /*初始化统计数据*/
-        stats.setRareCount("0");
-        stats.setConvertCount("0");
-        stats.setClassifiedCount("0");
-        stats.setRestrictedCount("0");
-        stats.setMilspecCount("0");
-        stats.setTotalCount("0");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        stats.setRareCount(preferences.getString("rare","0"));
+        stats.setConvertCount(preferences.getString("convert","0"));
+        stats.setClassifiedCount(preferences.getString("classified","0"));
+        stats.setRestrictedCount(preferences.getString("restricted","0"));
+        stats.setMilspecCount(preferences.getString("milspec","0"));
+        stats.setTotalCount(preferences.getString("total","0"));
         binding.setStats(stats);
 
         //初始化SoundPool和MediaPlayer
@@ -154,19 +155,19 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         initList();//初始化游戏列表
 
         //设置recyclerview
-        adapter = new WeaponAdapter(weaponList,BR.gun);
+        WeaponAdapter adapter = new WeaponAdapter(weaponList,BR.gun);
         final CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this);
         layoutManager.setSpeed(0.5f);//动画速度
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        binding.recyclerView2.setLayoutManager(layoutManager);
+        binding.drawLayout.simulatorList.setLayoutManager(layoutManager);
         int spacingInPixels = DensityUtil.dip2px(10f);//设置item间隔
-        binding.recyclerView2.addItemDecoration(new WeaponItemDecoration(spacingInPixels));
-        View header = LayoutInflater.from(this).inflate(R.layout.item_header,binding.recyclerView2,false);//添加表头
+        binding.drawLayout.simulatorList.addItemDecoration(new WeaponItemDecoration(spacingInPixels));
+        View header = LayoutInflater.from(this).inflate(R.layout.item_header,binding.drawLayout.simulatorList,false);//添加表头
         adapter.setHeaderView(header);
-        binding.recyclerView2.setAdapter(adapter);
+        binding.drawLayout.simulatorList.setAdapter(adapter);
 
         /*滑动结束展示所得物品*/
-        binding.recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        binding.drawLayout.simulatorList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 switch (newState){
@@ -183,15 +184,15 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         });
 
         /*切换模式*/
-        binding.switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.simulatorMode.switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     layoutManager.setSpeed(0.1f);
-                    binding.animationSpeed.setText(R.string.fast);
+                    binding.simulatorMode.animationSpeed.setText(R.string.fast);
                 }else{
                     layoutManager.setSpeed(0.5f);
-                    binding.animationSpeed.setText(R.string.normal);
+                    binding.simulatorMode.animationSpeed.setText(R.string.normal);
                 }
             }
         });
@@ -199,10 +200,9 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         binding.simulatorTitle.leftButton.setOnClickListener(this);
         binding.simulatorTitle.rightButton.setOnClickListener(this);
         binding.startButton.setOnClickListener(this);
+        binding.backButton.setOnClickListener(this);
         binding.discardButton.setOnClickListener(this);
         binding.keepButton.setOnClickListener(this);
-        binding.icHome.setOnClickListener(this);
-        binding.icQuit.setOnClickListener(this);
 
     }
 
@@ -249,48 +249,47 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.discard_button:
                 binding.startButton.setClickable(true);
-                binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                binding.simulatorDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 //开箱结束后恢复侧滑菜单及标题栏左右按钮
                 binding.simulatorTitle.leftButton.setClickable(true);
                 binding.simulatorTitle.rightButton.setClickable(true);
+                binding.backButton.setClickable(true);
                 initList();
-                binding.recyclerView2.scrollToPosition(0);
+                binding.drawLayout.simulatorList.scrollToPosition(0);
                 binding.decideLayout.setVisibility(View.GONE);
                 break;
             case R.id.keep_button:
                 uniqueItem.insert();
                 binding.startButton.setClickable(true);
-                binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                binding.simulatorDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 binding.simulatorTitle.leftButton.setClickable(true);
                 binding.simulatorTitle.rightButton.setClickable(true);
+                binding.backButton.setClickable(true);
                 initList();
-                binding.recyclerView2.scrollToPosition(0);
+                binding.drawLayout.simulatorList.scrollToPosition(0);
                 binding.decideLayout.setVisibility(View.GONE);
                 break;
             case R.id.left_button:
-                binding.drawerLayout2.openDrawer(GravityCompat.START);
+                binding.simulatorDrawer.openDrawer(GravityCompat.START);
+                break;
+            case R.id.back_button:
+                finish();
                 break;
             case R.id.right_button:
                 Intent intent = new Intent(this,InventoryActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.ic_home:
-                binding.drawerLayout2.closeDrawers();
-                finish();
-                break;
-            case R.id.ic_quit:
-                ActivityCollector.finishAll();
                 break;
             case R.id.start_button:
                 soundPool.play(soundMap.get(1),1,1,5,0,1);
                 player.start();
                 binding.startButton.setClickable(false);
                 //一次开箱结束前锁定侧滑菜单并使标题栏左右按钮失效
-                binding.drawerLayout2.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                binding.simulatorDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 binding.simulatorTitle.leftButton.setClickable(false);
                 binding.simulatorTitle.rightButton.setClickable(false);
+                binding.backButton.setClickable(false);
                 //游戏开始
-                binding.recyclerView2.smoothScrollToPosition(38);
+                binding.drawLayout.simulatorList.smoothScrollToPosition(38);
                 Single<UniqueItem> single = Single.create(new SingleOnSubscribe<UniqueItem>() {
                     @Override
                     public void subscribe(SingleEmitter<UniqueItem> e) throws Exception {
@@ -376,8 +375,8 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
     public void onBackPressed() {
         if(binding.decideLayout.getVisibility() == View.VISIBLE){
             onClick(binding.discardButton);
-        }else if (binding.drawerLayout2.isDrawerOpen(Gravity.START)){
-            binding.drawerLayout2.closeDrawers();
+        }else if (binding.simulatorDrawer.isDrawerOpen(Gravity.START)){
+            binding.simulatorDrawer.closeDrawers();
         }else{
             super.onBackPressed();
         }
@@ -392,6 +391,17 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
         if (soundPool != null){
             soundPool.release();
         }
+
+        /*暂存统计数据*/
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+        editor.putString("rare",stats.getRareCount());
+        editor.putString("convert",stats.getConvertCount());
+        editor.putString("classified",stats.getClassifiedCount());
+        editor.putString("restricted",stats.getRestrictedCount());
+        editor.putString("milspec",stats.getMilspecCount());
+        editor.putString("total",stats.getTotalCount());
+        editor.apply();
+
         super.onDestroy();
     }
 }

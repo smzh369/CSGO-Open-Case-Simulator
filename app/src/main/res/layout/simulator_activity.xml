@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <android.support.v4.widget.DrawerLayout
-            android:id="@+id/drawer_layout_2"
+            android:id="@+id/simulator_drawer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -26,49 +26,15 @@
                 <include layout="@layout/title"
                     android:id="@+id/simulator_title"/>
 
-                <RelativeLayout
-                    android:id="@+id/border"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/item_frame">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view_2"
-                        android:layout_width="485dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="#000510"/>
-
-                    <FrameLayout
-                        android:layout_width="485dp"
-                        android:layout_height="170dp"
-                        android:layout_centerInParent="true"
-                        android:background="#00000000"
-                        android:clickable="true">
-                    </FrameLayout>
-
-                </RelativeLayout>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/select_bar"
-                    android:layout_width="1dp"
-                    android:layout_height="170dp"
-                    android:layout_centerInParent="true"
-                    app:cardCornerRadius="4dp"
-                    app:cardBackgroundColor="#FF9900"
-                    app:cardElevation="8dp"/>
+                <include layout="@layout/draw"
+                    android:id="@+id/draw_layout"/>
 
                 <Button
                     android:id="@+id/start_button"
                     android:layout_width="120dp"
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/select_bar"
+                    android:layout_below="@id/draw_layout"
                     android:background="@drawable/start_button"
                     android:soundEffectsEnabled="false"
                     android:text="@string/start"
@@ -77,159 +43,30 @@
                     android:gravity="center"
                     android:layout_marginTop="30dp"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_centerVertical="true"
+                <Button
+                    android:id="@+id/back_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@id/border"
-                    android:padding="1dp">
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/ic_back"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@string/mode"
-                        android:textSize="14sp"/>
+                <include layout="@layout/mode"
+                    android:id="@+id/simulator_mode"/>
 
-                    <Switch
-                        android:id="@+id/switch_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textOn=""
-                        android:textOff=""/>
-
-                    <TextView
-                        android:id="@+id/animation_speed"
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@string/normal"
-                        android:textSize="14sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toRightOf="@id/border"
-                    android:padding="1dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@string/stats"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@{stats.rareCount}"
-                        android:textSize="12sp"
-                        android:textColor="@color/rare"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@{stats.convertCount}"
-                        android:textSize="12sp"
-                        android:textColor="@color/convert"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@{stats.classifiedCount}"
-                        android:textSize="12sp"
-                        android:textColor="@color/classified"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@{stats.restrictedCount}"
-                        android:textSize="12sp"
-                        android:textColor="@color/restricted"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@{stats.milspecCount}"
-                        android:textSize="12sp"
-                        android:textColor="@color/milspec"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="@{stats.totalCount}"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
+                <include layout="@layout/stats"
+                    app:stats="@{stats}"/>
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="180dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/star_background"
-                android:layout_gravity="start">
-
-                <fragment
-                    android:id="@+id/switch_case_fragment"
-                    android:name="com.zerlings.gabeisfaker.fragment.CaseFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/ic_home"
-                    android:layout_marginBottom="5dp"/>
-
-                <Button
-                    android:id="@+id/ic_home"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/nav_back"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="35dp"/>
-
-                <Button
-                    android:id="@+id/ic_quit"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/nav_quit"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="35dp"/>
-
-            </RelativeLayout>
+            <fragment
+                android:id="@+id/nav_fragment"
+                android:name="com.zerlings.gabeisfaker.fragment.NavFragment"
+                android:layout_gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
 
         </android.support.v4.widget.DrawerLayout>
 
