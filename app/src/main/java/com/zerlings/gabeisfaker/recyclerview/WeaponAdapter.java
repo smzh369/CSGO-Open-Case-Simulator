@@ -13,7 +13,7 @@ import com.zerlings.gabeisfaker.db.Gun;
 import java.util.List;
 
 /**
- * Created by 令子 on 2017/2/16.
+ * Created by smzh369 on 2017/2/16.
  */
 
 public class WeaponAdapter extends RecyclerView.Adapter<WeaponAdapter.ViewHolder> {

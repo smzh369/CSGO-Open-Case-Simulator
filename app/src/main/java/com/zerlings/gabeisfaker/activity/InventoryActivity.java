@@ -31,7 +31,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by 令子 on 2017/2/19.
+ * Created by smzh369 on 2017/2/19.
  */
 
 public class InventoryActivity extends BaseActivity{

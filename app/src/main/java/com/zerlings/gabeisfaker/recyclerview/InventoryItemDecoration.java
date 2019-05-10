@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * Created by 令子 on 2017/2/19.
+ * Created by smzh369 on 2017/2/19.
  */
 
 public class InventoryItemDecoration extends RecyclerView.ItemDecoration {

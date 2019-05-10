@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:scaleType="fitCenter"
-                app:imageId="@{case1.imageId}"/>
+                app:imageName="@{case1.imageName}"/>
 
             <TextView
                 android:id="@+id/case_name"

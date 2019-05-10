@@ -10,7 +10,7 @@ import com.zerlings.gabeisfaker.R;
 import java.util.Random;
 
 /**
- * Created by 令子 on 2018/2/17.
+ * Created by smzh369 on 2018/2/17.
  */
 
 @Table(database = AppDatabase.class)
@@ -26,7 +26,7 @@ public class UniqueItem extends BaseModel {
     private String skinName;
 
     @Column
-    private int imageId;
+    private String imageName;
 
     @Column
     private int quality;
@@ -50,7 +50,7 @@ public class UniqueItem extends BaseModel {
         this.itemName = gun.getGunName();
         this.skinName = gun.getSkinName();
         this.quality = gun.getQuality();
-        this.imageId = gun.getImageId();
+        this.imageName = gun.getImageName();
         this.isStatTrak = gun.isStatTrak();
         this.itemType = 0;
         Random random = new Random();
@@ -72,7 +72,7 @@ public class UniqueItem extends BaseModel {
         this.itemName = knife.getKnifeName();
         this.skinName = knife.getSkinName();
         this.quality = 6;
-        this.imageId = knife.getImageId();
+        this.imageName = knife.getImageName();
         this.itemType = 1;
         Random random = new Random();
         this.wearValue = random.nextFloat()*(knife.getMaxWear()-knife.getMinWear()) + knife.getMinWear();
@@ -100,7 +100,7 @@ public class UniqueItem extends BaseModel {
         this.itemName = glove.getGloveName();
         this.skinName = glove.getSkinName();
         this.quality = 6;
-        this.imageId = glove.getImageId();
+        this.imageName = glove.getImageName();
         this.itemType = 1;
         Random random = new Random();
         this.wearValue = random.nextFloat()*(glove.getMaxWear()-glove.getMinWear()) + glove.getMinWear();
@@ -142,12 +142,12 @@ public class UniqueItem extends BaseModel {
         this.skinName = skinName;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImageId(int ImageId) {
-        this.imageId = ImageId;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public int getQuality() {

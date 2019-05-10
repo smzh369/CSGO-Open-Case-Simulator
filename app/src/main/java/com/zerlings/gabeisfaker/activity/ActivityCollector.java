@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 令子 on 2018/2/25.
+ * Created by smzh369 on 2018/2/25.
  */
 
 public class ActivityCollector {

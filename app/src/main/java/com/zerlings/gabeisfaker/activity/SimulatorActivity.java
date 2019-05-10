@@ -53,14 +53,14 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by 令子 on 2017/2/15.
+ * Created by smzh369 on 2017/2/15.
  */
 
 public class SimulatorActivity extends BaseActivity implements View.OnClickListener{
 
     public static final String CASE_NAME = "case_name";
 
-    public static final String CASE_IMAGE_ID = "case_image_id";
+    public static final String CASE_IMAGE_NAME = "case_image_name";
 
     public static final String RARE_ITEM_TYPE = "rare_item_type";
 
@@ -80,7 +80,7 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
 
     public List<String> rareSkins ;
 
-    public int caseImageId;
+    public String caseImageName;
 
     public SimulatorActivityBinding binding;
 
@@ -138,7 +138,7 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
 
         //获取传入的箱子信息
         Intent intent = getIntent();
-        caseImageId = intent.getIntExtra(CASE_IMAGE_ID,0);
+        caseImageName = intent.getStringExtra(CASE_IMAGE_NAME);
         binding.simulatorTitle.titleText.setText(intent.getStringExtra(CASE_NAME));
         rareItems = Arrays.asList(intent.getStringArrayExtra(RARE_ITEM_TYPE));
         rareSkins = Arrays.asList(intent.getStringArrayExtra(RARE_SKIN_TYPE));
@@ -208,7 +208,7 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
 
     /**初始化各类武器列表**/
     public void initWeapons(){
-        weapons = InitUtils.initGun(caseImageId);
+        weapons = InitUtils.initGun(caseImageName);
         convertList.clear();
         classifiedList.clear();
         restrictedList.clear();
@@ -328,7 +328,7 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
             Gun rareWeapon = new Gun();
             rareWeapon.setStatTrak(false);
             rareWeapon.setGunName("*Rare Special Item*");
-            rareWeapon.setImageId(R.drawable.rare_special);
+            rareWeapon.setImageName("rare_special");
             rareWeapon.setSkinName(null);
             rareWeapon.setQuality(LEVEL_RARE);
             weaponList.set(37,rareWeapon);
@@ -353,8 +353,8 @@ public class SimulatorActivity extends BaseActivity implements View.OnClickListe
             //判断出手套还是刀，手套不能有计数器
             String knifeType = rareItems.get(random.nextInt(rareItems.size()));
             String skinType = rareSkins.get(random.nextInt(rareSkins.size()));
-            if (caseImageId == R.drawable.glove_case || caseImageId == R.drawable.operation_hydra_case
-                    || caseImageId == R.drawable.clutch_case){
+            if (caseImageName == "glove_case" || caseImageName == "operation_hydra_case"
+                    || caseImageName == "clutch_case"){
                 Glove glove = SQLite.select().from(Glove.class)
                         .where(Glove_Table.skinName.eq(skinType))
                         .querySingle();

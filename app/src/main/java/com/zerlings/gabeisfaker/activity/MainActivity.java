@@ -12,17 +12,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
-import com.raizlabs.android.dbflow.structure.database.transaction.FastStoreModelTransaction;
 import com.zerlings.gabeisfaker.BR;
 import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.databinding.ActivityMainBinding;
-import com.zerlings.gabeisfaker.db.AppDatabase;
 import com.zerlings.gabeisfaker.db.Case;
-import com.zerlings.gabeisfaker.db.Glove;
-import com.zerlings.gabeisfaker.db.Knife;
 import com.zerlings.gabeisfaker.recyclerview.CaseAdapter;
 import com.zerlings.gabeisfaker.utils.InitUtils;
 
@@ -41,26 +34,6 @@ public class MainActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
-
-        /*判断数据库是否完整，不完整则重新录入数据*/
-        long count = SQLite.selectCountOf().from(Knife.class).count();
-        if (count != 296){
-            Delete.table(Knife.class);
-            List<Knife> allKnives = InitUtils.initKnife();
-            FastStoreModelTransaction transaction = FastStoreModelTransaction
-                    .saveBuilder(FlowManager.getModelAdapter(Knife.class))
-                    .addAll(allKnives).build();
-            FlowManager.getDatabase(AppDatabase.class).executeTransaction(transaction);
-        }
-        count = SQLite.selectCountOf().from(Glove.class).count();
-        if (count != 48){
-            Delete.table(Glove.class);
-            List<Glove> allGloves = InitUtils.initGlove();
-            FastStoreModelTransaction transaction = FastStoreModelTransaction
-                    .saveBuilder(FlowManager.getModelAdapter(Glove.class))
-                    .addAll(allGloves).build();
-            FlowManager.getDatabase(AppDatabase.class).executeTransaction(transaction);
-        }
 
         /*清空统计数据*/
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
@@ -103,7 +76,7 @@ public class MainActivity extends BaseActivity {
                     Case mCase = caseList.get(position);
                     Intent intent = new Intent(MainActivity.this,SimulatorActivity.class);
                     intent.putExtra(SimulatorActivity.CASE_NAME,mCase.getCaseName());
-                    intent.putExtra(SimulatorActivity.CASE_IMAGE_ID,mCase.getImageId());
+                    intent.putExtra(SimulatorActivity.CASE_IMAGE_NAME,mCase.getImageName());
                     intent.putExtra(SimulatorActivity.RARE_ITEM_TYPE,mCase.getRareItemType());
                     intent.putExtra(SimulatorActivity.RARE_SKIN_TYPE,mCase.getRareSkinType());
                     startActivity(intent);

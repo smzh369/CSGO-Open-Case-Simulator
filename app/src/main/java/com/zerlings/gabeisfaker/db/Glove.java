@@ -6,13 +6,11 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
- * Created by 令子 on 2018/2/21.
+ * Created by smzh369 on 2018/2/21.
  */
 
 @Table(database = AppDatabase.class)
 public class Glove extends BaseModel {
-    @PrimaryKey(autoincrement = true)
-    private int id;
 
     @Column
     private String gloveName;
@@ -20,8 +18,8 @@ public class Glove extends BaseModel {
     @Column
     private String skinName;
 
-    @Column
-    private int imageId;
+    @PrimaryKey
+    private String imageName;
 
     @Column
     private float minWear;
@@ -33,22 +31,14 @@ public class Glove extends BaseModel {
     public Glove() {
     }
 
-    public Glove(String gloveName, String skinName, int imageId, int minWear, int maxWear) {
+    public Glove(String gloveName, String skinName, String imageName, int minWear, int maxWear) {
 
         this.gloveName = gloveName;
         this.skinName = skinName;
-        this.imageId = imageId;
+        this.imageName = imageName;
         this.minWear = minWear;
         this.maxWear = maxWear;
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getGloveName() {
@@ -67,12 +57,12 @@ public class Glove extends BaseModel {
         this.skinName = skinName;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public float getMinWear() {

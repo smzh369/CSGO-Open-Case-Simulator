@@ -1,7 +1,7 @@
 package com.zerlings.gabeisfaker.gson;
 
 /**
- * Created by 令子 on 2018/1/8.
+ * Created by smzh369 on 2018/1/8.
  */
 
 public class Sale {

@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.zerlings.gabeisfaker.db.AppDatabase;
 
 /**
- * Created by 令子 on 2017/2/13.
+ * Created by smzh369 on 2017/2/13.
  */
 
 public class MyApplication extends Application {

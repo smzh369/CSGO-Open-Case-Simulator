@@ -3,7 +3,7 @@ package com.zerlings.gabeisfaker.utils;
 import com.zerlings.gabeisfaker.MyApplication;
 
 /**
- * Created by 令子 on 2017/2/17.
+ * Created by smzh369 on 2017/2/17.
  */
 
 public class DensityUtil {

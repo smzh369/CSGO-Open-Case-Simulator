@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
 /**
- * Created by 令子 on 2017/2/17.
+ * Created by smzh369 on 2017/2/17.
  */
 
 public class CustomLinearLayoutManager extends LinearLayoutManager {

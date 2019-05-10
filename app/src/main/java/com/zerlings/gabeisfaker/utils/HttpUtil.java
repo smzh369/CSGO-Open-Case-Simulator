@@ -5,7 +5,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by 令子 on 2018/1/8.
+ * Created by smzh369 on 2018/1/8.
  */
 
 public class HttpUtil {

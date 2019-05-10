@@ -2,16 +2,14 @@ package com.zerlings.gabeisfaker.db;
 
 
 /**
- * Created by 令子 on 2017/2/13.
+ * Created by smzh369 on 2017/2/13.
  */
 
 public class Case {
 
-    private int id;
-
     private String caseName;
 
-    private int imageId;
+    private String imageName;
 
     private String[] rareItemType;
 
@@ -19,19 +17,11 @@ public class Case {
 
     public Case(){}
 
-    public Case(String caseName, int imageId, String[] rareItemType, String[] rareSkinType) {
+    public Case(String caseName, String imageName, String[] rareItemType, String[] rareSkinType) {
         this.caseName = caseName;
-        this.imageId = imageId;
+        this.imageName = imageName;
         this.rareItemType = rareItemType;
         this.rareSkinType = rareSkinType;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCaseName() {
@@ -42,12 +32,12 @@ public class Case {
         this.caseName = caseName;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public String[] getRareItemType() {

@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**
- * Created by 令子 on 2018/1/8.
+ * Created by smzh369 on 2018/1/8.
  */
 
 public interface QueryItem {

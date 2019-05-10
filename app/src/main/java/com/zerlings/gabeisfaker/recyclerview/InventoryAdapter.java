@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by 令子 on 2017/2/19.
+ * Created by smzh369 on 2017/2/19.
  */
 
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder>{

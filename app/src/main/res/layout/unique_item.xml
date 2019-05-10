@@ -21,7 +21,7 @@
             android:layout_marginTop="1dp"
             android:background="@color/cardview_dark_background"
             android:scaleType="fitCenter"
-            app:imageId="@{uniqueItem.imageId}"
+            app:imageName="@{uniqueItem.imageName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

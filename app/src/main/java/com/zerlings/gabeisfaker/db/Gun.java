@@ -2,7 +2,7 @@ package com.zerlings.gabeisfaker.db;
 
 
 /**
- * Created by 令子 on 2017/2/13.
+ * Created by smzh369 on 2017/2/13.
  */
 
 public class Gun {
@@ -13,7 +13,7 @@ public class Gun {
 
     private String skinName;
 
-    private int imageId;
+    private String imageName;
 
     private int quality;
 
@@ -21,21 +21,21 @@ public class Gun {
 
     private int maxWear;
 
-    private int caseId;
+    private String caseName;
 
     private boolean isStatTrak;
 
     public Gun() {
     }
 
-    public Gun(String gunName, String skinName, int imageId, int quality, int minWear, int maxWear, int caseId) {
+    public Gun(String gunName, String skinName, String imageName, int quality, int minWear, int maxWear, String caseName) {
         this.gunName = gunName;
         this.skinName = skinName;
-        this.imageId = imageId;
+        this.imageName = imageName;
         this.quality = quality;
         this.minWear = minWear;
         this.maxWear = maxWear;
-        this.caseId = caseId;
+        this.caseName = caseName;
     }
 
     public int getId() {
@@ -62,12 +62,12 @@ public class Gun {
         this.skinName = skinName;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public int getQuality() {
@@ -94,12 +94,12 @@ public class Gun {
         this.maxWear = maxWear;
     }
 
-    public int getCaseId() {
-        return caseId;
+    public String getCaseName() {
+        return caseName;
     }
 
-    public void setCaseId(int caseId) {
-        this.caseId = caseId;
+    public void setCaseName(String caseName) {
+        this.caseName = caseName;
     }
 
     public boolean isStatTrak() {

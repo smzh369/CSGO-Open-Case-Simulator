@@ -10,16 +10,19 @@ import com.zerlings.gabeisfaker.R;
 import com.zerlings.gabeisfaker.activity.SimulatorActivity;
 
 /**
- * Created by 令子 on 2017/2/22.
+ * Created by smzh369 on 2017/2/22.
  */
 
 public class BindingUtil {
 
-    @BindingAdapter("imageId")
-    public static void setImage(ImageView imageView, int imageId){
-        Glide.with(imageView.getContext())
-                .load(imageId)
-                .into(imageView);
+    @BindingAdapter("imageName")
+    public static void setImage(ImageView imageView, String imageName){
+        if (imageName != null){
+            int imageId = imageView.getResources().getIdentifier(imageName,"drawable","com.zerlings.gabeisfaker");
+            Glide.with(imageView.getContext())
+                    .load(imageId)
+                    .into(imageView);
+        }
     }
 
     @BindingAdapter("layoutColor")

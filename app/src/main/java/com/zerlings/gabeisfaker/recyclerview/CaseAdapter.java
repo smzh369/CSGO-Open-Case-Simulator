@@ -14,7 +14,7 @@ import com.zerlings.gabeisfaker.db.Case;
 import java.util.List;
 
 /**
- * Created by 令子 on 2017/2/15.
+ * Created by smzh369 on 2017/2/15.
  */
 
 public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
