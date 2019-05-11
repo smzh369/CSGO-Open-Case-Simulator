@@ -105,14 +105,14 @@ public class NavFragment extends Fragment {
                     case R.id.nav_donate:
                         showPopupMenu(activity);
                         break;
-                    case R.id.nav_star:
+                    /*case R.id.nav_star:
                         Intent starIntent = new Intent();
                         starIntent.setAction("android.intent.action.VIEW");
                         Uri uri = Uri.parse(downloadUrl);
                         starIntent.setData(uri);
                         startActivity(starIntent);
                         drawerLayout.closeDrawers();
-                        break;
+                        break;*/
                     case R.id.nav_quit:
                         ActivityCollector.finishAll();
                         break;
