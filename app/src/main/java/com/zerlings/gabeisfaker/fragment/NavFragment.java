@@ -50,7 +50,7 @@ public class NavFragment extends Fragment {
 
     public static final String payCode = "FKX04508GKMZBVRPRF3U8A";
 
-    public static final String downloadUrl = " https://pan.baidu.com/s/1pMubID9";
+    public static final String downloadUrl = " https://www.coolapk.com/apk/180268";
 
     public static final String tradeUrl = "https://steamcommunity.com/tradeoffer/new/?partner=106454411&token=jSG5eL6U";
 
