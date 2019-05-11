@@ -12,7 +12,7 @@
     <string name="instruction_text4">If you like this app please mark it 5 stars in the market and share it to your friends !</string>
     <string name="instruction_text5">If this app helps you save a lot of money from Gabe\'s deception , please
     don\'t be stingy to show your kindness. You can donate me $ via Alipay/WeChat or skins via Steam :)</string>
-    <string name="shared_text">I\'m playing CS:GO Case-Open Simulator. Have a try ! \nDownload URL :&#160;</string>
+    <string name="shared_text">I\'m playing CS:GO Case-Open Simulator. Have a try ! \nDownload URL:</string>
     <string name="alipay_text">Please install alipay first</string>
     <string name="wechat_text">Please install WeChat first</string>
     <string name="wechat_permission">Permission denied !</string>
