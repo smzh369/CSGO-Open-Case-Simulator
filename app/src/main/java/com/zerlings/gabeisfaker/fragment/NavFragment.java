@@ -50,7 +50,7 @@ public class NavFragment extends Fragment {
 
     public static final String payCode = "FKX04508GKMZBVRPRF3U8A";
 
-    public static final String downloadUrl = " https://www.coolapk.com/apk/180268";
+    public static final String downloadUrl = "https://www.coolapk.com/apk/com.zerlings.gabeisfaker";
 
     public static final String tradeUrl = "https://steamcommunity.com/tradeoffer/new/?partner=106454411&token=jSG5eL6U";
 
@@ -104,6 +104,14 @@ public class NavFragment extends Fragment {
                         break;
                     case R.id.nav_donate:
                         showPopupMenu(activity);
+                        break;
+                    case R.id.nav_star:
+                        Intent starIntent = new Intent();
+                        starIntent.setAction("android.intent.action.VIEW");
+                        Uri uri = Uri.parse(downloadUrl);
+                        starIntent.setData(uri);
+                        startActivity(starIntent);
+                        drawerLayout.closeDrawers();
                         break;
                     case R.id.nav_quit:
                         ActivityCollector.finishAll();
@@ -175,8 +183,8 @@ public class NavFragment extends Fragment {
                     case R.id.steam:
                         Intent intent = new Intent();
                         intent.setAction("android.intent.action.VIEW");
-                        Uri url = Uri.parse(tradeUrl);
-                        intent.setData(url);
+                        Uri uri = Uri.parse(tradeUrl);
+                        intent.setData(uri);
                         startActivity(intent);
                         drawerLayout.closeDrawers();
                         break;

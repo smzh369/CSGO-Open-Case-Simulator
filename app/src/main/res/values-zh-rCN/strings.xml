@@ -9,7 +9,7 @@
     <string name="instruction_text3">在虚拟库存页面长按物品可以进入复选删除模式。</string>
     <string name="instruction_text4">如果您喜欢本应用请在市场上给予五星好评并分享给你的基友们 !</string>
     <string name="instruction_text5">如果本应用帮您从G胖的开箱骗局中剩下了麒麟臂，请不要吝啬于打赏！接受支付宝/微信和Steam皮肤^^</string>
-    <string name="shared_text">我正在玩CS:GO开箱模拟器! 来试试手气吧! 下载地址 :</string>
+    <string name="shared_text">我正在玩CS:GO开箱模拟器! 来试试手气吧! 下载地址 : </string>
     <string name="alipay_text">请先安装支付宝</string>
     <string name="wechat_text">请先安装微信</string>
     <string name="wechat_permission">权限获取失败 ！</string>
@@ -31,6 +31,7 @@
     <string name="normal">正常</string>
     <string name="fast">急速</string>
     <string name="stats">统计</string>
+    <string name="star">评分</string>
 
     <string name="prisma_case">棱彩武器箱</string>
     <string name="danger_zone_case">“头号特训”武器箱</string>
