@@ -23,10 +23,10 @@
             android:icon="@drawable/nav_donate"
             android:title="@string/donate"
             app:actionLayout="@layout/anchor"/>
-        <item
+        <!--<item
             android:id="@+id/nav_star"
             android:icon="@drawable/nav_star"
-            android:title="@string/star"/>
+            android:title="@string/star"/>-->
     </group>
     <group
         android:id="@+id/group_3">
